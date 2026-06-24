@@ -213,6 +213,44 @@
   .stagger.in>*:nth-child(5){transition-delay:.32s}
   .stagger.in>*:nth-child(6){transition-delay:.4s}
 
+  /* cinematic hero */
+  .hero{min-height:100vh;display:flex;align-items:center;padding:96px 0 56px}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.30;
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.75),transparent 92%);mask-image:linear-gradient(180deg,rgba(0,0,0,.75),transparent 92%)}
+  .hero-scrim{position:absolute;inset:0;z-index:1;background:
+     radial-gradient(70% 60% at 82% 8%,rgba(34,197,94,.20),transparent 60%),
+     linear-gradient(180deg,rgba(5,17,11,.32),rgba(5,17,11,.80))}
+  .hero .wrap{z-index:2}
+  .hero-title .w{display:inline-block;opacity:0;transform:translateY(40px);will-change:transform,opacity}
+  .scroll-ind{margin-top:2.8rem;display:inline-flex;align-items:center;gap:.6rem;color:var(--muted);font-weight:700;font-size:.82rem;letter-spacing:.14em}
+  .scroll-ind .ar{width:30px;height:30px;border-radius:50%;border:1px solid var(--glass-bd);display:grid;place-items:center;animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(6px)}}
+
+  /* horizontal-scroll projects */
+  .hsection{position:relative;height:360vh}
+  .hsticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;direction:ltr}
+  .htrack{display:flex;gap:26px;padding:0 6vw;direction:ltr;will-change:transform}
+  .hpanel{flex:0 0 auto;width:min(82vw,560px);height:66vh;display:flex;flex-direction:column;justify-content:center;direction:rtl}
+  .hpanel h2{font-size:clamp(2.2rem,6vw,4rem);margin-top:.5rem}
+  .hpanel p{margin-top:1.1rem;color:var(--muted);font-size:1.18rem;max-width:42ch}
+  .hcard{flex:0 0 auto;width:min(74vw,520px);height:66vh;border-radius:26px;position:relative;overflow:hidden;
+    border:1px solid var(--glass-bd);background:linear-gradient(160deg,#0e2419,#06140d)}
+  .hcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .hcard:hover img{transform:scale(1.06)}
+  .hcard .grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,14,9,.92),transparent 55%)}
+  .hcard.empty::before{content:"";position:absolute;inset:0;opacity:.5;background-image:repeating-linear-gradient(135deg,rgba(34,197,94,.1) 0 2px,transparent 2px 16px)}
+  .hcard .cap{position:absolute;inset-block-end:0;padding:30px;direction:rtl;z-index:2}
+  .hcard .cap span{color:var(--brand-l);font-weight:800;font-size:.82rem}
+  .hcard .cap h3{font-size:1.55rem;font-weight:800;margin-top:.3rem;color:#fff}
+  .hint-scroll{position:absolute;bottom:24px;inset-inline:0;text-align:center;color:var(--muted);font-size:.78rem;letter-spacing:.18em;z-index:3}
+  /* flat fallback (no-motion / reduced-motion / mobile) */
+  body.flat .hsection{height:auto}
+  body.flat .hsticky{position:static;height:auto;overflow:visible;padding:0}
+  body.flat .htrack{flex-wrap:wrap;justify-content:center;transform:none!important;padding:0 22px;gap:18px}
+  body.flat .hpanel{width:100%;height:auto;text-align:center;align-items:center;margin-bottom:10px}
+  body.flat .hcard{height:auto;aspect-ratio:4/3;width:min(92vw,440px)}
+  body.flat .hint-scroll{display:none}
+
   @media (max-width:880px){
     .menu,.nav .btn-primary{display:none}
     .cards,.tiles{grid-template-columns:1fr 1fr}
@@ -258,10 +296,13 @@
 
 <!-- HERO -->
 <section id="top" class="hero">
-  <div class="hero-photo"></div>
+  <video class="hero-video" autoplay muted loop playsinline poster="assets/site-work.jpeg">
+    <source src="assets/kl-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim"></div>
   <div class="wrap">
     <span class="badge reveal"><span class="dot"></span> קבלן רשום • מעל 30 שנות ניסיון • עובדים בכל הארץ</span>
-    <h1 class="display reveal">מגדרים, מאבטחים<br><span class="grad-txt">ובונים תשתיות.</span></h1>
+    <h1 class="display hero-title" id="heroTitle"><span class="w">מגדרים,</span> <span class="w">מאבטחים</span><br><span class="w grad-txt">ובונים</span> <span class="w grad-txt">תשתיות.</span></h1>
     <p class="lead reveal">כ.ל מערכות התראה וגידור בע״מ — גדרות ביטחוניות ופרטיות, מערכות התראה, עבודות עפר, פינוי פסולת ופיתוח תשתיות. ניסיון של מעל 30 שנה, ציוד כבד משלנו, וביצוע שעומד בכל תקן.</p>
     <div class="cta reveal">
       <a href="#contact" class="btn btn-primary">קבלו הצעת מחיר
@@ -275,6 +316,7 @@
       <div class="chip glass"><div class="n grad-txt">משהב״ט</div><div class="l">קבלן משנה מאושר</div></div>
       <div class="chip glass"><div class="n grad-txt">צי מלא</div><div class="l">ציוד כבד משלנו</div></div>
     </div>
+    <a class="scroll-ind" href="#services"><span class="ar">↓</span> גלול לגלות עוד</a>
   </div>
 </section>
 
@@ -327,7 +369,7 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">תיק עבודות</span>
-      <h2 class="display">פרויקטים נבחרים</h2>
+      <h2 class="display">פרויקטים <span class="grad-txt">נבחרים</span></h2>
       <p>תמונות מהשטח מספרות את הסיפור. אפשר להוסיף עוד תמונות אמיתיות — המסגרות מוכנות.</p>
     </div>
     <div class="tiles stagger">
@@ -469,12 +511,19 @@
 
   const M = window.Motion;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const showAll = () => document.querySelectorAll('.reveal,.stagger>*').forEach(e=>{e.style.opacity=1;e.style.transform='none';});
+  const flat = !M || reduce || innerWidth < 760;   // simple layout for mobile / no-motion
+  const showAll = () => document.querySelectorAll('.reveal,.stagger>*,.hero-title .w').forEach(e=>{e.style.opacity=1;e.style.transform='none';});
 
-  if (!M || reduce) {
+  if (flat) {
     showAll();
-  } else {
+    document.body.classList.add('flat');
+  }
+
+  if (M && !reduce) {
     const { animate, inView, scroll, stagger } = M;
+
+    // hero headline — word by word, on load
+    animate('#heroTitle .w', { opacity: 1, y: 0 }, { type: 'spring', stiffness: 90, damping: 16, delay: stagger(.09, { start: .15 }) });
 
     // scroll-linked progress bar
     scroll(animate('#progress', { scaleX: [0, 1] }, { ease: 'linear' }));
@@ -496,6 +545,7 @@
       const end = +el.dataset.count, suf = el.dataset.suffix || '';
       animate(0, end, { duration: 1.4, ease: [.2,.7,.2,1], onUpdate: v => el.textContent = Math.round(v) + suf });
     }, { amount: .6 });
+
   }
 
   // card spotlight + 3D tilt (spring-eased via Motion when available)
