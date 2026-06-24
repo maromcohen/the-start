@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>כ.ל מערכות התראה וגידור | גדרות ביטחוניות, עבודות עפר ופיתוח</title>
+<title>כ.ל מערכות התראה וגידור בע״מ | גדרות ביטחוניות, עבודות עפר ופיתוח</title>
 <meta name="description" content="כ.ל מערכות התראה וגידור — מעל 30 שנות ניסיון. גדרות ביטחוניות ופרטיות, מערכות התראה, עבודות עפר, פינוי פסולת ופיתוח תשתיות. עובדים בכל רחבי הארץ." />
 <style>
   :root{
@@ -77,8 +77,10 @@
 
   /* hero */
   .hero{position:relative;padding:70px 0 90px;overflow:hidden}
-  .hero-photo{position:absolute;inset:0;z-index:0;background:url('assets/site-work.jpeg') center/cover no-repeat;
-    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 85%);mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 85%);opacity:.28}
+  .hero-photo{position:absolute;inset:-4%;z-index:0;background:url('assets/site-work.jpeg') center/cover no-repeat;
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 85%);mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 85%);opacity:.28;
+    animation:kenburns 26s ease-in-out infinite alternate;will-change:transform}
+  @keyframes kenburns{from{transform:scale(1) translate(0,0)}to{transform:scale(1.12) translate(-2%,-1.5%)}}
   .hero .wrap{padding-top:40px;padding-bottom:20px}
   .badge{display:inline-flex;align-items:center;gap:.55rem;font-weight:700;font-size:.88rem;color:#dff5e8;
     padding:.5rem 1.05rem;border-radius:999px;background:var(--glass);border:1px solid var(--glass-bd);backdrop-filter:blur(10px);margin-bottom:1.6rem}
@@ -138,11 +140,19 @@
   .tile .cap h3{font-size:1.25rem;font-weight:800;margin-top:.2rem;color:#fff}
 
   /* fleet */
-  .fleet-grid{margin-top:44px;display:grid;gap:18px;grid-template-columns:repeat(4,1fr)}
-  .fleet{padding:28px;border-radius:var(--radius);text-align:center;background:var(--glass);border:1px solid var(--glass-bd);backdrop-filter:blur(12px);transition:.25s}
-  .fleet:hover{transform:translateY(-4px);border-color:var(--glass-bd2)}
-  .fleet .n{font-weight:900;font-size:1.4rem}
-  .fleet p{margin-top:.3rem;color:var(--muted);font-size:.92rem}
+  .fleet-grid{margin-top:48px;display:grid;gap:20px;grid-template-columns:repeat(4,1fr)}
+  .fleet{position:relative;padding:24px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--glass-bd);
+    backdrop-filter:blur(12px);transition:.25s;overflow:hidden}
+  .fleet::after{content:"";position:absolute;inset:auto -30% -40% -30%;height:60%;
+    background:radial-gradient(circle,rgba(34,197,94,.22),transparent 65%);opacity:0;transition:.3s}
+  .fleet:hover{transform:translateY(-6px);border-color:var(--glass-bd2)}
+  .fleet:hover::after{opacity:1}
+  .fleet:hover .machine{transform:translateY(-3px) scale(1.04)}
+  .machine{display:block;width:100%;height:96px;color:var(--brand-l);margin-bottom:14px;transition:.35s cubic-bezier(.2,.7,.2,1)}
+  .machine .dk{color:#0a2c1b}
+  .fleet .brand{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-l)}
+  .fleet .n{font-weight:900;font-size:1.3rem;margin-top:.1rem;color:#fff}
+  .fleet p{margin-top:.35rem;color:var(--muted);font-size:.9rem}
 
   /* why */
   .why-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
@@ -230,7 +240,7 @@
 <header>
   <div class="wrap">
     <div class="nav">
-      <a href="#top" class="logo"><span class="mark">כ.ל</span><b>כ.ל <span>מערכות התראה וגידור</span></b></a>
+      <a href="#top" class="logo"><span class="mark">כ.ל</span><b>כ.ל <span>מערכות התראה וגידור בע״מ</span></b></a>
       <nav class="menu">
         <a href="#services">שירותים</a>
         <a href="#projects">פרויקטים</a>
@@ -252,7 +262,7 @@
   <div class="wrap">
     <span class="badge reveal"><span class="dot"></span> קבלן רשום • מעל 30 שנות ניסיון • עובדים בכל הארץ</span>
     <h1 class="display reveal">מגדרים, מאבטחים<br><span class="grad-txt">ובונים תשתיות.</span></h1>
-    <p class="lead reveal">כ.ל מערכות התראה וגידור — גדרות ביטחוניות ופרטיות, מערכות התראה, עבודות עפר, פינוי פסולת ופיתוח תשתיות. ניסיון של מעל 30 שנה, ציוד כבד משלנו, וביצוע שעומד בכל תקן.</p>
+    <p class="lead reveal">כ.ל מערכות התראה וגידור בע״מ — גדרות ביטחוניות ופרטיות, מערכות התראה, עבודות עפר, פינוי פסולת ופיתוח תשתיות. ניסיון של מעל 30 שנה, ציוד כבד משלנו, וביצוע שעומד בכל תקן.</p>
     <div class="cta reveal">
       <a href="#contact" class="btn btn-primary">קבלו הצעת מחיר
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(180deg)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -336,14 +346,57 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">הציוד שלנו</span>
-      <h2 class="display">צי ציוד כבד משלנו</h2>
-      <p>בלי תלות בקבלני משנה — הכל אצלנו בבית. זה אומר זמינות מהירה, שליטה באיכות ועמידה בלוחות זמנים.</p>
+      <h2 class="display">צי ציוד כבד <span class="grad-txt">משלנו</span></h2>
+      <p>בלי תלות בקבלני משנה — הכל אצלנו בבית. מחפרונים, בובקט וזחל בבעלותנו, מותגים מובילים בתחזוקה מלאה. זמינות מהירה, שליטה באיכות ועמידה בלוחות זמנים.</p>
     </div>
     <div class="fleet-grid stagger">
-      <div class="fleet"><div class="n grad-txt">טרקטורים</div><p>לעבודות עפר וחפירה</p></div>
-      <div class="fleet"><div class="n grad-txt">מיני־באגרים</div><p>לעבודה בשטחים צרים</p></div>
-      <div class="fleet"><div class="n grad-txt">בובקט</div><p>פינוי, יישור ושינוע</p></div>
-      <div class="fleet"><div class="n grad-txt">מכולות</div><p>לפינוי פסולת בכל היקף</p></div>
+      <div class="fleet">
+        <svg class="machine" viewBox="0 0 160 110" fill="none" aria-hidden="true">
+          <rect class="dk" x="8" y="86" width="96" height="18" rx="9" fill="currentColor"/>
+          <circle cx="22" cy="95" r="4" fill="#22C55E"/><circle cx="46" cy="95" r="4" fill="#22C55E"/><circle cx="70" cy="95" r="4" fill="#22C55E"/><circle cx="94" cy="95" r="4" fill="#22C55E"/>
+          <rect x="26" y="58" width="60" height="30" rx="6" fill="currentColor"/>
+          <rect class="dk" x="32" y="44" width="28" height="17" rx="4" fill="currentColor"/>
+          <rect x="36" y="48" width="20" height="10" rx="2" fill="#0a2c1b"/>
+          <path d="M82 70 L120 46 L141 72" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M141 72 q1 15 -14 18 l-5 -15 z" fill="currentColor"/>
+        </svg>
+        <div class="brand">Sunward</div><div class="n">מחפרונים</div><p>חפירה, יישור והכשרת קרקע</p>
+      </div>
+      <div class="fleet">
+        <svg class="machine" viewBox="0 0 160 110" fill="none" aria-hidden="true">
+          <rect class="dk" x="40" y="78" width="78" height="22" rx="11" fill="currentColor"/>
+          <circle cx="58" cy="89" r="9" fill="#22C55E"/><circle cx="100" cy="89" r="9" fill="#22C55E"/><circle cx="58" cy="89" r="3.5" fill="#0a2c1b"/><circle cx="100" cy="89" r="3.5" fill="#0a2c1b"/>
+          <path d="M48 78 L52 52 L96 52 L108 78 Z" fill="currentColor"/>
+          <rect x="62" y="44" width="30" height="14" rx="3" fill="currentColor"/>
+          <rect x="66" y="47" width="22" height="9" rx="2" fill="#0a2c1b"/>
+          <path d="M50 60 L18 84" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+          <path d="M18 84 l-10 -2 0 18 14 0 z" fill="currentColor"/>
+        </svg>
+        <div class="brand">Mustang</div><div class="n">בובקט</div><p>פינוי, יישור ושינוע</p>
+      </div>
+      <div class="fleet">
+        <svg class="machine" viewBox="0 0 160 110" fill="none" aria-hidden="true">
+          <path class="dk" d="M30 104 L18 80 L110 80 L122 104 Z" fill="currentColor"/>
+          <circle cx="40" cy="92" r="3.5" fill="#22C55E"/><circle cx="60" cy="92" r="3.5" fill="#22C55E"/><circle cx="80" cy="92" r="3.5" fill="#22C55E"/><circle cx="100" cy="92" r="3.5" fill="#22C55E"/>
+          <rect x="44" y="50" width="58" height="30" rx="6" fill="currentColor"/>
+          <rect class="dk" x="50" y="38" width="26" height="14" rx="4" fill="currentColor"/>
+          <rect x="54" y="41" width="18" height="9" rx="2" fill="#0a2c1b"/>
+          <path d="M104 58 L138 58" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+          <path d="M138 44 L146 44 L146 96 L138 96 Z" fill="currentColor"/>
+        </svg>
+        <div class="brand">Crawler</div><div class="n">זחל</div><p>עבודה בשטח כבד ומדרונות</p>
+      </div>
+      <div class="fleet">
+        <svg class="machine" viewBox="0 0 160 110" fill="none" aria-hidden="true">
+          <path d="M22 50 L138 50 L120 98 L40 98 Z" fill="currentColor"/>
+          <path class="dk" d="M22 50 L138 50 L134 60 L26 60 Z" fill="currentColor"/>
+          <line x1="52" y1="60" x2="46" y2="98" stroke="#0a2c1b" stroke-width="4"/>
+          <line x1="80" y1="60" x2="80" y2="98" stroke="#0a2c1b" stroke-width="4"/>
+          <line x1="108" y1="60" x2="114" y2="98" stroke="#0a2c1b" stroke-width="4"/>
+          <path d="M14 50 L24 40 L40 40" stroke="#22C55E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="brand">Containers</div><div class="n">מכולות</div><p>לפינוי פסולת בכל היקף</p>
+      </div>
     </div>
   </div>
 </section>
@@ -400,7 +453,7 @@
 
 <footer>
   <div class="wrap foot">
-    <div class="logo"><span class="mark">כ.ל</span><b>כ.ל מערכות התראה וגידור</b></div>
+    <div class="logo"><span class="mark">כ.ל</span><b>כ.ל מערכות התראה וגידור בע״מ</b></div>
     <p>© <span id="year"></span> כל הזכויות שמורות • מעל 30 שנות ניסיון • עובדים בכל הארץ</p>
   </div>
 </footer>
