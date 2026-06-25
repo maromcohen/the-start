@@ -111,6 +111,7 @@
   .hero .eyebrow{opacity:0;animation:up 1s var(--ease) .4s forwards}
   .hero h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(3.4rem,12vw,9.5rem);line-height:.92;letter-spacing:-.01em;margin:.18em 0 .12em}
   .hero h1 .amp{font-style:italic;color:var(--blush);font-weight:500}
+  .hero h1 .nbw{display:inline-block;white-space:nowrap}
   .hero h1 .ch{display:inline-block;opacity:0;transform:translateY(34px) rotate(6deg);filter:blur(8px);animation:heroCh 1s var(--ease) forwards}
   @keyframes heroCh{to{opacity:1;transform:none;filter:none}}
   .hero .tag{font-size:clamp(1rem,2.6vw,1.4rem);opacity:0;animation:up 1s var(--ease) 1.5s forwards;font-weight:300;letter-spacing:.02em}
@@ -458,10 +459,11 @@
       <span class="eyebrow">BOOK YOUR EVENT</span>
       <h2 class="head" style="margin-top:18px">בואו נתכנן את <em>הבר שלכם</em></h2>
       <p class="lead" style="margin-top:18px">ספרו לנו על האירוע ונחזור אליכם עם הצעה מותאמת אישית.</p>
-      <div class="c"><span class="ic">✆</span><div><b>טלפון</b><span>050-000-0000</span></div></div>
-      <div class="c"><span class="ic">✉</span><div><b>אימייל</b><span>hello@cocktailsanddreams.co.il</span></div></div>
+      <div class="c"><span class="ic">✆</span><div><b>עידן הרמן</b><a href="tel:+972544930095" style="color:var(--muted);display:block">054-493-0095</a></div></div>
+      <div class="c"><span class="ic">✆</span><div><b>אופיר לרנר</b><a href="tel:+972524637076" style="color:var(--muted);display:block">052-463-7076</a></div></div>
+      <div class="c"><span class="ic">◎</span><div><b>אינסטגרם</b><a href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" style="color:var(--muted);display:block">cocktail.dreams_@</a></div></div>
       <div class="c"><span class="ic">⌖</span><div><b>אזור פעילות</b><span>תל אביב והמרכז · בכל הארץ בתיאום</span></div></div>
-      <a class="wa magnetic" href="https://wa.me/972500000000?text=היי!%20אשמח%20לפרטים%20על%20בר%20קוקטיילים%20לאירוע" target="_blank" rel="noopener"><span>הזמינו דרך וואטסאפ</span> <span>↗</span></a>
+      <a class="wa magnetic" href="https://wa.me/972544930095?text=היי!%20אשמח%20לפרטים%20על%20בר%20קוקטיילים%20לאירוע" target="_blank" rel="noopener"><span>הזמינו דרך וואטסאפ</span> <span>↗</span></a>
     </div>
     <form class="bk reveal" id="bkForm">
       <label><span class="lab">שם מלא</span><input name="name" type="text" required placeholder="השם שלכם" /></label>
@@ -486,9 +488,9 @@
   <div class="wrap">
     <img class="flogo" src="assets/img/logo-white.jpeg" alt="Cocktails & Dreams" />
     <div class="soc">
-      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">◎</a>
-      <a href="https://wa.me/972500000000" target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
-      <a href="mailto:hello@cocktailsanddreams.co.il" aria-label="Email">✉</a>
+      <a href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" aria-label="Instagram">◎</a>
+      <a href="https://wa.me/972544930095" target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
+      <a href="tel:+972544930095" aria-label="Phone">✆</a>
     </div>
     <nav class="fnav">
       <a href="#pour">החוויה</a><a href="#about">מי אנחנו</a><a href="#menu">הקוקטיילים</a><a href="#events">אירועים</a><a href="#gallery">גלריה</a><a href="#book">צרו קשר</a>
@@ -497,7 +499,7 @@
   </div>
 </footer>
 
-<a class="wafloat" href="https://wa.me/972500000000?text=היי!%20אשמח%20לפרטים%20על%20בר%20קוקטיילים" target="_blank" rel="noopener" aria-label="WhatsApp">
+<a class="wafloat" href="https://wa.me/972544930095?text=היי!%20אשמח%20לפרטים%20על%20בר%20קוקטיילים" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.04c-.25.7-1.44 1.33-1.99 1.38-.51.05-.51.4-3.21-.67-2.7-1.07-4.42-3.81-4.55-3.99-.13-.18-1.1-1.46-1.1-2.78s.69-1.98.94-2.25c.25-.27.54-.34.72-.34.18 0 .36 0 .51.01.16.01.39-.06.61.47.22.53.76 1.84.83 1.97.07.13.11.29.02.47-.09.18-.13.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.28-.12.54.15.27.66 1.09 1.42 1.76.97.86 1.79 1.13 2.05 1.26.27.13.42.11.57-.07.16-.18.66-.77.84-1.04.18-.27.36-.22.61-.13.25.09 1.57.74 1.84.88.27.13.45.2.51.31.07.11.07.64-.18 1.34Z"/></svg>
 </a>
 
@@ -518,15 +520,18 @@
   (function(){
     var h1=document.getElementById('heroH1');
     h1.querySelectorAll('.amp').forEach(function(a){a.dataset.amp='1';});
+    function mkCh(c,i){var s=document.createElement('span');s.className='ch';s.textContent=c;s.style.animationDelay=(.6+i*0.045)+'s';return s;}
     function wrap(node,start){
       var i=start;
       Array.prototype.slice.call(node.childNodes).forEach(function(n){
         if(n.nodeType===3){
           var frag=document.createDocumentFragment();
-          n.textContent.split('').forEach(function(c){
-            if(c===' '){frag.appendChild(document.createTextNode(' '));return;}
-            var s=document.createElement('span');s.className='ch';s.textContent=c;
-            s.style.animationDelay=(.6+i*0.045)+'s';i++;frag.appendChild(s);
+          n.textContent.split(/(\s+)/).forEach(function(tok){
+            if(tok==='')return;
+            if(/^\s+$/.test(tok)){frag.appendChild(document.createTextNode(' '));return;}
+            var w=document.createElement('span');w.className='nbw';   /* keep word unbroken */
+            tok.split('').forEach(function(c){w.appendChild(mkCh(c,i));i++;});
+            frag.appendChild(w);
           });
           node.replaceChild(frag,n);
         }else if(n.classList&&n.classList.contains('amp')){
@@ -624,7 +629,15 @@
       words=Array.prototype.slice.call(document.querySelectorAll('#pourWords .word')),
       dur=0,target=0,current=0,ready=false;
   vid.addEventListener('loadedmetadata',function(){dur=vid.duration||0;ready=true;});
-  vid.addEventListener('loadeddata',function(){try{vid.currentTime=0.001;}catch(e){}});
+  if(touch){
+    /* mobile: scroll-scrub is unreliable on iOS — play the pour on a loop so the fill is always visible */
+    vid.loop=true;vid.setAttribute('autoplay','');vid.setAttribute('loop','');
+    var kick=function(){vid.play().catch(function(){});};
+    vid.addEventListener('loadeddata',kick);kick();
+    document.addEventListener('touchstart',kick,{once:true,passive:true});
+  }else{
+    vid.addEventListener('loadeddata',function(){try{vid.currentTime=0.001;vid.play().then(function(){vid.pause();}).catch(function(){});}catch(e){}});
+  }
   function compute(){
     var rect=pour.getBoundingClientRect();var total=pour.offsetHeight-innerHeight;
     var p=Math.min(1,Math.max(0,(-rect.top)/total));target=p;
@@ -632,15 +645,17 @@
     if(pct)pct.textContent=Math.round(p*100)+'%';
     var lit=Math.round(p*words.length);words.forEach(function(w,i){w.classList.toggle('on',i<lit);});
   }
-  function loop(){current+=(target-current)*0.12;if(ready&&dur){var t=current*dur;if(Math.abs((vid.currentTime||0)-t)>0.02){try{vid.currentTime=t;}catch(e){}}}requestAnimationFrame(loop);}
+  function loop(){current+=(target-current)*0.12;if(!touch&&ready&&dur){var t=current*dur;if(Math.abs((vid.currentTime||0)-t)>0.02){try{vid.currentTime=t;}catch(e){}}}requestAnimationFrame(loop);}
   window.addEventListener('scroll',compute,{passive:true});window.addEventListener('resize',compute);compute();loop();
 
   /* ---- booking form ---- */
   var f=document.getElementById('bkForm');
   f.addEventListener('submit',function(e){
     e.preventDefault();var d=new FormData(f);
-    var body=encodeURIComponent('שם: '+(d.get('name')||'')+'\n'+'טלפון: '+(d.get('phone')||'')+'\n'+'תאריך: '+(d.get('date')||'')+'\n'+'סוג אירוע: '+(d.get('type')||'')+'\n'+'אורחים: '+(d.get('guests')||'')+'\n\n'+(d.get('msg')||''));
-    window.location.href='mailto:hello@cocktailsanddreams.co.il?subject='+encodeURIComponent('בקשת הזמנה לאירוע — '+(d.get('name')||''))+'&body='+body;
+    var msg='היי Cocktails & Dreams! אשמח להזמין אירוע 🍸\n\n'+
+      'שם: '+(d.get('name')||'')+'\n'+'טלפון: '+(d.get('phone')||'')+'\n'+'תאריך: '+(d.get('date')||'')+'\n'+
+      'סוג אירוע: '+(d.get('type')||'')+'\n'+'אורחים: '+(d.get('guests')||'')+(d.get('msg')?('\n\n'+d.get('msg')):'');
+    window.open('https://wa.me/972544930095?text='+encodeURIComponent(msg),'_blank');
   });
 })();
 </script>
