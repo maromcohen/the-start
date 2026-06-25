@@ -310,6 +310,39 @@
   .wafloat{position:fixed;bottom:22px;inset-inline-end:22px;z-index:150;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.5);transition:transform .3s}
   .wafloat:hover{transform:scale(1.08)}
 
+  /* ===== 3D COVERFLOW CAROUSEL ===== */
+  .carousel-sec{background:var(--bg2);overflow:hidden}
+  .cwrap{position:relative;margin-top:54px;display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,22px)}
+  .cstage{position:relative;width:min(380px,76vw);height:min(500px,66vh);perspective:1300px}
+  .cring{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .8s var(--ease);will-change:transform;cursor:grab}
+  .cring:active{cursor:grabbing}
+  .citem{position:absolute;inset:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;background:#000;
+    box-shadow:0 36px 90px -34px rgba(0,0,0,.75);transition:opacity .6s,filter .6s}
+  .citem img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+  .citem figcaption{position:absolute;inset-inline:0;bottom:0;padding:26px;z-index:2;background:linear-gradient(to top,rgba(10,7,8,.95) 6%,transparent 70%)}
+  .citem figcaption h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600}
+  .citem figcaption p{color:var(--muted);font-size:.85rem;margin-top:4px}
+  .citem.far{filter:brightness(.38) saturate(.7)}
+  .cnav{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);
+    font-size:1.4rem;cursor:none;flex:0 0 auto;display:grid;place-items:center;transition:.3s var(--ease);z-index:5}
+  .cnav:hover{border-color:var(--gold);color:var(--gold);transform:scale(1.08)}
+  .cdots{display:flex;gap:9px;justify-content:center;margin-top:36px}
+  .cdots button{width:8px;height:8px;border-radius:50%;border:none;background:rgba(255,255,255,.22);cursor:none;transition:.35s var(--ease);padding:0}
+  .cdots button.on{background:var(--gold);width:24px;border-radius:10px}
+
+  /* ===== INSTAGRAM ===== */
+  .insta .iglink{display:inline-block;margin-top:14px;font-family:'Marcellus',serif;letter-spacing:.08em;color:var(--gold-l);font-size:1.05rem}
+  .iggrid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:48px 0 40px}
+  .igtile{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+  .igtile img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+  .igtile::after{content:"";position:absolute;inset:0;background:rgba(10,7,8,.55);opacity:0;transition:opacity .4s;display:grid}
+  .igtile .igico{position:absolute;inset:0;display:grid;place-items:center;z-index:2;opacity:0;transform:scale(.7);transition:.4s var(--ease);color:#fff}
+  .igtile:hover img{transform:scale(1.12)}
+  .igtile:hover::after{opacity:1}
+  .igtile:hover .igico{opacity:1;transform:scale(1)}
+  @media(max-width:760px){.iggrid{grid-template-columns:repeat(3,1fr)}}
+
   @media(max-width:900px){
     .about{grid-template-columns:1fr}.cgrid{grid-template-columns:1fr 1fr}
     .xgrid{grid-template-columns:1fr}.gmason{columns:2}
@@ -399,6 +432,28 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- 3D COVERFLOW CAROUSEL -->
+<section class="blk carousel-sec spot" id="showcase">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow">SIGNATURE</span>
+    <h2 class="head" style="margin-top:14px">טעימה <em>מהבר</em></h2>
+  </div>
+  <div class="cwrap">
+    <button class="cnav prev" aria-label="הקודם">‹</button>
+    <div class="cstage">
+      <div class="cring" id="cring">
+        <figure class="citem"><img src="assets/img/cocktail-cheers.jpeg" alt="אפרול שפריץ" /><figcaption><h3>אפרול שפריץ</h3><p>אפרול · קאווה · תפוז מקורמל</p></figcaption></figure>
+        <figure class="citem"><img src="assets/img/cocktail-passion.jpeg" alt="פאשן סמאש" /><figcaption><h3>פאשן סמאש</h3><p>וודקה · ליקר פסואה · ליצ'י</p></figcaption></figure>
+        <figure class="citem"><img src="assets/img/bar-spread.jpeg" alt="קרייזי תות" /><figcaption><h3>קרייזי תות</h3><p>ערק · תות · לימון טרי</p></figcaption></figure>
+        <figure class="citem"><img src="assets/img/pour-skyline.jpeg" alt="מזיגה חיה" /><figcaption><h3>מזיגה חיה</h3><p>ישר מול האורחים</p></figcaption></figure>
+        <figure class="citem"><img src="assets/img/bar-rooftop.jpeg" alt="הבר על הגג" /><figcaption><h3>הבר על הגג</h3><p>תל אביב · קו הרקיע</p></figcaption></figure>
+      </div>
+    </div>
+    <button class="cnav next" aria-label="הבא">›</button>
+  </div>
+  <div class="cdots" id="cdots"></div>
 </section>
 
 <!-- ABOUT -->
@@ -518,6 +573,24 @@
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/pour-skyline.jpeg" alt="" loading="lazy" /></div>
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-spread.jpeg" alt="" loading="lazy" /></div>
     </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="blk insta spot" id="insta">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow">INSTAGRAM</span>
+    <h2 class="head" style="margin-top:14px">עקבו <em>אחרינו</em></h2>
+    <a class="iglink" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener">@cocktail.dreams_</a>
+    <div class="iggrid">
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/cocktail-cheers.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/cocktail-passion.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/bar-spread.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/bar-rooftop.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/pour-skyline.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/pour-poster.jpg" alt="" loading="lazy" /><span class="igico">◎</span></a>
+    </div>
+    <a class="cta magnetic" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" style="display:inline-block">לעמוד האינסטגרם ↗</a>
   </div>
 </section>
 
@@ -748,6 +821,45 @@
     var cg=document.querySelector('.cgrid');if(!cg||rm)return;
     var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){cg.classList.add('hinted');o.unobserve(cg);}});},{threshold:.2});
     o.observe(cg);
+  })();
+
+  /* ---- 3D COVERFLOW CAROUSEL ---- */
+  (function(){
+    var ring=document.getElementById('cring');if(!ring)return;
+    var items=Array.prototype.slice.call(ring.children),n=items.length,theta=360/n,idx=0,radius=0;
+    var dotwrap=document.getElementById('cdots'),dots=[],stage=ring.parentElement,timer=null;
+    function norm(i){return ((i%n)+n)%n;}
+    function render(){
+      ring.style.transform='translateZ(-'+radius+'px) rotateY('+(-idx*theta)+'deg)';
+      items.forEach(function(it,i){var front=norm(i)===norm(idx);it.classList.toggle('far',!front);it.style.zIndex=front?3:1;});
+      dots.forEach(function(d,i){d.classList.toggle('on',i===norm(idx));});
+    }
+    function layout(){
+      var w=ring.offsetWidth||320;
+      radius=Math.round((w/2)/Math.tan(Math.PI/n))+44;
+      items.forEach(function(it,i){it.style.transform='rotateY('+(i*theta)+'deg) translateZ('+radius+'px)';});
+      render();
+    }
+    function go(d){idx+=d;render();}
+    items.forEach(function(_,i){var b=document.createElement('button');b.setAttribute('aria-label','קוקטייל '+(i+1));b.addEventListener('click',function(){idx=idx-norm(idx)+i;render();reset();});dotwrap.appendChild(b);dots.push(b);});
+    var prev=document.querySelector('.cnav.prev'),next=document.querySelector('.cnav.next');
+    prev.addEventListener('click',function(){go(-1);reset();});
+    next.addEventListener('click',function(){go(1);reset();});
+    /* touch swipe */
+    var sx=null;
+    stage.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+    stage.addEventListener('touchend',function(e){if(sx==null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)go(dx>0?-1:1);sx=null;reset();});
+    /* desktop drag */
+    var dragx=null;
+    stage.addEventListener('mousedown',function(e){dragx=e.clientX;});
+    window.addEventListener('mouseup',function(e){if(dragx==null)return;var dx=e.clientX-dragx;if(Math.abs(dx)>50)go(dx>0?-1:1);dragx=null;reset();});
+    /* autoplay */
+    function start(){if(!rm)timer=setInterval(function(){go(1);},4500);}
+    function reset(){clearInterval(timer);start();}
+    stage.addEventListener('mouseenter',function(){clearInterval(timer);});
+    stage.addEventListener('mouseleave',start);
+    window.addEventListener('resize',layout);
+    layout();start();
   })();
 
   /* ---- HERO PARALLAX ---- */
