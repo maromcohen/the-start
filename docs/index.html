@@ -216,6 +216,45 @@
   .mitem .star{color:var(--gold);font-size:.72rem;letter-spacing:.12em;font-family:'Marcellus',serif;border:1px solid var(--line);padding:3px 9px;border-radius:100px;white-space:nowrap}
   @media(max-width:760px){.menu-list{grid-template-columns:1fr;max-width:520px}}
 
+  /* ===== 3D FLIP CARDS ===== */
+  .cgrid{perspective:1600px}
+  .flip{position:relative;aspect-ratio:3/4;border-radius:10px}
+  .flip-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .9s var(--ease);will-change:transform}
+  .flip:hover .flip-inner,.flip.flipped .flip-inner{transform:rotateY(180deg)}
+  .flip-face{position:absolute;inset:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#000;
+    -webkit-backface-visibility:hidden;backface-visibility:hidden}
+  .flip-front img{width:100%;height:100%;object-fit:cover}
+  .flip-front::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,7,8,.92) 4%,transparent 55%)}
+  .flip-front::before{content:"⟲";position:absolute;top:14px;inset-inline-end:14px;z-index:3;width:30px;height:30px;border-radius:50%;
+    display:grid;place-items:center;background:rgba(10,7,8,.5);border:1px solid var(--line);color:var(--gold-l);font-size:.9rem;backdrop-filter:blur(4px)}
+  .flip-front .meta{position:absolute;inset-inline:0;bottom:0;padding:24px;z-index:2}
+  .flip-front .meta h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600}
+  .flip-front .meta p{color:var(--muted);font-size:.84rem;margin-top:4px}
+  .flip-front .pill{position:absolute;top:16px;inset-inline-start:16px;z-index:2;background:rgba(10,7,8,.55);backdrop-filter:blur(6px);
+    border:1px solid var(--line);font-family:'Marcellus',serif;font-size:.62rem;letter-spacing:.16em;padding:6px 12px;border-radius:100px;color:var(--gold-l)}
+  .flip-back{transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    padding:34px 28px;background:radial-gradient(120% 100% at 50% 0,#1d1519,#0c0809)}
+  .flip-back .eyebrow{margin-bottom:14px}
+  .flip-back h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600}
+  .flip-back p{color:var(--muted);margin-top:14px;font-size:.95rem;line-height:1.6}
+  .flip-back .back-cta{margin-top:24px;font-family:'Marcellus',serif;letter-spacing:.1em;font-size:.82rem;color:var(--gold);
+    border:1px solid var(--gold);padding:10px 22px;border-radius:100px;transition:all .4s var(--ease)}
+  .flip-back .back-cta:hover{background:var(--gold);color:#1a0f12}
+
+  /* ===== STUDIO BUBBLES (3D depth) ===== */
+  .bubbles{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;transition:transform .25s ease-out;will-change:transform}
+  .bub{position:absolute;bottom:-10%;border-radius:50%;opacity:0;
+    background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.55),rgba(244,169,184,.2) 55%,transparent 72%);
+    box-shadow:0 0 12px rgba(244,169,184,.25);animation:rise linear infinite}
+  @keyframes rise{0%{transform:translateY(0) translateX(0) scale(.9);opacity:0}
+    12%{opacity:.85}88%{opacity:.65}100%{transform:translateY(-112vh) translateX(var(--sway,0px)) scale(1.1);opacity:0}}
+  .gframe{transition:transform .4s var(--ease)}
+
+  /* ===== 3D LIFT-IN (events) ===== */
+  .r3d{perspective:1200px}
+  .r3d.stagger>*{transform:translateY(46px) rotateX(24deg);transform-origin:top center}
+  .r3d.stagger.in>*{transform:none}
+
   /* ===== EXPERIENCE ===== */
   .xgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
   .xcard{border:1px solid var(--line);border-radius:12px;padding:34px 30px;background:var(--glass);transition:border-color .5s,transform .5s var(--ease),background .5s;position:relative;overflow:hidden}
@@ -331,6 +370,7 @@
   <div class="studio">
     <div class="spotbeam"></div>
     <div class="floor"></div>
+    <div class="bubbles" id="bubbles" aria-hidden="true"></div>
     <div class="stage">
       <div class="copy">
         <span class="eyebrow">THE POUR</span>
@@ -386,18 +426,42 @@
       <p class="lead" style="margin-top:18px">תפריט חתימה שמשתנה לפי האירוע — מהקלאסיקות ועד יצירות מקוריות בגוונים של ורוד, ענבר וקצף.</p>
     </div>
     <div class="cgrid stagger">
-      <article class="card tilt" data-cur="VIEW"><div class="inner3d">
-        <span class="pill">SIGNATURE</span><img src="assets/img/cocktail-cheers.jpeg" alt="אפרול שפריץ" />
-        <div class="meta"><h3>אפרול שפריץ</h3><p>אפרול · קאווה · תפוז מקורמל</p></div></div>
-      </article>
-      <article class="card tilt" data-cur="VIEW"><div class="inner3d">
-        <span class="pill">VODKA</span><img src="assets/img/cocktail-passion.jpeg" alt="פאשן סמאש" />
-        <div class="meta"><h3>פאשן סמאש</h3><p>וודקה · ליקר פסואה · ליצ'י</p></div></div>
-      </article>
-      <article class="card tilt" data-cur="VIEW"><div class="inner3d">
-        <span class="pill">THE BAR</span><img src="assets/img/bar-spread.jpeg" alt="הבר המלא" />
-        <div class="meta"><h3>הבר המלא</h3><p>שורת קוקטיילים לאירוע שלם</p></div></div>
-      </article>
+      <article class="flip" data-cur="FLIP"><div class="flip-inner">
+        <div class="flip-face flip-front">
+          <span class="pill">SIGNATURE</span><img src="assets/img/cocktail-cheers.jpeg" alt="אפרול שפריץ" />
+          <div class="meta"><h3>אפרול שפריץ</h3><p>אפרול · קאווה · תפוז מקורמל</p></div>
+        </div>
+        <div class="flip-face flip-back">
+          <span class="eyebrow">SIGNATURE</span>
+          <h3>אפרול שפריץ</h3>
+          <p>הקלאסיקה האיטלקית האהובה — אפרול, קאווה מבעבעת ופלחי תפוז מקורמל. מושלם לוולקאם דרינק.</p>
+          <a class="back-cta" href="#book">להזמנה →</a>
+        </div>
+      </div></article>
+      <article class="flip" data-cur="FLIP"><div class="flip-inner">
+        <div class="flip-face flip-front">
+          <span class="pill">VODKA</span><img src="assets/img/cocktail-passion.jpeg" alt="פאשן סמאש" />
+          <div class="meta"><h3>פאשן סמאש</h3><p>וודקה · ליקר פסואה · ליצ'י</p></div>
+        </div>
+        <div class="flip-face flip-back">
+          <span class="eyebrow">VODKA</span>
+          <h3>פאשן סמאש</h3>
+          <p>וודקה איכותית, ליקר פסואה וליצ'י עם פסיפלורה טרייה. מתוק, פירותי ומרענן.</p>
+          <a class="back-cta" href="#book">להזמנה →</a>
+        </div>
+      </div></article>
+      <article class="flip" data-cur="FLIP"><div class="flip-inner">
+        <div class="flip-face flip-front">
+          <span class="pill">THE BAR</span><img src="assets/img/bar-spread.jpeg" alt="הבר המלא" />
+          <div class="meta"><h3>הבר המלא</h3><p>שורת קוקטיילים לאירוע שלם</p></div>
+        </div>
+        <div class="flip-face flip-back">
+          <span class="eyebrow">THE BAR</span>
+          <h3>הבר המלא</h3>
+          <p>בר נייד מאובזר, בארמן צמוד ותפריט חתימה מותאם — חוויה שלמה לכל אורחי האירוע.</p>
+          <a class="back-cta" href="#book">לפרטים →</a>
+        </div>
+      </div></article>
     </div>
 
     <div class="menutitle reveal">
@@ -426,7 +490,7 @@
       <span class="eyebrow">WHAT WE BRING</span>
       <h2 class="head" style="margin-top:18px">חוויה שלמה, <em>לכל אירוע</em></h2>
     </div>
-    <div class="xgrid stagger">
+    <div class="xgrid stagger r3d">
       <div class="xcard glow"><div class="ic">♥</div><h3>חתונות &amp; אירוסין</h3><p>בר חתימה מעוצב, קוקטייל וולקאם לאורחים ותפריט שמספר את הסיפור שלכם.</p></div>
       <div class="xcard glow"><div class="ic">★</div><h3>אירועים פרטיים</h3><p>ימי הולדת, מסיבות גג ואירועים אינטימיים — אנחנו מביאים את הבר והאווירה.</p></div>
       <div class="xcard glow"><div class="ic">▲</div><h3>אירועי חברה</h3><p>השקות, ערבי לקוחות ומסיבות צוות עם בר נייד וברמן צמוד.</p></div>
@@ -442,12 +506,12 @@
       <h2 class="head" style="margin-top:18px">רגעים <em>מהאירועים</em></h2>
     </div>
     <div class="gmason">
-      <div class="gi reveal" data-cur="VIEW"><img src="assets/img/cocktail-cheers.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal" data-cur="PLAY"><video src="assets/video/bar.mp4" muted loop playsinline autoplay></video></div>
-      <div class="gi reveal" data-cur="VIEW"><img src="assets/img/bar-rooftop.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal" data-cur="VIEW"><img src="assets/img/cocktail-passion.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal" data-cur="VIEW"><img src="assets/img/pour-skyline.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal" data-cur="VIEW"><img src="assets/img/bar-spread.jpeg" alt="" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-cheers.jpeg" alt="" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="PLAY"><video src="assets/video/bar.mp4" muted loop playsinline autoplay></video></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-rooftop.jpeg" alt="" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-passion.jpeg" alt="" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/pour-skyline.jpeg" alt="" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-spread.jpeg" alt="" loading="lazy" /></div>
     </div>
   </div>
 </section>
@@ -613,6 +677,48 @@
       el.style.setProperty('--my',(e.clientY-r.top)+'px');
     });
   });
+
+  /* ---- FLIP CARDS: tap to flip on touch ---- */
+  document.querySelectorAll('.flip').forEach(function(card){
+    card.addEventListener('click',function(e){
+      if(e.target.closest('.back-cta'))return;       /* let the CTA link work */
+      if(touch){e.preventDefault();card.classList.toggle('flipped');}
+    });
+  });
+
+  /* ---- STUDIO BUBBLES (champagne, with depth) ---- */
+  (function(){
+    var box=document.getElementById('bubbles');
+    if(!box||rm)return;
+    var n=touch?10:18;
+    for(var i=0;i<n;i++){
+      var b=document.createElement('span');b.className='bub';
+      var size=6+Math.random()*22;
+      b.style.width=b.style.height=size.toFixed(1)+'px';
+      b.style.left=(Math.random()*100).toFixed(1)+'%';
+      b.style.setProperty('--sway',(Math.random()*80-40).toFixed(0)+'px');
+      var dur=7+Math.random()*9;
+      b.style.animationDuration=dur.toFixed(1)+'s';
+      b.style.animationDelay=(-Math.random()*dur).toFixed(1)+'s';
+      b.dataset.depth=(0.3+Math.random()*0.9).toFixed(2);   /* parallax depth */
+      box.appendChild(b);
+    }
+  })();
+
+  /* ---- STUDIO: 3D frame tilt + bubble parallax (desktop) ---- */
+  if(!touch&&!rm){
+    var studio=document.querySelector('.studio'),
+        gframe=document.querySelector('.gframe'),
+        bbox=document.getElementById('bubbles');
+    if(studio&&gframe){
+      studio.addEventListener('mousemove',function(e){
+        var px=(e.clientX/innerWidth-.5),py=(e.clientY/innerHeight-.5);
+        gframe.style.transform='perspective(1000px) rotateY('+px*12+'deg) rotateX('+(-py*12)+'deg) translateZ(20px)';
+        if(bbox)bbox.style.transform='translate('+px*-26+'px,'+py*-26+'px)';
+      });
+      studio.addEventListener('mouseleave',function(){gframe.style.transform='';if(bbox)bbox.style.transform='';});
+    }
+  }
 
   /* ---- HERO PARALLAX ---- */
   if(!touch&&!rm){
