@@ -15,23 +15,37 @@ Cocktails & Dreams — a professional, cinematic cocktail bar website. Hebrew RT
 
 ## Israeli Legal Compliance (Required for Every Website Build)
 
-Every website built in this project (and by this user) MUST include full Israeli legal compliance. This is a permanent requirement:
+Every website built in this project (and by this user) MUST include full Israeli legal compliance. This is a permanent requirement — no lawyer needed, use the standard templates below.
 
-1. **Accessibility Widget** — Interactive accessibility panel with options: font size increase, high contrast, link highlighting, grayscale mode, readable font, animation stop. Professional SVG accessibility icon (universal person-with-arms symbol in circle), never use ♿ emoji.
+### 1. Accessibility (נגישות) — MANDATORY
+- **Law:** חוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח‑1998 + תקנות התשע"ג‑2013
+- **Standard:** Israeli Standard IS 5568 = WCAG 2.0 Level AA
+- **Penalty:** Up to NIS 50,000 per violation, no need to prove damage
+- **Required:** Interactive accessibility widget (font size, contrast, link highlighting, readable font, animation stop) + professional SVG icon (never ♿ emoji)
+- **Accessibility Statement must include:** compliance declaration referencing IS 5568 + WCAG 2.0 AA, list of accessibility features, known limitations, accessibility coordinator name + phone + email, invitation to report issues, last update date
 
-2. **Accessibility Statement** — Full Hebrew accessibility statement per Israeli Standard 5568 (based on WCAG 2.0 Level AA). Include compliance level, assistive technology support, contact details for accessibility coordinator.
+### 2. Privacy Policy (מדיניות פרטיות) — MANDATORY
+- **Law:** חוק הגנת הפרטיות, התשמ"א‑1981 + תיקון מס' 13 (August 2025)
+- **Penalty:** Up to 5% of annual turnover
+- **Must include:** types of data collected (voluntary vs automatic), purpose of collection, consequences of not providing data, controller identity + contact, data recipients, data security measures, data retention policy, cookie disclosure (essential vs analytics vs marketing), data subject rights (access, correction, deletion, objection), how to exercise rights, policy update mechanism
 
-3. **Privacy Policy** — Complete Hebrew privacy policy covering: data collection, cookies, third-party services, data storage, user rights, contact information. Must comply with Israeli Privacy Protection Law (1981).
+### 3. Terms of Service (תקנון שימוש) — MANDATORY for commercial sites
+- **Law:** חוק הגנת הצרכן התשמ"א‑1981 + חוק החוזים האחידים התשמ"ג‑1982
+- **Must include:** business identity + contact, service description, age restriction (18+ for alcohol per חוק הגבלת פרסום אלכוהול התשע"ב‑2012), intellectual property (חוק זכות יוצרים התשס"ח‑2007), user obligations, liability limitations (must be reasonable per Standard Contracts Law), external links disclaimer, modification clause, governing law (Israeli law), exclusive jurisdiction (Tel Aviv district), contact information
 
-4. **Terms of Service** — Full Hebrew terms of service covering: service description, user obligations, intellectual property, liability limitations, dispute resolution under Israeli law.
+### 4. Cookie Consent Banner — DE FACTO MANDATORY
+- **Law:** PPA guidance (February 2026) under Privacy Protection Law
+- **Required:** RTL banner with accept/decline buttons (no dark patterns), must appear on first visit, store preference in localStorage, do not fire non-essential cookies before consent, link to privacy policy
 
-5. **Cookie Consent Banner** — RTL animated banner with accept/decline buttons. Must appear on first visit, store user preference in localStorage, match site design theme.
+### 5. SSL/HTTPS — MANDATORY
+- Implied by Amendment 13 security requirements. Handled automatically by Netlify/hosting.
 
-6. **SSL/HTTPS** — Site must be served over HTTPS (handled by Netlify automatically).
+### 6. 18+ Notice — REQUIRED for alcohol content
+- **Law:** חוק הגבלת פרסום והפצה של משקאות אלכוהוליים, התשע"ב‑2012
+- Display prominently on alcohol-related pages. Include statement that content is for 18+ only.
 
-7. **18+ Notice** — Where relevant (alcohol-related content), include appropriate age verification or notice.
-
-8. **All Legal Texts in Hebrew** — Every legal document, notice, and UI element must be in Hebrew.
+### 7. All Legal Texts in Hebrew
+- Every legal document, notice, and UI element must be in Hebrew for Israeli audience.
 
 ## Communication
 
