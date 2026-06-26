@@ -42,6 +42,26 @@
   .eyebrow .ix{color:var(--muted);font-variant-numeric:tabular-nums;margin-inline-end:.5em}
   .ltr{direction:ltr;unicode-bidi:isolate}
 
+  /* ===== PARTICLE CANVAS ===== */
+  #particleCanvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.6}
+
+  /* ===== SCROLL CINEMA — MASK SPLIT ===== */
+  .cinema-mask{position:relative;overflow:hidden}
+  .cinema-mask::before,.cinema-mask::after{content:"";position:absolute;inset-inline:0;height:0;background:var(--bg);z-index:10;transition:height 1.4s cubic-bezier(.32,.72,0,1)}
+  .cinema-mask::before{top:0}
+  .cinema-mask::after{bottom:0}
+  .cinema-mask.cinema-in::before,.cinema-mask.cinema-in::after{height:0}
+  .cinema-mask.cinema-out::before,.cinema-mask.cinema-out::after{height:12%}
+
+  /* Dramatic zoom on scroll */
+  .cinema-zoom{transition:transform 1.8s cubic-bezier(.32,.72,0,1),filter 1.8s cubic-bezier(.32,.72,0,1);transform:scale(1.15);filter:brightness(.6)}
+  .cinema-zoom.zoomed{transform:scale(1);filter:brightness(1)}
+
+  /* Text split reveal — words clip in */
+  .word-reveal{display:inline-block;overflow:hidden;vertical-align:top}
+  .word-reveal .wr-inner{display:inline-block;transform:translateY(110%);transition:transform .8s cubic-bezier(.32,.72,0,1);will-change:transform}
+  .word-reveal.revealed .wr-inner{transform:translateY(0)}
+
   /* ===== AMBIENT BACKGROUND ===== */
   .bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
   .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;mix-blend-mode:screen;will-change:transform}
@@ -480,6 +500,7 @@
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 </div>
 <div class="grain" aria-hidden="true"></div>
+<canvas id="particleCanvas" aria-hidden="true"></canvas>
 
 <!-- CUSTOM CURSOR -->
 <div class="cur" id="cur"><span class="ct" id="curTxt"></span></div>
@@ -597,8 +618,8 @@
         <div class="s"><b>100%</b><span>מזיגה חיה</span></div>
       </div>
     </div>
-    <div class="imgwrap reveal" data-cur="VIEW">
-      <img src="assets/img/bar-rooftop.jpeg" alt="בר קוקטיילים על גג בתל אביב" />
+    <div class="imgwrap reveal cinema-mask" data-cur="VIEW">
+      <img class="cinema-zoom" src="assets/img/bar-rooftop.jpeg" alt="בר קוקטיילים על גג בתל אביב" />
       <span class="badge">TEL AVIV · ROOFTOP</span>
     </div>
   </div>
@@ -714,7 +735,7 @@
 </section>
 
 <!-- GALLERY -->
-<section class="blk gallery" id="gallery">
+<section class="blk gallery cinema-mask" id="gallery">
   <div class="wrap">
     <div class="reveal" style="max-width:640px">
       <span class="eyebrow"><span class="ix">06</span>רגעים</span>
@@ -1018,6 +1039,43 @@
     }
 
     gsap.to('.bgfx .blob',{scale:1.15,ease:'none',scrollTrigger:{trigger:'main',start:'top top',end:'bottom bottom',scrub:4}});
+
+    /* SCROLL CINEMA — cinematic mask reveal */
+    gsap.utils.toArray('.cinema-mask').forEach(function(el){
+      ScrollTrigger.create({trigger:el,start:'top 90%',end:'top 40%',
+        onEnter:function(){el.classList.add('cinema-in');el.classList.remove('cinema-out')},
+        onLeaveBack:function(){el.classList.remove('cinema-in');el.classList.add('cinema-out')}
+      });
+    });
+
+    /* Cinema zoom on images */
+    gsap.utils.toArray('.cinema-zoom').forEach(function(el){
+      ScrollTrigger.create({trigger:el,start:'top 85%',
+        onEnter:function(){el.classList.add('zoomed')},
+        onLeaveBack:function(){el.classList.remove('zoomed')}
+      });
+    });
+
+    /* Word reveal — wrap each word in hero h2s and reveal on scroll */
+    gsap.utils.toArray('h2.head').forEach(function(h){
+      var words=h.innerHTML.split(/(\s+)/);
+      var wrapped=words.map(function(w){
+        if(w.trim()==='')return w;
+        if(w.indexOf('<')===0)return w;
+        return '<span class="word-reveal"><span class="wr-inner">'+w+'</span></span>';
+      }).join('');
+      h.innerHTML=wrapped;
+      var reveals=h.querySelectorAll('.word-reveal');
+      ScrollTrigger.create({trigger:h,start:'top 85%',onEnter:function(){
+        reveals.forEach(function(r,i){setTimeout(function(){r.classList.add('revealed')},i*80)});
+      }});
+    });
+
+    /* Dramatic section zoom-in */
+    gsap.utils.toArray('.xcard').forEach(function(card,i){
+      gsap.fromTo(card,{scale:.85,opacity:0,rotateX:8},{scale:1,opacity:1,rotateX:0,duration:1,ease:'power3.out',
+        scrollTrigger:{trigger:card,start:'top 92%',toggleActions:'play none none none'},delay:i*.12});
+    });
   }
 
   /* preloader — hide after the pour fill, or once loaded (whichever; capped so a slow video never traps it) */
@@ -1364,6 +1422,88 @@
       'סוג אירוע: '+(d.get('type')||'')+'\n'+'אורחים: '+(d.get('guests')||'')+(d.get('msg')?('\n\n'+d.get('msg')):'');
     window.open('https://wa.me/972544930095?text='+encodeURIComponent(msg),'_blank');
   });
+})();
+</script>
+
+<!-- PARTICLE COCKTAIL RAIN -->
+<script>
+(function(){
+  var c=document.getElementById('particleCanvas');
+  if(!c||window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var ctx=c.getContext('2d');
+  var W,H,particles=[];
+  var colors=['#d9b382','#f4a9b8','#f0d9b5','#c84d63','#e07b91','#a99b97'];
+  var mouse={x:-1000,y:-1000};
+
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+
+  function Particle(){
+    this.reset();
+    this.y=Math.random()*H;
+  }
+  Particle.prototype.reset=function(){
+    this.x=Math.random()*W;
+    this.y=-10-Math.random()*40;
+    this.r=Math.random()*3+1;
+    this.vy=Math.random()*.8+.3;
+    this.vx=(Math.random()-.5)*.3;
+    this.alpha=Math.random()*.5+.2;
+    this.color=colors[Math.floor(Math.random()*colors.length)];
+    this.wobble=Math.random()*Math.PI*2;
+    this.wobbleSpeed=Math.random()*.02+.005;
+    this.life=0;
+  };
+  Particle.prototype.update=function(){
+    this.wobble+=this.wobbleSpeed;
+    this.x+=this.vx+Math.sin(this.wobble)*.4;
+    this.y+=this.vy;
+    this.life++;
+
+    var dx=this.x-mouse.x,dy=this.y-mouse.y;
+    var dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<120){
+      var force=(120-dist)/120*2;
+      this.x+=dx/dist*force;
+      this.y+=dy/dist*force*.5;
+      this.alpha=Math.min(this.alpha+.02,.8);
+    }
+
+    if(this.y>H+20||this.x<-20||this.x>W+20)this.reset();
+  };
+  Particle.prototype.draw=function(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+    ctx.fillStyle=this.color;
+    ctx.globalAlpha=this.alpha;
+    ctx.fill();
+    if(this.r>2){
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.r*3,0,Math.PI*2);
+      ctx.fillStyle=this.color;
+      ctx.globalAlpha=this.alpha*.15;
+      ctx.fill();
+    }
+  };
+
+  var count=window.innerWidth<768?40:80;
+  for(var i=0;i<count;i++)particles.push(new Particle());
+
+  document.addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY;});
+  document.addEventListener('touchmove',function(e){if(e.touches[0]){mouse.x=e.touches[0].clientX;mouse.y=e.touches[0].clientY;}});
+
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    ctx.globalAlpha=1;
+    for(var i=0;i<particles.length;i++){
+      particles[i].update();
+      particles[i].draw();
+    }
+    ctx.globalAlpha=1;
+    requestAnimationFrame(loop);
+  }
+  loop();
 })();
 </script>
 </body>
