@@ -1129,7 +1129,7 @@
     }
     function togglePanel(open){var o=open===undefined?!panel.classList.contains('open'):open;panel.classList.toggle('open',o);fab.setAttribute('aria-expanded',o);}
     fab.addEventListener('click',function(){togglePanel();});
-    document.addEventListener('click',function(e){if(panel.classList.contains('open')&&!panel.contains(e.target)&&e.target!==fab)togglePanel(false);});
+    document.addEventListener('click',function(e){if(panel.classList.contains('open')&&!panel.contains(e.target)&&!fab.contains(e.target))togglePanel(false);});
     panel.querySelectorAll('[data-a11y]').forEach(function(b){
       b.addEventListener('click',function(){
         var k=b.getAttribute('data-a11y');
