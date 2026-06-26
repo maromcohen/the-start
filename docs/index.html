@@ -36,7 +36,8 @@
   ::selection{background:var(--blush);color:#1a0f12}
   .serif{font-family:'Cormorant Garamond',serif}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 24px;position:relative;z-index:2}
-  .eyebrow{font-family:'Marcellus',serif;letter-spacing:.42em;text-transform:uppercase;font-size:.72rem;color:var(--gold);display:inline-block}
+  .eyebrow{font-family:'Marcellus',serif;letter-spacing:.24em;text-transform:uppercase;font-size:.72rem;color:var(--gold);display:inline-block}
+  .eyebrow .ix{color:var(--muted);font-variant-numeric:tabular-nums;margin-inline-end:.5em}
   .ltr{direction:ltr;unicode-bidi:isolate}
 
   /* ===== AMBIENT BACKGROUND ===== */
@@ -44,7 +45,8 @@
   .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;mix-blend-mode:screen;will-change:transform}
   .b1{width:46vw;height:46vw;background:radial-gradient(circle,var(--rose),transparent 65%);top:-8vw;inset-inline-start:-6vw;animation:drift1 22s ease-in-out infinite}
   .b2{width:40vw;height:40vw;background:radial-gradient(circle,#7a4a8c,transparent 65%);bottom:-10vw;inset-inline-end:-6vw;animation:drift2 26s ease-in-out infinite}
-  .b3{width:32vw;height:32vw;background:radial-gradient(circle,var(--gold),transparent 60%);top:40%;left:55%;opacity:.28;animation:drift3 30s ease-in-out infinite}
+  .b3{width:32vw;height:32vw;background:radial-gradient(circle,var(--gold),transparent 60%);top:40%;left:55%;opacity:.16;animation:drift3 30s ease-in-out infinite}
+  .blob{opacity:.28}
   @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(8vw,6vh) scale(1.15)}}
   @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-7vw,-5vh) scale(1.2)}}
   @keyframes drift3{0%,100%{transform:translate(-50%,0) scale(1)}50%{transform:translate(-40%,-8vh) scale(1.1)}}
@@ -272,7 +274,7 @@
   .xcard::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),rgba(217,179,130,.1),transparent 60%)}
   .xcard:hover::before{opacity:1}
   .xcard:hover{border-color:rgba(217,179,130,.45);transform:translateY(-6px)}
-  .xcard .ic{width:46px;height:46px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--gold);margin-bottom:22px;font-size:1.1rem}
+  .xcard .ic{width:46px;height:46px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--gold);margin-bottom:22px;font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;font-variant-numeric:tabular-nums}
   .xcard h3{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;position:relative}
   .xcard p{color:var(--muted);font-size:.92rem;margin-top:10px;position:relative}
 
@@ -470,9 +472,9 @@
     <img class="heroimg" src="assets/img/cocktail-cheers.jpeg" alt="" style="display:none" />
   </div>
   <div class="inner">
-    <span class="eyebrow">בר קוקטיילים נייד · אירועים פרטיים</span>
+    <span class="eyebrow">בר קוקטיילים נייד · תל אביב</span>
     <h1 class="ltr" id="heroH1">Cocktails <span class="amp">&amp;</span> Dreams</h1>
-    <p class="tag">חוויה של בר עילית — <b>ישר מול האורחים שלכם</b></p>
+    <p class="tag">שני ברמנים, בר אחד שמגיע אליכם — <b>וקוקטייל שנמזג לאט מול האורחים.</b></p>
   </div>
   <div class="scrollhint"><div class="l"></div><span>SCROLL</span></div>
 </section>
@@ -491,7 +493,7 @@
     <div class="bubbles" id="bubbles" aria-hidden="true"></div>
     <div class="stage">
       <div class="copy">
-        <span class="eyebrow">THE POUR</span>
+        <span class="eyebrow"><span class="ix">01</span>המזיגה</span>
         <h2 id="pourWords" style="margin-top:18px">
           <span class="word">כל</span> <span class="word">קוקטייל</span> <span class="word">נמזג</span>
           <em class="word">לאט.</em><br>
@@ -517,7 +519,7 @@
 <!-- 3D COVERFLOW CAROUSEL -->
 <section class="blk carousel-sec spot" id="showcase">
   <div class="wrap" style="text-align:center">
-    <span class="eyebrow">SIGNATURE</span>
+    <span class="eyebrow"><span class="ix">02</span>הבר</span>
     <h2 class="head" style="margin-top:14px">טעימה <em>מהבר</em></h2>
   </div>
   <div class="cwrap">
@@ -540,10 +542,10 @@
 <section class="blk spot" id="about">
   <div class="wrap about">
     <div class="txt reveal">
-      <span class="eyebrow">מי אנחנו</span>
-      <h2 class="head" style="margin-top:18px">בר נייד שמביא את <em>הקוקטייל בר</em> אליכם</h2>
-      <p>אנחנו Cocktails &amp; Dreams — צוות בארמנים שחי ונושם קוקטיילים. אנחנו מקימים בר מלא ומעוצב בכל מקום: גג בתל אביב, חצר פרטית, חתונה או מסיבה. מרכיבים טריים, קרח צלול וכלי זכוכית מהסרטים.</p>
-      <p>כל אירוע נבנה סביבכם — תפריט מותאם, מזיגה חיה מול האורחים וחוויה שנשארת הרבה אחרי הכוס האחרונה.</p>
+      <span class="eyebrow"><span class="ix">03</span>הסיפור</span>
+      <h2 class="head" style="margin-top:18px">אנחנו מביאים את הבר. <em>אתם נשארים עם האורחים.</em></h2>
+      <p>התחלנו כשני ברמנים שאוהבים את הרגע שבו מוזגים את הכוס הראשונה. היום אנחנו מקימים בר מלא בכל מקום — גג בתל אביב, חצר אחורית, חתונה — עם מרכיבים טריים, קרח צלול וכלים שנעים לאחוז.</p>
+      <p>אנחנו לא מגישים תפריט מהמדף. יושבים אתכם, מבינים את האירוע, ובונים תפריט שמרגיש שלכם — ומוזגים אותו חי, מול האורחים.</p>
       <div class="stats">
         <div class="s"><b data-count="250">0</b><span>אירועים</span></div>
         <div class="s"><b data-count="40">0</b><span>קוקטיילים בתפריט</span></div>
@@ -561,7 +563,7 @@
 <section class="blk cocktails spot" id="menu">
   <div class="wrap">
     <div class="reveal" style="max-width:640px">
-      <span class="eyebrow">SIGNATURE</span>
+      <span class="eyebrow"><span class="ix">04</span>התפריט</span>
       <h2 class="head" style="margin-top:18px">הקוקטיילים <em>שלנו</em></h2>
       <p class="lead" style="margin-top:18px">תפריט חתימה שמשתנה לפי האירוע — מהקלאסיקות ועד יצירות מקוריות בגוונים של ורוד, ענבר וקצף.</p>
     </div>
@@ -655,13 +657,13 @@
 <section class="blk spot" id="events">
   <div class="wrap">
     <div class="reveal" style="max-width:640px">
-      <span class="eyebrow">WHAT WE BRING</span>
-      <h2 class="head" style="margin-top:18px">חוויה שלמה, <em>לכל אירוע</em></h2>
+      <span class="eyebrow"><span class="ix">05</span>אירועים</span>
+      <h2 class="head" style="margin-top:18px">בנויים <em>לכל אירוע</em></h2>
     </div>
     <div class="xgrid stagger r3d">
-      <div class="xcard glow"><div class="ic">♥</div><h3>חתונות &amp; אירוסין</h3><p>בר חתימה מעוצב, קוקטייל וולקאם לאורחים ותפריט שמספר את הסיפור שלכם.</p></div>
-      <div class="xcard glow"><div class="ic">★</div><h3>אירועים פרטיים</h3><p>ימי הולדת, מסיבות גג ואירועים אינטימיים — אנחנו מביאים את הבר והאווירה.</p></div>
-      <div class="xcard glow"><div class="ic">▲</div><h3>אירועי חברה</h3><p>השקות, ערבי לקוחות ומסיבות צוות עם בר נייד וברמן צמוד.</p></div>
+      <div class="xcard glow"><div class="ic">01</div><h3>חתונות &amp; אירוסין</h3><p>קוקטייל קבלת פנים, בר חתימה מעוצב ותפריט שנבנה סביב הסיפור שלכם.</p></div>
+      <div class="xcard glow"><div class="ic">02</div><h3>אירועים פרטיים</h3><p>ימי הולדת, מסיבות גג וערבים אינטימיים — אנחנו מביאים את הבר ואת האווירה.</p></div>
+      <div class="xcard glow"><div class="ic">03</div><h3>אירועי חברה</h3><p>השקות, ערבי לקוחות ומסיבות צוות, עם ברמן צמוד לאורך כל הערב.</p></div>
     </div>
   </div>
 </section>
@@ -670,8 +672,8 @@
 <section class="blk gallery" id="gallery">
   <div class="wrap">
     <div class="reveal" style="max-width:640px">
-      <span class="eyebrow">GALLERY</span>
-      <h2 class="head" style="margin-top:18px">רגעים <em>מהאירועים</em></h2>
+      <span class="eyebrow"><span class="ix">06</span>רגעים</span>
+      <h2 class="head" style="margin-top:18px">מתוך <em>הערבים</em></h2>
     </div>
     <div class="gmason">
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-cheers.jpeg" alt="" loading="lazy" /></div>
@@ -706,7 +708,7 @@
 <section class="blk book spot" id="book">
   <div class="wrap bookgrid">
     <div class="contactside reveal">
-      <span class="eyebrow">BOOK YOUR EVENT</span>
+      <span class="eyebrow"><span class="ix">07</span>יצירת קשר</span>
       <h2 class="head" style="margin-top:18px">בואו נתכנן את <em>הבר שלכם</em></h2>
       <p class="lead" style="margin-top:18px">ספרו לנו על האירוע ונחזור אליכם עם הצעה מותאמת אישית.</p>
       <div class="c"><span class="ic">✆</span><div><b>עידן הרמן</b><a href="tel:+972544930095" style="color:var(--muted);display:block">054-493-0095</a></div></div>
@@ -1158,7 +1160,7 @@
   var f=document.getElementById('bkForm');
   f.addEventListener('submit',function(e){
     e.preventDefault();var d=new FormData(f);
-    var msg='היי Cocktails & Dreams! אשמח להזמין אירוע 🍸\n\n'+
+    var msg='היי, אשמח להזמין אתכם לאירוע.\n\n'+
       'שם: '+(d.get('name')||'')+'\n'+'טלפון: '+(d.get('phone')||'')+'\n'+'תאריך: '+(d.get('date')||'')+'\n'+
       'סוג אירוע: '+(d.get('type')||'')+'\n'+'אורחים: '+(d.get('guests')||'')+(d.get('msg')?('\n\n'+d.get('msg')):'');
     window.open('https://wa.me/972544930095?text='+encodeURIComponent(msg),'_blank');
