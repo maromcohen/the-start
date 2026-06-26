@@ -1,0 +1,42 @@
+<script>
+(function(){
+var c=window._cd;if(!c)return;
+var W='https://static.wixstatic.com/media/b47f77_',J='~mv2.jpeg',
+AP=W+'5913d28ea0494cf3b141d9da64799037'+J,
+PA=W+'7aa3d1169a3f4eedaee58dfd7406867f'+J,
+SP=W+'aefc7cdda91e409f8904158cdae0d322'+J;
+var menu=[['קינג פרש',"על בסיס ג'ין, בזיליקום ומלפפון רענן",0],
+['קרייזי תות','על בסיס ערק, תות, לימון טרי ורוזטה',0],
+['פאשן סמאש',"על בסיס וודקה, ליקר פסואה וליצ'י",0],
+['אפרול שפריץ','אפרול, קאווה ותפוז מקורמל',1],
+['שפריץ לימון',"לימונצ'לו, קאווה ולימון טרי",0],
+["ג'וני רנג'רס",'על בסיס טקילה, ליקר מידורי, מנגו וסאוור',0],
+['רזברי סמאש',"על בסיס וודקה, לימונצ'לו ופטל אדום",0],
+['מנגו מרטיני',"על בסיס ג'ין, טריפל סק, מנגו וסאוור",0],
+['סוויט סאמר','על בסיס וודקה, ליצ\'י, אננס ואפרול',0],
+['ניו יורק סאוור','וויסקי, קינמון, דבש וסאוור',0]];
+var menuH=menu.map(function(m){return '<div class="mitem'+(m[2]?' fav':'')+'"><div class="nm">'+m[0]+(m[2]?' <span class="star">★ הכי אהוב</span>':'')+'</div><div class="ds">'+m[1]+'</div></div>';}).join('');
+var ev=[['01','חתונות &amp; אירוסין','קוקטייל קבלת פנים, בר חתימה מעוצב ותפריט שנבנה סביב הסיפור שלכם.'],
+['02','אירועים פרטיים','ימי הולדת, מסיבות גג וערבים אינטימיים — אנחנו מביאים את הבר ואת האווירה.'],
+['03','אירועי חברה','השקות, ערבי לקוחות ומסיבות צוות, עם ברמן צמוד לאורך כל הערב.']];
+var evH=ev.map(function(e){return '<div class="xcard"><div class="ic">'+e[0]+'</div><h3>'+e[1]+'</h3><p>'+e[2]+'</p></div>';}).join('');
+var s=document.createElement('div');
+s.innerHTML='<section class="blk" id="menu"><div class="wrap">'
++'<div class="reveal" style="text-align:center;max-width:640px;margin:0 auto"><p class="eyebrow">SIGNATURE COCKTAILS</p>'
++'<h2 class="head">הקוקטיילים <em>שלנו</em></h2></div>'
++'<div class="cgrid reveal">'
++'<div class="card"><span class="pill">SIGNATURE</span><img src="'+AP+'" alt="אפרול שפריץ"><div class="meta"><h3>אפרול שפריץ</h3><p>אפרול · קאווה · תפוז מקורמל</p></div></div>'
++'<div class="card"><span class="pill">VODKA</span><img src="'+PA+'" alt="פאשן סמאש"><div class="meta"><h3>פאשן סמאש</h3><p>וודקה · ליקר פסואה · ליצ\'י</p></div></div>'
++'<div class="card"><span class="pill">THE BAR</span><img src="'+SP+'" alt="הבר המלא"><div class="meta"><h3>הבר המלא</h3><p>שורת קוקטיילים לאירוע שלם</p></div></div>'
++'</div>'
++'<div class="menutitle reveal"><h3>תפריט החלומות שלנו</h3><div class="rule"></div></div>'
++'<div class="menu-list reveal">'+menuH+'</div>'
++'</div></section>'
++'<section class="blk" id="events"><div class="wrap">'
++'<div class="reveal" style="max-width:640px"><p class="eyebrow">05 — אירועים</p>'
++'<h2 class="head">בנויים <em>לכל אירוע</em></h2></div>'
++'<div class="xgrid reveal">'+evH+'</div>'
++'</div></section>';
+while(s.firstChild)c.appendChild(s.firstChild);
+})();
+</script>
