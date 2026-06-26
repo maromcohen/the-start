@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: maromcohen/the-start
   branch: claude/cocktail-bar-website-7pu9ml
 
 locale: he
