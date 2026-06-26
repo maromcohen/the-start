@@ -1,21 +1,27 @@
 {
-  "_comment": "Each business gets one of these. The generator (build.mjs) injects it into template.html to produce a finished site. Swap these values and re-run to re-skin/re-brand the whole site.",
+  "_comment": "One of these per business. Run: node build.mjs config.json output. Swap values + assets and re-run to generate a fully re-skinned site.",
 
-  "brand": {
-    "name": "Cocktails & Dreams",
-    "sub": "MOBILE BAR"
+  "brand": { "name": "Cocktails & Dreams", "sub": "MOBILE BAR" },
+
+  "meta": {
+    "title": "Cocktails & Dreams · בר קוקטיילים נייד לאירועים",
+    "description": "Cocktails & Dreams — חוויית בר קוקטיילים פרימיום לאירועים פרטיים, חתונות וגגות. בר נייד, בארמנים מקצועיים וקוקטיילים שנמזגים לאט מול האורחים."
   },
 
   "theme": {
-    "bg": "#0a0708",
-    "bg2": "#120c0e",
-    "ink": "#f4ece9",
-    "muted": "#a99b97",
-    "blush": "#f4a9b8",
-    "blushD": "#e07b91",
-    "rose": "#c84d63",
-    "gold": "#d9b382",
-    "goldL": "#f0d9b5"
+    "bg": "#0a0708", "bg2": "#120c0e", "ink": "#f4ece9", "muted": "#a99b97",
+    "blush": "#f4a9b8", "blushD": "#e07b91", "rose": "#c84d63",
+    "gold": "#d9b382", "goldL": "#f0d9b5"
+  },
+
+  "hero": {
+    "eyebrow": "בר קוקטיילים נייד · אירועים פרטיים",
+    "tag": "חוויה של בר עילית — <b>ישר מול האורחים שלכם</b>"
+  },
+
+  "about": {
+    "p1": "אנחנו Cocktails &amp; Dreams — צוות בארמנים שחי ונושם קוקטיילים. אנחנו מקימים בר מלא ומעוצב בכל מקום: גג בתל אביב, חצר פרטית, חתונה או מסיבה. מרכיבים טריים, קרח צלול וכלי זכוכית מהסרטים.",
+    "p2": "כל אירוע נבנה סביבכם — תפריט מותאם, מזיגה חיה מול האורחים וחוויה שנשארת הרבה אחרי הכוס האחרונה."
   },
 
   "contact": {
@@ -27,6 +33,40 @@
       { "name": "אופיר לרנר", "phone": "052-463-7076", "digits": "972524637076" }
     ]
   },
+
+  "featured": [
+    { "pill": "SIGNATURE", "img": "cocktail-cheers.jpeg", "name": "אפרול שפריץ", "desc": "אפרול · קאווה · תפוז מקורמל", "back": "הקלאסיקה האיטלקית האהובה — אפרול, קאווה מבעבעת ופלחי תפוז מקורמל. מושלם לוולקאם דרינק.", "cta": "להזמנה →" },
+    { "pill": "VODKA", "img": "cocktail-passion.jpeg", "name": "פאשן סמאש", "desc": "וודקה · ליקר פסואה · ליצ'י", "back": "וודקה איכותית, ליקר פסואה וליצ'י עם פסיפלורה טרייה. מתוק, פירותי ומרענן.", "cta": "להזמנה →" },
+    { "pill": "THE BAR", "img": "bar-spread.jpeg", "name": "הבר המלא", "desc": "שורת קוקטיילים לאירוע שלם", "back": "בר נייד מאובזר, בארמן צמוד ותפריט חתימה מותאם — חוויה שלמה לכל אורחי האירוע.", "cta": "לפרטים →" }
+  ],
+
+  "carousel": [
+    { "img": "cocktail-cheers.jpeg", "name": "אפרול שפריץ", "desc": "אפרול · קאווה · תפוז מקורמל" },
+    { "img": "cocktail-passion.jpeg", "name": "פאשן סמאש", "desc": "וודקה · ליקר פסואה · ליצ'י" },
+    { "img": "bar-spread.jpeg", "name": "קרייזי תות", "desc": "ערק · תות · לימון טרי" },
+    { "img": "pour-skyline.jpeg", "name": "מזיגה חיה", "desc": "ישר מול האורחים" },
+    { "img": "bar-rooftop.jpeg", "name": "הבר על הגג", "desc": "תל אביב · קו הרקיע" }
+  ],
+
+  "events": [
+    { "icon": "♥", "title": "חתונות &amp; אירוסין", "desc": "בר חתימה מעוצב, קוקטייל וולקאם לאורחים ותפריט שמספר את הסיפור שלכם." },
+    { "icon": "★", "title": "אירועים פרטיים", "desc": "ימי הולדת, מסיבות גג ואירועים אינטימיים — אנחנו מביאים את הבר והאווירה." },
+    { "icon": "▲", "title": "אירועי חברה", "desc": "השקות, ערבי לקוחות ומסיבות צוות עם בר נייד וברמן צמוד." }
+  ],
+
+  "gallery": [
+    { "type": "img", "src": "cocktail-cheers.jpeg" },
+    { "type": "video", "src": "bar.mp4" },
+    { "type": "img", "src": "bar-rooftop.jpeg" },
+    { "type": "img", "src": "cocktail-passion.jpeg" },
+    { "type": "img", "src": "pour-skyline.jpeg" },
+    { "type": "img", "src": "bar-spread.jpeg" }
+  ],
+
+  "instagram": [
+    "cocktail-cheers.jpeg", "cocktail-passion.jpeg", "bar-spread.jpeg",
+    "bar-rooftop.jpeg", "pour-skyline.jpeg", "pour-poster.jpg"
+  ],
 
   "menu": [
     { "name": "קינג פרש", "desc": "על בסיס ג'ין, בזיליקום ומלפפון רענן" },

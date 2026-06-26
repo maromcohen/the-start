@@ -33,23 +33,27 @@ node build.mjs demo.json demo-output     # -> "Vino & Co", purple theme, wine me
 | `contact.people[]` | Names + phone numbers + `tel:` links (independent of WhatsApp) |
 | `contact.igUser` | Instagram links + handle |
 | `contact.area` | Service-area line |
-| `menu[]` | Rebuilds the full "תפריט" list (name, desc, `fav` star) |
+| `meta.title` / `meta.description` | SEO `<title>` + meta description |
+| `hero.eyebrow` / `hero.tag` | Hero copy (tag may contain inline HTML) |
+| `about.p1` / `about.p2` | About paragraphs |
+| `featured[]` | The 3 flip cards (pill, img, name, desc, back, cta) |
+| `carousel[]` | The 3D coverflow items (img, name, desc) |
+| `events[]` | The "what we bring" cards (icon, title, desc) |
+| `gallery[]` | Masonry items (`type: img\|video`, src) |
+| `instagram[]` | The IG tiles (image filenames) |
+| `menu[]` | The full "תפריט" list (name, desc, `fav` star) |
 
 Per-business **assets** (logo, photos, videos) are swapped by replacing the files
 in `output/assets/` — no code change.
 
-## Roadmap (next data-driven blocks)
+## Roadmap (next)
 
-Same pattern (`<!--LIST:name-->` markers + config arrays):
-
-- `cocktailsFeatured[]` — the 3 flip cards
-- `carousel[]` — the 3D coverflow items
-- `gallery[]` — masonry images/videos
-- `instagram[]` — the IG tiles
-- `events[]` — the "what we bring" cards
-- `mixer` — the "find your drink" chips + recommendations
-- `hero` / `about` copy, `meta` (SEO), and a per-business logo/poster pipeline
+- `mixer` — the "find your drink" chips + recommendations (currently in JS)
+- Per-business **logo/poster pipeline** (auto video transcode + poster, like we did by hand)
+- Section headings/eyebrows as config (currently template defaults)
 - **Auto-deploy**: create repo + push + enable the Pages Actions workflow → live link
+- **Client intake form** that writes the `config.json` automatically
+- More **templates** (restaurant, venue, personal brand) — each a new market
 
 ## How it works
 

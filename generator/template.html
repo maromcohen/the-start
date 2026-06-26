@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Cocktails &amp; Dreams · בר קוקטיילים נייד לאירועים</title>
-<meta name="description" content="Cocktails & Dreams — חוויית בר קוקטיילים פרימיום לאירועים פרטיים, חתונות וגגות. בר נייד, בארמנים מקצועיים וקוקטיילים שנמזגים לאט מול האורחים." />
+<title>{{META_TITLE}}</title>
+<meta name="description" content="{{META_DESC}}" />
 <meta name="theme-color" content="#0a0708" />
 <meta property="og:title" content="Cocktails & Dreams" />
 <meta property="og:description" content="בר קוקטיילים נייד פרימיום לאירועים." />
@@ -470,9 +470,9 @@
     <img class="heroimg" src="assets/img/cocktail-cheers.jpeg" alt="" style="display:none" />
   </div>
   <div class="inner">
-    <span class="eyebrow">בר קוקטיילים נייד · אירועים פרטיים</span>
+    <span class="eyebrow">{{HERO_EYEBROW}}</span>
     <h1 class="ltr" id="heroH1">Cocktails <span class="amp">&amp;</span> Dreams</h1>
-    <p class="tag">חוויה של בר עילית — <b>ישר מול האורחים שלכם</b></p>
+    <p class="tag">{{HERO_TAG}}</p>
   </div>
   <div class="scrollhint"><div class="l"></div><span>SCROLL</span></div>
 </section>
@@ -524,11 +524,9 @@
     <button class="cnav prev" aria-label="הקודם">‹</button>
     <div class="cstage">
       <div class="cring" id="cring">
+        <!--LIST:carousel-->
         <figure class="citem"><img src="assets/img/cocktail-cheers.jpeg" alt="אפרול שפריץ" /><figcaption><h3>אפרול שפריץ</h3><p>אפרול · קאווה · תפוז מקורמל</p></figcaption></figure>
-        <figure class="citem"><img src="assets/img/cocktail-passion.jpeg" alt="פאשן סמאש" /><figcaption><h3>פאשן סמאש</h3><p>וודקה · ליקר פסואה · ליצ'י</p></figcaption></figure>
-        <figure class="citem"><img src="assets/img/bar-spread.jpeg" alt="קרייזי תות" /><figcaption><h3>קרייזי תות</h3><p>ערק · תות · לימון טרי</p></figcaption></figure>
-        <figure class="citem"><img src="assets/img/pour-skyline.jpeg" alt="מזיגה חיה" /><figcaption><h3>מזיגה חיה</h3><p>ישר מול האורחים</p></figcaption></figure>
-        <figure class="citem"><img src="assets/img/bar-rooftop.jpeg" alt="הבר על הגג" /><figcaption><h3>הבר על הגג</h3><p>תל אביב · קו הרקיע</p></figcaption></figure>
+        <!--/LIST:carousel-->
       </div>
     </div>
     <button class="cnav next" aria-label="הבא">›</button>
@@ -542,8 +540,8 @@
     <div class="txt reveal">
       <span class="eyebrow">מי אנחנו</span>
       <h2 class="head" style="margin-top:18px">בר נייד שמביא את <em>הקוקטייל בר</em> אליכם</h2>
-      <p>אנחנו Cocktails &amp; Dreams — צוות בארמנים שחי ונושם קוקטיילים. אנחנו מקימים בר מלא ומעוצב בכל מקום: גג בתל אביב, חצר פרטית, חתונה או מסיבה. מרכיבים טריים, קרח צלול וכלי זכוכית מהסרטים.</p>
-      <p>כל אירוע נבנה סביבכם — תפריט מותאם, מזיגה חיה מול האורחים וחוויה שנשארת הרבה אחרי הכוס האחרונה.</p>
+      <p>{{ABOUT_P1}}</p>
+      <p>{{ABOUT_P2}}</p>
       <div class="stats">
         <div class="s"><b data-count="250">0</b><span>אירועים</span></div>
         <div class="s"><b data-count="40">0</b><span>קוקטיילים בתפריט</span></div>
@@ -566,6 +564,7 @@
       <p class="lead" style="margin-top:18px">תפריט חתימה שמשתנה לפי האירוע — מהקלאסיקות ועד יצירות מקוריות בגוונים של ורוד, ענבר וקצף.</p>
     </div>
     <div class="cgrid stagger">
+      <!--LIST:featured-->
       <article class="flip" data-cur="FLIP"><div class="flip-inner">
         <div class="flip-face flip-front">
           <span class="pill">SIGNATURE</span><img src="assets/img/cocktail-cheers.jpeg" alt="אפרול שפריץ" />
@@ -578,30 +577,7 @@
           <a class="back-cta" href="#book">להזמנה →</a>
         </div>
       </div></article>
-      <article class="flip" data-cur="FLIP"><div class="flip-inner">
-        <div class="flip-face flip-front">
-          <span class="pill">VODKA</span><img src="assets/img/cocktail-passion.jpeg" alt="פאשן סמאש" />
-          <div class="meta"><h3>פאשן סמאש</h3><p>וודקה · ליקר פסואה · ליצ'י</p></div>
-        </div>
-        <div class="flip-face flip-back">
-          <span class="eyebrow">VODKA</span>
-          <h3>פאשן סמאש</h3>
-          <p>וודקה איכותית, ליקר פסואה וליצ'י עם פסיפלורה טרייה. מתוק, פירותי ומרענן.</p>
-          <a class="back-cta" href="#book">להזמנה →</a>
-        </div>
-      </div></article>
-      <article class="flip" data-cur="FLIP"><div class="flip-inner">
-        <div class="flip-face flip-front">
-          <span class="pill">THE BAR</span><img src="assets/img/bar-spread.jpeg" alt="הבר המלא" />
-          <div class="meta"><h3>הבר המלא</h3><p>שורת קוקטיילים לאירוע שלם</p></div>
-        </div>
-        <div class="flip-face flip-back">
-          <span class="eyebrow">THE BAR</span>
-          <h3>הבר המלא</h3>
-          <p>בר נייד מאובזר, בארמן צמוד ותפריט חתימה מותאם — חוויה שלמה לכל אורחי האירוע.</p>
-          <a class="back-cta" href="#book">לפרטים →</a>
-        </div>
-      </div></article>
+      <!--/LIST:featured-->
     </div>
 
     <div class="menutitle reveal">
@@ -652,9 +628,9 @@
       <h2 class="head" style="margin-top:18px">חוויה שלמה, <em>לכל אירוע</em></h2>
     </div>
     <div class="xgrid stagger r3d">
+      <!--LIST:events-->
       <div class="xcard glow"><div class="ic">♥</div><h3>חתונות &amp; אירוסין</h3><p>בר חתימה מעוצב, קוקטייל וולקאם לאורחים ותפריט שמספר את הסיפור שלכם.</p></div>
-      <div class="xcard glow"><div class="ic">★</div><h3>אירועים פרטיים</h3><p>ימי הולדת, מסיבות גג ואירועים אינטימיים — אנחנו מביאים את הבר והאווירה.</p></div>
-      <div class="xcard glow"><div class="ic">▲</div><h3>אירועי חברה</h3><p>השקות, ערבי לקוחות ומסיבות צוות עם בר נייד וברמן צמוד.</p></div>
+      <!--/LIST:events-->
     </div>
   </div>
 </section>
@@ -667,12 +643,9 @@
       <h2 class="head" style="margin-top:18px">רגעים <em>מהאירועים</em></h2>
     </div>
     <div class="gmason">
+      <!--LIST:gallery-->
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-cheers.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="PLAY"><video src="assets/video/bar.mp4" muted loop playsinline autoplay></video></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-rooftop.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-passion.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/pour-skyline.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-spread.jpeg" alt="" loading="lazy" /></div>
+      <!--/LIST:gallery-->
     </div>
   </div>
 </section>
@@ -684,12 +657,9 @@
     <h2 class="head" style="margin-top:14px">עקבו <em>אחרינו</em></h2>
     <a class="iglink" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener">@cocktail.dreams_</a>
     <div class="iggrid">
+      <!--LIST:instagram-->
       <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/cocktail-cheers.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/cocktail-passion.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/bar-spread.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/bar-rooftop.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/pour-skyline.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/pour-poster.jpg" alt="" loading="lazy" /><span class="igico">◎</span></a>
+      <!--/LIST:instagram-->
     </div>
     <a class="cta magnetic" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" style="display:inline-block">לעמוד האינסטגרם ↗</a>
   </div>

@@ -35,6 +35,17 @@ const D = {
             blush:'#f4a9b8', blushD:'#e07b91', rose:'#c84d63', gold:'#d9b382', goldL:'#f0d9b5' }
 };
 
+/* ---- 0) scalar text tokens (may contain inline HTML) ---- */
+const T = {
+  '{{META_TITLE}}':   cfg.meta?.title || cfg.brand?.name || '',
+  '{{META_DESC}}':    cfg.meta?.description || '',
+  '{{HERO_EYEBROW}}': cfg.hero?.eyebrow || '',
+  '{{HERO_TAG}}':     cfg.hero?.tag || '',
+  '{{ABOUT_P1}}':     cfg.about?.p1 || '',
+  '{{ABOUT_P2}}':     cfg.about?.p2 || ''
+};
+for (const k of Object.keys(T)) rep(k, T[k]);
+
 /* ---- 1) theme colours (longest-unique hex, global) ---- */
 for (const k of Object.keys(D.colors)) {
   if (cfg.theme?.[k]) rep(D.colors[k], cfg.theme[k]);
@@ -73,7 +84,7 @@ if (cfg.brand?.sub) rep(D.brandSub, cfg.brand.sub);
 /* ---- 4) data-driven lists ---- */
 function expandList(name, itemsHtml) {
   const re = new RegExp(`<!--LIST:${name}-->[\\s\\S]*?<!--/LIST:${name}-->`);
-  html = html.replace(re, `<!--LIST:${name}-->\n${itemsHtml}\n      <!--/LIST:${name}-->`);
+  html = html.replace(re, itemsHtml);
 }
 if (Array.isArray(cfg.menu)) {
   const items = cfg.menu.map(m =>
@@ -83,6 +94,51 @@ if (Array.isArray(cfg.menu)) {
   ).join('\n');
   expandList('menu', items);
 }
+
+if (Array.isArray(cfg.featured)) {
+  expandList('featured', cfg.featured.map(f =>
+`      <article class="flip" data-cur="FLIP"><div class="flip-inner">
+        <div class="flip-face flip-front">
+          <span class="pill">${esc(f.pill)}</span><img src="assets/img/${f.img}" alt="${esc(f.name)}" />
+          <div class="meta"><h3>${esc(f.name)}</h3><p>${esc(f.desc)}</p></div>
+        </div>
+        <div class="flip-face flip-back">
+          <span class="eyebrow">${esc(f.pill)}</span>
+          <h3>${esc(f.name)}</h3>
+          <p>${esc(f.back)}</p>
+          <a class="back-cta" href="#book">${esc(f.cta || 'להזמנה →')}</a>
+        </div>
+      </div></article>`).join('\n'));
+}
+
+if (Array.isArray(cfg.carousel)) {
+  expandList('carousel', cfg.carousel.map(c =>
+    `        <figure class="citem"><img src="assets/img/${c.img}" alt="${esc(c.name)}" /><figcaption><h3>${esc(c.name)}</h3><p>${esc(c.desc)}</p></figcaption></figure>`
+  ).join('\n'));
+}
+
+if (Array.isArray(cfg.events)) {
+  expandList('events', cfg.events.map(e =>
+    `      <div class="xcard glow"><div class="ic">${e.icon}</div><h3>${e.title}</h3><p>${esc(e.desc)}</p></div>`
+  ).join('\n'));
+}
+
+if (Array.isArray(cfg.gallery)) {
+  expandList('gallery', cfg.gallery.map(g => g.type === 'video'
+    ? `      <div class="gi reveal tilt" data-cur="PLAY"><video src="assets/video/${g.src}" muted loop playsinline autoplay></video></div>`
+    : `      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/${g.src}" alt="" loading="lazy" /></div>`
+  ).join('\n'));
+}
+
+if (Array.isArray(cfg.instagram)) {
+  const ig = cfg.contact?.igUser || 'instagram';
+  expandList('instagram', cfg.instagram.map(img =>
+    `      <a class="igtile" href="https://www.instagram.com/${ig}" target="_blank" rel="noopener"><img src="assets/img/${img}" alt="" loading="lazy" /><span class="igico">◎</span></a>`
+  ).join('\n'));
+}
+
+/* ---- strip any leftover list markers (blocks not present in config keep their template default) ---- */
+html = html.replace(/[ \t]*<!--\/?LIST:[a-zA-Z]+-->\n?/g, '');
 
 /* ---- write output + copy assets ---- */
 fs.mkdirSync(outDir, { recursive: true });
