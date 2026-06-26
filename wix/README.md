@@ -22,8 +22,10 @@
 | `04-content-js2.html` | BODY_END | מזריק: כרטיסי קוקטיילים, תפריט מלא, אירועים | ✅ חי (CD Content JS2) |
 | `05-content-js3.html` | BODY_END | מזריק: גלריה, טופס הזמנה, footer, וואטסאפ, scroll/reveal JS | ✅ חי (CD Content JS3) |
 | `07-mixer-js.html` | BODY_END | מזריק: preloader, בועות אנימציה, בונה קוקטיילים אינטראקטיבי | ✅ חי (CD Mixer JS) |
+| `08-legal-css.html` | HEAD | סגנונות כפתור נגישות, פאנל נגישות, מודלים משפטיים | ✅ חי (CD Legal CSS) |
+| `09-legal-js.html` | BODY_END | כפתור נגישות + 7 אפשרויות, תקנון, פרטיות, הצהרת נגישות | ✅ חי (CD Legal JS) |
 
-**סטטוס: כל 7 ה-embeds חיים והאתר פורסם.** (יוני 2026)
+**סטטוס: כל 9 ה-embeds חיים והאתר פורסם.** (יוני 2026)
 
 כל embed מתחת למגבלת 15,000 התווים של Wix.
 
