@@ -1,0 +1,111 @@
+backend:
+  name: git-gateway
+  branch: claude/cocktail-bar-website-7pu9ml
+
+locale: he
+
+media_folder: docs/assets/img
+public_folder: assets/img
+
+collections:
+  - name: content
+    label: תוכן האתר
+    label_singular: קטע
+    editor:
+      preview: false
+    files:
+      - name: hero
+        label: כותרת ראשית (Hero)
+        file: content/hero.json
+        fields:
+          - { name: eyebrow, label: כותרת משנה עליונה, widget: string }
+          - { name: title, label: שם העסק, widget: string }
+          - { name: subtitle, label: תת-כותרת, widget: string }
+          - { name: subtitle_bold, label: טקסט מודגש, widget: string }
+          - { name: cta_text, label: כפתור קריאה לפעולה, widget: string }
+          - { name: hero_video, label: סרטון רקע, widget: file }
+          - { name: hero_poster, label: תמונת פוסטר, widget: image }
+
+      - name: about
+        label: אודות
+        file: content/about.json
+        fields:
+          - { name: eyebrow, label: כותרת משנה, widget: string }
+          - { name: title, label: כותרת, widget: string }
+          - { name: title_em, label: כותרת מודגשת, widget: string }
+          - { name: paragraph1, label: פסקה ראשונה, widget: text }
+          - { name: paragraph2, label: פסקה שנייה, widget: text }
+          - { name: stat_events, label: מספר אירועים, widget: string }
+          - { name: stat_events_label, label: תווית אירועים, widget: string }
+          - { name: stat_cocktails, label: מספר קוקטיילים, widget: string }
+          - { name: stat_cocktails_label, label: תווית קוקטיילים, widget: string }
+          - { name: stat_live, label: אחוז מזיגה חיה, widget: string }
+          - { name: stat_live_label, label: תווית מזיגה חיה, widget: string }
+          - { name: image, label: תמונה ראשית, widget: image }
+          - { name: image_alt, label: תיאור תמונה, widget: string }
+          - { name: badge, label: תגית על התמונה, widget: string }
+
+      - name: cocktails
+        label: קוקטיילים ותפריט
+        file: content/cocktails.json
+        fields:
+          - { name: eyebrow, label: כותרת משנה, widget: string }
+          - { name: title, label: כותרת, widget: string }
+          - { name: title_em, label: כותרת מודגשת, widget: string }
+          - { name: lead, label: תיאור, widget: text }
+          - name: featured
+            label: קוקטיילים מובחרים (כרטיסים)
+            widget: list
+            fields:
+              - { name: name, label: שם, widget: string }
+              - { name: short, label: תיאור קצר, widget: string }
+              - { name: description, label: תיאור מלא, widget: text }
+              - { name: tag, label: תגית, widget: string }
+              - { name: image, label: תמונה, widget: image }
+          - name: menu
+            label: תפריט
+            widget: list
+            fields:
+              - { name: name, label: שם קוקטייל, widget: string }
+              - { name: description, label: תיאור, widget: string }
+              - { name: favorite, label: הכי אהוב?, widget: boolean, default: false }
+
+      - name: events
+        label: סוגי אירועים
+        file: content/events.json
+        fields:
+          - { name: eyebrow, label: כותרת משנה, widget: string }
+          - { name: title, label: כותרת, widget: string }
+          - { name: title_em, label: כותרת מודגשת, widget: string }
+          - name: items
+            label: אירועים
+            widget: list
+            fields:
+              - { name: number, label: מספר, widget: string }
+              - { name: name, label: שם, widget: string }
+              - { name: description, label: תיאור, widget: text }
+
+      - name: contact
+        label: יצירת קשר
+        file: content/contact.json
+        fields:
+          - { name: eyebrow, label: כותרת משנה, widget: string }
+          - { name: title, label: כותרת, widget: string }
+          - { name: title_em, label: כותרת מודגשת, widget: string }
+          - { name: lead, label: תיאור, widget: text }
+          - name: people
+            label: אנשי קשר
+            widget: list
+            fields:
+              - { name: name, label: שם, widget: string }
+              - { name: phone, label: טלפון (תצוגה), widget: string }
+              - { name: phone_link, label: טלפון (קישור), widget: string }
+          - { name: instagram, label: שם משתמש אינסטגרם, widget: string }
+          - { name: instagram_url, label: קישור אינסטגרם, widget: string }
+          - { name: area, label: אזור פעילות, widget: string }
+          - { name: whatsapp_number, label: מספר וואטסאפ, widget: string }
+          - { name: whatsapp_text, label: טקסט וואטסאפ, widget: string }
+          - name: form_types
+            label: סוגי אירועים בטופס
+            widget: list
+            field: { name: type, label: סוג, widget: string }

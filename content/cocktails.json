@@ -1,0 +1,41 @@
+{
+  "eyebrow": "התפריט",
+  "title": "הקוקטיילים",
+  "title_em": "שלנו",
+  "lead": "תפריט חתימה שמשתנה לפי האירוע — מהקלאסיקות ועד יצירות מקוריות בגוונים של ורוד, ענבר וקצף.",
+  "featured": [
+    {
+      "name": "אפרול שפריץ",
+      "short": "אפרול · קאווה · תפוז מקורמל",
+      "description": "הקלאסיקה האיטלקית האהובה — אפרול, קאווה מבעבעת ופלחי תפוז מקורמל. מושלם לוולקאם דרינק.",
+      "tag": "SIGNATURE",
+      "image": "assets/img/cocktail-cheers.jpeg"
+    },
+    {
+      "name": "פאשן סמאש",
+      "short": "וודקה · ליקר פסואה · ליצ'י",
+      "description": "וודקה איכותית, ליקר פסואה וליצ'י עם פסיפלורה טרייה. מתוק, פירותי ומרענן.",
+      "tag": "VODKA",
+      "image": "assets/img/cocktail-passion.jpeg"
+    },
+    {
+      "name": "הבר המלא",
+      "short": "שורת קוקטיילים לאירוע שלם",
+      "description": "בר נייד מאובזר, בארמן צמוד ותפריט חתימה מותאם — חוויה שלמה לכל אורחי האירוע.",
+      "tag": "THE BAR",
+      "image": "assets/img/bar-spread.jpeg"
+    }
+  ],
+  "menu": [
+    {"name": "קינג פרש", "description": "על בסיס ג'ין, בזיליקום ומלפפון רענן", "favorite": false},
+    {"name": "קרייזי תות", "description": "על בסיס ערק, תות, לימון טרי ורוזטה", "favorite": false},
+    {"name": "פאשן סמאש", "description": "על בסיס וודקה, ליקר פסואה וליצ'י", "favorite": false},
+    {"name": "אפרול שפריץ", "description": "אפרול, קאווה ותפוז מקורמל", "favorite": true},
+    {"name": "שפריץ לימון", "description": "לימונצ'לו, קאווה ולימון טרי", "favorite": false},
+    {"name": "ג'וני רנג'רס", "description": "על בסיס טקילה, ליקר מידורי, מנגו וסאוור", "favorite": false},
+    {"name": "רזברי סמאש", "description": "על בסיס וודקה, לימונצ'לו ופטל אדום", "favorite": false},
+    {"name": "מנגו מרטיני", "description": "על בסיס ג'ין, טריפל סק, מנגו וסאוור", "favorite": false},
+    {"name": "סוויט סאמר", "description": "על בסיס וודקה, ליצ'י, אננס ואפרול", "favorite": false},
+    {"name": "ניו יורק סאוור", "description": "וויסקי, קינמון, דבש וסאוור", "favorite": false}
+  ]
+}
