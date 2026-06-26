@@ -139,9 +139,36 @@ function buildHTML() {
   // Add Netlify Identity widget for CMS auth
   html = html.replace('</head>', '  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n</head>');
 
-  // Add identity redirect script before </body>
+  // Add cookie consent banner + identity redirect before </body>
+  html = html.replace('</head>',
+    `<style>
+  .cookie-banner{position:fixed;bottom:0;inset-inline:0;z-index:8000;background:rgba(10,7,8,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(217,179,130,.25);padding:18px 24px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;transform:translateY(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);direction:rtl}
+  .cookie-banner.show{transform:none}
+  .cookie-banner p{color:#a99b97;font-size:.88rem;max-width:600px;line-height:1.6;margin:0}
+  .cookie-banner a{color:#d9b382;text-decoration:underline}
+  .cookie-btn{font-family:'Marcellus',serif;letter-spacing:.1em;font-size:.75rem;padding:10px 22px;border-radius:100px;cursor:pointer;transition:all .3s;border:none}
+  .cookie-accept{background:#d9b382;color:#1a0f12}.cookie-accept:hover{background:#f0d9b5}
+  .cookie-decline{background:transparent;color:#a99b97;border:1px solid rgba(169,155,151,.3)}.cookie-decline:hover{border-color:#d9b382;color:#d9b382}
+</style>
+</head>`);
+
   html = html.replace('</body>',
-    `<script>
+    `<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="הסכמה לעוגיות">
+  <p>אתר זה משתמש בעוגיות (Cookies) לצורך שיפור חוויית הגלישה ולמטרות סטטיסטיות. לפרטים נוספים ראו את <a href="#" data-modal="m-privacy">מדיניות הפרטיות</a>.</p>
+  <button class="cookie-btn cookie-accept" id="cookieAccept">מאשר</button>
+  <button class="cookie-btn cookie-decline" id="cookieDecline">דוחה</button>
+</div>
+<script>
+(function(){
+  if(!localStorage.getItem('cookie-consent')){
+    var b=document.getElementById('cookieBanner');
+    setTimeout(function(){b.classList.add('show')},1500);
+    document.getElementById('cookieAccept').addEventListener('click',function(){localStorage.setItem('cookie-consent','accepted');b.classList.remove('show')});
+    document.getElementById('cookieDecline').addEventListener('click',function(){localStorage.setItem('cookie-consent','declined');b.classList.remove('show')});
+  }
+})();
+</script>
+<script>
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", function(user) {
       if (!user) {
