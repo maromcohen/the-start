@@ -1,0 +1,100 @@
+<script>
+(function(){
+var c=window._cd;if(!c)return;
+var W='https://static.wixstatic.com/media/b47f77_',J='~mv2.jpeg',
+LO=W+'1ff12b4f855e457e91c873b1e8af38c9'+J;
+var ldr=document.createElement('div');ldr.className='cd-loader';
+ldr.innerHTML='<div class="ll"><img src="'+LO+'" alt=""></div><div class="lbar"><span></span></div><div class="ltxt">LOADING EXPERIENCE</div>';
+c.prepend(ldr);
+setTimeout(function(){ldr.classList.add('out');setTimeout(function(){ldr.remove()},900)},2600);
+function mkBubble(){
+var b=document.createElement('div');b.className='bubble';
+var sz=8+Math.random()*28;
+b.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100)+'vw;bottom:-40px;animation-duration:'+(5+Math.random()*8)+'s';
+c.appendChild(b);b.addEventListener('animationend',function(){b.remove()});
+}
+setInterval(mkBubble,1800);
+var hero=c.querySelector('.hero');
+if(hero){
+var ins=hero.nextElementSibling;
+var sec=document.createElement('section');
+sec.className='blk mixer-sec';sec.id='mixer';
+var ingreds=[
+{n:'קרח',icon:'❄',color:'rgba(200,220,255,.4)',h:15},
+{n:'וודקה',icon:'◈',color:'rgba(220,220,230,.5)',h:25},
+{n:'ליקר פסואה',icon:'◉',color:'rgba(255,180,60,.5)',h:18},
+{n:'ליצ\'י',icon:'●',color:'rgba(255,230,230,.5)',h:14},
+{n:'פסיפלורה',icon:'❀',color:'rgba(180,80,180,.45)',h:12},
+{n:'לימון',icon:'◔',color:'rgba(255,255,100,.3)',h:8}
+];
+var btnH=ingreds.map(function(ig,i){return '<button class="ibtn" data-i="'+i+'">'+ig.icon+' '+ig.n+'</button>'}).join('');
+sec.innerHTML='<div class="wrap"><p class="eyebrow reveal">MIX YOUR DRINK</p>'
++'<h2 class="head reveal" style="margin-top:14px">תבנו את ה<em>קוקטייל</em> שלכם</h2>'
++'<p class="lead reveal" style="margin:12px auto 0">הוסיפו מרכיבים אחד אחד — ותראו איך הקוקטייל נולד.</p>'
++'<div class="glass-area" id="garea">'
++'<svg class="glass-svg" viewBox="0 0 200 320"><defs><clipPath id="gc"><path d="M50 40 L55 280 Q60 300 100 300 Q140 300 145 280 L150 40 Z"/></clipPath></defs>'
++'<rect id="gliq" class="glass-liquid" clip-path="url(#gc)" x="48" y="300" width="104" height="0" rx="4" fill="rgba(255,180,60,.35)"/>'
++'<path class="glass-body" d="M48 35 L53 280 Q58 305 100 305 Q142 305 147 280 L152 35" />'
++'<path class="glass-body" d="M42 35 L158 35" stroke-linecap="round"/>'
++'<ellipse cx="100" cy="35" rx="55" ry="8" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>'
++'</svg>'
++'<div class="pour-fx" id="pourfx"></div>'
++'</div>'
++'<div class="ingred-btns" id="ibtns">'+btnH+'</div>'
++'<button class="shake-btn" id="shakebtn">נערו את הכוס! 🍸</button>'
++'<div class="result-card" id="mixres"><h3>פאשן סמאש</h3><p>וודקה איכותית, ליקר פסואה וליצ\'י עם פסיפלורה טרייה. מתוק, פירותי ומרענן.</p><a class="cta" href="#book" style="display:inline-block;margin-top:18px">הוסיפו לאירוע →</a></div>'
++'</div>';
+if(ins)c.insertBefore(sec,ins);else c.appendChild(sec);
+var added=0,total=ingreds.length,liq=document.getElementById('gliq'),
+ga=document.getElementById('garea'),pfx=document.getElementById('pourfx'),
+sbtn=document.getElementById('shakebtn'),mres=document.getElementById('mixres');
+var curH=0,colors=[];
+document.getElementById('ibtns').addEventListener('click',function(ev){
+var btn=ev.target.closest('.ibtn');if(!btn||btn.classList.contains('added'))return;
+btn.classList.add('added');
+var idx=parseInt(btn.dataset.i),ig=ingreds[idx];
+pfx.classList.add('go');
+setTimeout(function(){pfx.classList.remove('go')},700);
+curH+=ig.h;colors.push(ig.color);
+var mix=colors.length>1?mixColors(colors):colors[0];
+liq.setAttribute('y',String(300-curH*2.8));
+liq.setAttribute('height',String(curH*2.8));
+liq.setAttribute('fill',mix);
+added++;
+if(added>=total)setTimeout(function(){sbtn.classList.add('show')},500);
+});
+sbtn.addEventListener('click',function(){
+ga.classList.add('shaking');
+sbtn.style.display='none';
+setTimeout(function(){
+ga.classList.remove('shaking');
+liq.setAttribute('fill','rgba(200,120,60,.55)');
+liq.style.filter='saturate(1.4)';
+mres.classList.add('show');
+},1600);
+});
+if(window.DeviceMotionEvent){
+var lastShake=0;
+window.addEventListener('devicemotion',function(e){
+var a=e.accelerationIncludingGravity;
+if(!a)return;
+var f=Math.abs(a.x)+Math.abs(a.y)+Math.abs(a.z);
+if(f>35&&added>=total&&Date.now()-lastShake>3000){
+lastShake=Date.now();sbtn.click();
+}
+});
+}
+function mixColors(arr){
+var r=0,g=0,b=0,a=0;
+arr.forEach(function(c){
+var m=c.match(/[\d.]+/g);if(m&&m.length>=4){
+r+=parseFloat(m[0]);g+=parseFloat(m[1]);b+=parseFloat(m[2]);a+=parseFloat(m[3]);
+}});
+var n=arr.length;
+return 'rgba('+Math.round(r/n)+','+Math.round(g/n)+','+Math.round(b/n)+','+(a/n).toFixed(2)+')';
+}
+}
+var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target);}});},{threshold:.12});
+c.querySelectorAll('.mixer-sec .reveal').forEach(function(el){io2.observe(el);});
+})();
+</script>
