@@ -17,9 +17,11 @@
 |------|-------|-------|-------|
 | `01-core-css.html` | HEAD | הסתרת תוכן Wix, פונטים, משתני צבע, nav, hero, marquee | ✅ חי (CD Core CSS) |
 | `02-sections-css.html` | HEAD | pour, about, כרטיסים, תפריט, אירועים, גלריה, טופס, footer | ✅ חי (CD Sections CSS) |
-| `03-content-js1.html` | BODY_END | מזריק: nav, hero+וידאו, marquee, pour studio+וידאו, about | ⏳ מוכן, ממתין להעלאה |
-| `04-content-js2.html` | BODY_END | מזריק: כרטיסי קוקטיילים, תפריט מלא, אירועים | ⏳ מוכן, ממתין להעלאה |
-| `05-content-js3.html` | BODY_END | מזריק: גלריה, טופס הזמנה, footer, וואטסאפ, scroll/reveal JS | ⏳ מוכן, ממתין להעלאה |
+| `03-content-js1.html` | BODY_END | מזריק: nav, hero+וידאו, marquee, pour studio+וידאו, about | ✅ חי (CD Content JS1) |
+| `04-content-js2.html` | BODY_END | מזריק: כרטיסי קוקטיילים, תפריט מלא, אירועים | ✅ חי (CD Content JS2) |
+| `05-content-js3.html` | BODY_END | מזריק: גלריה, טופס הזמנה, footer, וואטסאפ, scroll/reveal JS | ✅ חי (CD Content JS3) |
+
+**סטטוס: כל 5 ה-embeds חיים והאתר פורסם.** (יוני 2026)
 
 כל embed מתחת למגבלת 15,000 התווים של Wix.
 
