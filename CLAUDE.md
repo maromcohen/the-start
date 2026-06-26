@@ -21,7 +21,7 @@ Every website built in this project (and by this user) MUST include full Israeli
 - **Law:** חוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח‑1998 + תקנות התשע"ג‑2013
 - **Standard:** Israeli Standard IS 5568 = WCAG 2.0 Level AA
 - **Penalty:** Up to NIS 50,000 per violation, no need to prove damage
-- **Required:** Interactive accessibility widget (font size, contrast, link highlighting, readable font, animation stop) + professional SVG icon (never ♿ emoji)
+- **Required:** Full Israeli-standard accessibility widget (see section below) + professional SVG icon (never ♿ emoji)
 - **Accessibility Statement must include:** compliance declaration referencing IS 5568 + WCAG 2.0 AA, list of accessibility features, known limitations, accessibility coordinator name + phone + email, invitation to report issues, last update date
 
 ### 2. Privacy Policy (מדיניות פרטיות) — MANDATORY
@@ -47,6 +47,127 @@ Every website built in this project (and by this user) MUST include full Israeli
 ### 7. All Legal Texts in Hebrew
 - Every legal document, notice, and UI element must be in Hebrew for Israeli audience.
 
+## Israeli Accessibility Widget — Full Implementation Standard
+
+Every website MUST include a professional accessibility widget matching Israeli industry standard (accessiBe, EqualWeb, NagishLi level). The widget must have **all 17 features** below, organized in categorized sections with icons.
+
+### Widget Structure
+- Fixed position button (bottom-left for RTL sites) with professional SVG accessibility icon (never ♿ emoji)
+- Panel: `role="dialog"`, `aria-label="הגדרות נגישות"`, `max-height` with `overflow-y:auto`
+- Button must use `aria-expanded` + `aria-controls`
+- Click-outside to close must use `fab.contains(e.target)` (not `e.target !== fab`) because SVG child elements don't match the button itself
+- State persisted in `localStorage` key `a11y`, restored on page load
+
+### Required Features (17 buttons in 4 categories)
+
+**גודל תצוגה (Display Size) — 4 buttons:**
+1. **הגדל טקסט (A+)** — `html.a11y-fs1{font-size:115%}`, `html.a11y-fs2{font-size:130%}` (two levels)
+2. **הקטן טקסט (A-)** — reverse of above
+3. **מרווח שורות (☰)** — `html.a11y-spacing,html.a11y-spacing *{line-height:2.2!important}`
+4. **מרווח אותיות (a‥b)** — `html.a11y-letters *{letter-spacing:.14em!important;word-spacing:.2em!important}`
+
+**צבעים ותצוגה (Colors & Display) — 4 buttons:**
+5. **ניגודיות גבוהה (◑)** — `html.a11y-contrast{filter:contrast(1.6) saturate(1.2)}` + override backgrounds/colors
+6. **גווני אפור (◐)** — `html.a11y-gray{filter:grayscale(100%)}`
+7. **היפוך צבעים (◕)** — `html.a11y-invert{filter:invert(100%) hue-rotate(180deg)}` + counter-invert on images/video
+8. **הסתרת תמונות (⊘)** — `html.a11y-noimages img,video,.bgfx{opacity:0!important}`
+
+**ניווט וקריאה (Navigation & Reading) — 8 buttons:**
+9. **הדגשת קישורים (🔗)** — `html.a11y-links a{outline:2px solid!important;text-decoration:underline!important}`
+10. **הדגשת כותרות (H)** — `html.a11y-headings h1,h2,h3,h4{outline:3px solid var(--gold)!important;outline-offset:4px}`
+11. **הדגשת פוקוס (⊡)** — `html.a11y-focus *:focus{outline:4px solid #ff0!important;outline-offset:4px!important}`
+12. **קו הנחיה לקריאה (─)** — fixed horizontal bar following mouse Y position (`mousemove` listener, `position:fixed;height:4px;background:var(--gold)`)
+13. **סמן גדול (↖)** — `html.a11y-bigcur,html.a11y-bigcur *{cursor:url("data:image/svg+xml,...")!important}` (40x40 SVG cursor)
+14. **גופן קריא (Aa)** — `html.a11y-readable *{font-family:Arial,sans-serif!important}`
+15. **גופן לדיסלקטים (Dy)** — `html.a11y-dyslexia *{font-family:'OpenDyslexic','Comic Sans MS',Arial,sans-serif!important}`
+16. **עצירת אנימציות (⏸)** — `html.a11y-stop *{animation:none!important;transition:none!important}` + pause all `<video>` elements
+
+**איפוס — 1 button (full width):**
+17. **איפוס כל ההגדרות (↺)** — clear state object, remove all classes, hide reading guide
+
+### HTML Structure Template
+```html
+<button class="a11y-fab" id="a11yFab" aria-label="תפריט נגישות" aria-expanded="false" aria-controls="a11yPanel">
+  <svg><!-- professional accessibility SVG icon --></svg>
+</button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="הגדרות נגישות">
+  <h4>תפריט נגישות</h4>
+  <h5>גודל תצוגה</h5>
+  <div class="a11y-grid">
+    <button type="button" data-a11y="fontUp"><span class="a11y-ico">A+</span>הגדל טקסט</button>
+    <button type="button" data-a11y="fontDown"><span class="a11y-ico">A-</span>הקטן טקסט</button>
+    <button type="button" data-a11y="spacing"><span class="a11y-ico">☰</span>מרווח שורות</button>
+    <button type="button" data-a11y="letters"><span class="a11y-ico">a‥b</span>מרווח אותיות</button>
+  </div>
+  <h5>צבעים ותצוגה</h5>
+  <div class="a11y-grid">
+    <button type="button" data-a11y="contrast"><span class="a11y-ico">◑</span>ניגודיות גבוהה</button>
+    <button type="button" data-a11y="gray"><span class="a11y-ico">◐</span>גווני אפור</button>
+    <button type="button" data-a11y="invert"><span class="a11y-ico">◕</span>היפוך צבעים</button>
+    <button type="button" data-a11y="noimages"><span class="a11y-ico">⊘</span>הסתרת תמונות</button>
+  </div>
+  <h5>ניווט וקריאה</h5>
+  <div class="a11y-grid">
+    <button type="button" data-a11y="links"><span class="a11y-ico">🔗</span>הדגשת קישורים</button>
+    <button type="button" data-a11y="headings"><span class="a11y-ico">H</span>הדגשת כותרות</button>
+    <button type="button" data-a11y="focus"><span class="a11y-ico">⊡</span>הדגשת פוקוס</button>
+    <button type="button" data-a11y="guide"><span class="a11y-ico">─</span>קו הנחיה לקריאה</button>
+    <button type="button" data-a11y="bigcur"><span class="a11y-ico">↖</span>סמן גדול</button>
+    <button type="button" data-a11y="readable"><span class="a11y-ico">Aa</span>גופן קריא</button>
+    <button type="button" data-a11y="dyslexia"><span class="a11y-ico">Dy</span>גופן לדיסלקטים</button>
+    <button type="button" data-a11y="stop"><span class="a11y-ico">⏸</span>עצירת אנימציות</button>
+  </div>
+  <div class="a11y-grid" style="margin-top:10px">
+    <button type="button" class="a11y-reset" data-a11y="reset"><span class="a11y-ico">↺</span>איפוס כל ההגדרות</button>
+  </div>
+</div>
+<div class="a11y-reading-guide" id="a11yGuide"></div>
+```
+
+### JS Logic Pattern
+```javascript
+var toggles=['contrast','gray','invert','links','headings','focus','bigcur','readable','dyslexia','stop','spacing','letters','noimages','guide'];
+var state=JSON.parse(localStorage.getItem('a11y')||'{}');
+function apply(){
+  root.classList.toggle('a11y-fs1',state.fs===1);
+  root.classList.toggle('a11y-fs2',state.fs===2);
+  toggles.forEach(function(k){root.classList.toggle('a11y-'+k,!!state[k]);});
+  guide.style.display=state.guide?'block':'none';
+  // pause/resume videos for stop-animations
+  document.querySelectorAll('video').forEach(function(v){
+    state.stop?v.pause():(v.autoplay&&v.play().catch(function(){}));
+  });
+  // update button .on states
+  panel.querySelectorAll('[data-a11y]').forEach(function(b){
+    var k=b.getAttribute('data-a11y');
+    if(k==='fontUp'||k==='fontDown')b.classList.toggle('on',state.fs>0);
+    else if(k==='reset')return;
+    else b.classList.toggle('on',!!state[k]);
+  });
+  localStorage.setItem('a11y',JSON.stringify(state));
+}
+// reading guide follows mouse
+if(state.guide){document.addEventListener('mousemove',function(e){guide.style.top=e.clientY+'px';});}
+```
+
+### CSS Requirements
+- Panel: `width:320px`, `max-height:calc(100vh - 200px)`, `overflow-y:auto`
+- Grid: `grid-template-columns:1fr 1fr`, `gap:8px`
+- Icons: `.a11y-ico{display:block;font-size:1.1rem;margin-bottom:3px}`
+- Active state: `.a11y-grid button.on{background:var(--gold);color:#1a0f12;border-color:var(--gold)}`
+- Reset button: `grid-column:1/-1` (full width)
+- Reading guide: `position:fixed;inset-inline:0;height:4px;background:var(--gold);z-index:9998;pointer-events:none;display:none`
+- NEVER use `cursor:none` anywhere — always `cursor:pointer` for interactive elements
+
+### Additional Accessibility Requirements (Not Widget)
+- `<main>` landmark wrapping the main content area
+- `<button>` for all interactive elements (never `<div>` or `<span>` with click handlers)
+- Burger menu: `<button type="button" aria-expanded="false" aria-controls="nav">`
+- Focus trap on modals: intercept Tab/Shift+Tab keydown, cycle focus within modal's focusable elements
+- Color contrast minimum 4.5:1 for normal text, 3:1 for large text
+- Descriptive `alt` text in Hebrew for all content images
+- `aria-label` on all `<video>` elements
+
 ## Israeli Legal Compliance Audit (Run After Every Build)
 
 After building any website, run a compliance audit to catch issues that could trigger lawsuits (up to NIS 50,000 per accessibility violation). Check every item below:
@@ -62,7 +183,7 @@ After building any website, run a compliance audit to catch issues that could tr
 8. **Color contrast:** Text must have 4.5:1 ratio against background (3:1 for large text).
 9. **Heading hierarchy:** Must have logical h1→h2→h3 structure, no skipped levels.
 10. **Form labels:** Every input/select/textarea must be inside `<label>` or linked via `for`/`id`.
-11. **Accessibility widget:** Must have interactive panel with font size, contrast, link highlighting, readable font, animation stop options. SVG icon (never ♿ emoji).
+11. **Accessibility widget:** Must have full 17-feature Israeli-standard widget (see "Israeli Accessibility Widget" section). SVG icon (never ♿ emoji). All 4 categories present: display size (4), colors (4), navigation (8), reset (1).
 12. **Click handlers on SVG buttons:** When a `<button>` contains SVG, the click-outside handler must use `fab.contains(e.target)` not `e.target !== fab` — clicks on SVG child elements (circle, path) won't match the button itself.
 
 ### Legal Text Audit
