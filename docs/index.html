@@ -96,7 +96,7 @@
   nav.links a:hover::after{transform:scaleX(1)}
   .cta{font-family:'Marcellus',serif;font-size:.78rem;letter-spacing:.14em;padding:11px 22px;border:1px solid var(--gold);color:var(--gold);border-radius:100px;transition:all .4s var(--ease);white-space:nowrap}
   .cta:hover{background:var(--gold);color:#1a0f12;box-shadow:0 10px 30px -10px rgba(217,179,130,.6)}
-  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
   .burger span{width:24px;height:2px;background:var(--ink);transition:.3s}
   @media(max-width:900px){
     nav.links{position:fixed;inset:0;background:rgba(10,7,8,.97);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;gap:34px;transform:translateY(-100%);transition:transform .6s var(--ease);z-index:190}
@@ -452,7 +452,7 @@
 <!-- NAV -->
 <header id="hdr">
   <a class="brand" href="#top" data-cur="" aria-label="Cocktails & Dreams">
-    <img src="assets/img/logo-white.jpeg" alt="" />
+    <img src="assets/img/logo-white.jpeg" alt="Cocktails & Dreams לוגו" />
     <span class="bt">COCKTAILS &amp; DREAMS<small>MOBILE BAR</small></span>
   </a>
   <nav class="links" id="nav">
@@ -460,16 +460,16 @@
     <a href="#events">אירועים</a><a href="#gallery">גלריה</a><a href="#book">צרו קשר</a>
   </nav>
   <a class="cta magnetic" href="#book">הזמינו אירוע</a>
-  <div class="burger" id="burger" aria-label="תפריט"><span></span><span></span><span></span></div>
+  <button class="burger" id="burger" type="button" aria-label="תפריט ניווט" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="media" id="heroMedia">
-    <video autoplay muted loop playsinline preload="auto" poster="assets/img/cocktail-cheers.jpeg">
+    <video autoplay muted loop playsinline preload="auto" poster="assets/img/cocktail-cheers.jpeg" aria-label="סרטון רקע — מזיגת קוקטיילים באירוע">
       <source src="assets/video/hero.mp4" type="video/mp4" />
     </video>
-    <img class="heroimg" src="assets/img/cocktail-cheers.jpeg" alt="" style="display:none" />
+    <img class="heroimg" src="assets/img/cocktail-cheers.jpeg" alt="קוקטיילים בהרמת כוסית" style="display:none" />
   </div>
   <div class="inner">
     <span class="eyebrow">בר קוקטיילים נייד · תל אביב</span>
@@ -504,11 +504,11 @@
       <div class="framerow">
         <div class="tube"><i id="pourFill"></i></div>
         <div class="gframe">
-          <video id="pourVid" muted playsinline preload="auto" poster="assets/img/pour-poster.jpg" disablepictureinpicture>
+          <video id="pourVid" muted playsinline preload="auto" poster="assets/img/pour-poster.jpg" disablepictureinpicture aria-label="סרטון מזיגה חיה של קוקטייל">
             <source src="assets/video/pour.mp4" type="video/mp4" />
           </video>
           <div class="vig"></div>
-          <img class="wm" src="assets/img/logo-white.jpeg" alt="" />
+          <img class="wm" src="assets/img/logo-white.jpeg" alt="" role="presentation" />
           <span class="pct" id="pourPct">0%</span>
         </div>
       </div>
@@ -641,7 +641,7 @@
     </div>
     <div class="mixres" id="mixres">
       <div class="rc">
-        <img id="mxImg" src="assets/img/cocktail-cheers.jpeg" alt="" />
+        <img id="mxImg" src="assets/img/cocktail-cheers.jpeg" alt="קוקטייל מומלץ" />
         <div class="body">
           <span class="eyebrow">ההמלצה שלנו</span>
           <h3 id="mxName"></h3>
@@ -676,12 +676,12 @@
       <h2 class="head" style="margin-top:18px">מתוך <em>הערבים</em></h2>
     </div>
     <div class="gmason">
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-cheers.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="PLAY"><video src="assets/video/bar.mp4" muted loop playsinline autoplay></video></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-rooftop.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-passion.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/pour-skyline.jpeg" alt="" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-spread.jpeg" alt="" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-cheers.jpeg" alt="קוקטיילים בהרמת כוסית באירוע" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="PLAY"><video src="assets/video/bar.mp4" muted loop playsinline autoplay aria-label="סרטון מהבר באירוע"></video></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-rooftop.jpeg" alt="בר קוקטיילים על גג בתל אביב" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-passion.jpeg" alt="קוקטייל פאשן פרוט" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/pour-skyline.jpeg" alt="מזיגת קוקטייל על רקע קו הרקיע" loading="lazy" /></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-spread.jpeg" alt="הבר המלא עם כל הציוד" loading="lazy" /></div>
     </div>
   </div>
 </section>
@@ -693,12 +693,12 @@
     <h2 class="head" style="margin-top:14px">עקבו <em>אחרינו</em></h2>
     <a class="iglink" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener">@cocktail.dreams_</a>
     <div class="iggrid">
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/cocktail-cheers.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/cocktail-passion.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/bar-spread.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/bar-rooftop.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/pour-skyline.jpeg" alt="" loading="lazy" /><span class="igico">◎</span></a>
-      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener"><img src="assets/img/pour-poster.jpg" alt="" loading="lazy" /><span class="igico">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" aria-label="פוסט אינסטגרם — קוקטיילים"><img src="assets/img/cocktail-cheers.jpeg" alt="פוסט אינסטגרם — קוקטיילים" loading="lazy" /><span class="igico" aria-hidden="true">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" aria-label="פוסט אינסטגרם — פאשן פרוט"><img src="assets/img/cocktail-passion.jpeg" alt="פוסט אינסטגרם — פאשן פרוט" loading="lazy" /><span class="igico" aria-hidden="true">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" aria-label="פוסט אינסטגרם — הבר"><img src="assets/img/bar-spread.jpeg" alt="פוסט אינסטגרם — הבר" loading="lazy" /><span class="igico" aria-hidden="true">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" aria-label="פוסט אינסטגרם — גג בתל אביב"><img src="assets/img/bar-rooftop.jpeg" alt="פוסט אינסטגרם — גג בתל אביב" loading="lazy" /><span class="igico" aria-hidden="true">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" aria-label="פוסט אינסטגרם — מזיגה"><img src="assets/img/pour-skyline.jpeg" alt="פוסט אינסטגרם — מזיגה" loading="lazy" /><span class="igico" aria-hidden="true">◎</span></a>
+      <a class="igtile" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" aria-label="פוסט אינסטגרם — מזיגה חיה"><img src="assets/img/pour-poster.jpg" alt="פוסט אינסטגרם — מזיגה חיה" loading="lazy" /><span class="igico" aria-hidden="true">◎</span></a>
     </div>
     <a class="cta magnetic" href="https://www.instagram.com/cocktail.dreams_" target="_blank" rel="noopener" style="display:inline-block">לעמוד האינסטגרם ↗</a>
   </div>
@@ -782,7 +782,7 @@
     <p>אתר זה נבנה ומתוחזק בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג‑2013, ועומד בדרישות התקן הישראלי ת"י 5568 ברמת AA, התואם להנחיות הנגישות לתוכן אינטרנט WCAG 2.0 ברמת AA של ארגון W3C.</p>
     <h4>התאמות הנגישות באתר</h4>
     <ul>
-      <li>תפריט נגישות ייעודי הכולל: הגדלת והקטנת טקסט, מצב ניגודיות גבוהה, הדגשת קישורים, מעבר לגופן קריא ועצירת אנימציות.</li>
+      <li>תפריט נגישות ייעודי (סמל הנגישות בפינה השמאלית התחתונה) הכולל: הגדלת והקטנת טקסט, מצב ניגודיות גבוהה, הדגשת קישורים, מעבר לגופן קריא ועצירת אנימציות.</li>
       <li>ניווט מלא באמצעות מקלדת עם סימון מיקוד (Focus) ברור וגלוי.</li>
       <li>קישור "דלג לתוכן" לדילוג מהיר לתוכן המרכזי.</li>
       <li>טקסט חלופי (alt) לתמונות ותיאורי ARIA לרכיבים אינטראקטיביים.</li>
@@ -959,7 +959,7 @@
   var hdr=document.getElementById('hdr'),nav=document.getElementById('nav'),burger=document.getElementById('burger');
   function onScroll(){hdr.classList.toggle('solid',window.scrollY>40);}
   onScroll();window.addEventListener('scroll',onScroll,{passive:true});
-  burger.addEventListener('click',function(){nav.classList.toggle('open');burger.classList.toggle('x');});
+  burger.addEventListener('click',function(){nav.classList.toggle('open');burger.classList.toggle('x');burger.setAttribute('aria-expanded',nav.classList.contains('open'));});
   nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');burger.classList.remove('x');});});
 
   document.getElementById('yr').textContent=new Date().getFullYear();
