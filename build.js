@@ -136,6 +136,12 @@ function buildHTML() {
     );
   }
 
+  // Replace accessibility emoji with professional SVG icon
+  html = html.replace(
+    '<button class="a11y-fab" id="a11yFab" aria-label="תפריט נגישות" aria-expanded="false" aria-controls="a11yPanel">♿</button>',
+    `<button class="a11y-fab" id="a11yFab" aria-label="תפריט נגישות" aria-expanded="false" aria-controls="a11yPanel"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="5.5" r="1.8" fill="currentColor"/><path d="M8 9.5h8M12 9.5v4.5m0 0l-2.5 4.5m2.5-4.5l2.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`
+  );
+
   // Add Netlify Identity widget for CMS auth
   html = html.replace('</head>', '  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n</head>');
 
