@@ -3,3 +3,4 @@
 .wix/
 node_modules/
 public/
+.netlify
