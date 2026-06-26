@@ -1,0 +1,14 @@
+{
+  "brand": { "name": "Vino & Co", "sub": "WINE EVENTS" },
+  "theme": { "bg":"#0c0a0d","bg2":"#15101a","ink":"#f3ecf4","muted":"#a99bb0","blush":"#c9a0ff","blushD":"#a06fe0","rose":"#7a3fb0","gold":"#c8a24a","goldL":"#ecd79a" },
+  "contact": {
+    "whatsapp":"972500000000","igUser":"vino.and.co","area":"ירושלים והסביבה",
+    "people":[{"name":"דניאל כהן","phone":"053-111-2222","digits":"972531112222"},{"name":"מאיה לוי","phone":"054-333-4444","digits":"972543334444"}]
+  },
+  "menu": [
+    {"name":"שיראז עתיר","desc":"יין אדום עשיר, פירות יער ותבלינים"},
+    {"name":"שרדונה מצונן","desc":"לבן רענן עם נגיעות חמאה","fav":true},
+    {"name":"רוזה קיץ","desc":"ורד קליל, תות ואבטיח"},
+    {"name":"פורט מתוק","desc":"קינוח בכוס — שוקולד ודובדבן"}
+  ]
+}

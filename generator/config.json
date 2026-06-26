@@ -1,0 +1,43 @@
+{
+  "_comment": "Each business gets one of these. The generator (build.mjs) injects it into template.html to produce a finished site. Swap these values and re-run to re-skin/re-brand the whole site.",
+
+  "brand": {
+    "name": "Cocktails & Dreams",
+    "sub": "MOBILE BAR"
+  },
+
+  "theme": {
+    "bg": "#0a0708",
+    "bg2": "#120c0e",
+    "ink": "#f4ece9",
+    "muted": "#a99b97",
+    "blush": "#f4a9b8",
+    "blushD": "#e07b91",
+    "rose": "#c84d63",
+    "gold": "#d9b382",
+    "goldL": "#f0d9b5"
+  },
+
+  "contact": {
+    "whatsapp": "972544930095",
+    "igUser": "cocktail.dreams_",
+    "area": "תל אביב והמרכז · בכל הארץ בתיאום",
+    "people": [
+      { "name": "עידן הרמן", "phone": "054-493-0095", "digits": "972544930095" },
+      { "name": "אופיר לרנר", "phone": "052-463-7076", "digits": "972524637076" }
+    ]
+  },
+
+  "menu": [
+    { "name": "קינג פרש", "desc": "על בסיס ג'ין, בזיליקום ומלפפון רענן" },
+    { "name": "קרייזי תות", "desc": "על בסיס ערק, תות, לימון טרי ורוזטה" },
+    { "name": "פאשן סמאש", "desc": "על בסיס וודקה, ליקר פסואה וליצ'י" },
+    { "name": "אפרול שפריץ", "desc": "אפרול, קאווה ותפוז מקורמל", "fav": true },
+    { "name": "שפריץ לימון", "desc": "לימונצ'לו, קאווה ולימון טרי" },
+    { "name": "ג'וני רנג'רס", "desc": "על בסיס טקילה, ליקר מידורי, מנגו וסאוור" },
+    { "name": "רזברי סמאש", "desc": "על בסיס וודקה, לימונצ'לו ופטל אדום" },
+    { "name": "מנגו מרטיני", "desc": "על בסיס ג'ין, טריפל סק, מנגו וסאוור" },
+    { "name": "סוויט סאמר", "desc": "על בסיס וודקה, ליצ'י, אננס ואפרול" },
+    { "name": "ניו יורק סאוור", "desc": "וויסקי, קינמון, דבש וסאוור" }
+  ]
+}
