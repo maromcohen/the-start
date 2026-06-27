@@ -325,12 +325,18 @@
 
   /* ===== GALLERY ===== */
   .gallery{background:var(--bg2)}
-  .gmason{columns:3;column-gap:16px;margin-top:50px}
-  .gmason .gi{break-inside:avoid;margin-bottom:16px;border-radius:14px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.06);
+  .gmason{columns:3;column-gap:18px;margin-top:50px}
+  .gmason .gi{break-inside:avoid;margin-bottom:18px;border-radius:18px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.06);
     transition:all .7s cubic-bezier(.32,.72,0,1)}
-  .gmason .gi img,.gmason .gi video{width:100%;display:block;transition:transform 1.4s cubic-bezier(.32,.72,0,1),filter .7s}
-  .gmason .gi:hover{border-color:rgba(217,179,130,.25);box-shadow:0 24px 60px -20px rgba(0,0,0,.5)}
-  .gmason .gi:hover img,.gmason .gi:hover video{transform:scale(1.08)}
+  .gmason .gi::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(217,179,130,.08) 0%,transparent 50%);opacity:0;transition:opacity .7s cubic-bezier(.32,.72,0,1);pointer-events:none;z-index:2}
+  .gmason .gi::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,7,8,.6) 0%,transparent 40%);z-index:1;pointer-events:none;opacity:0;transition:opacity .7s cubic-bezier(.32,.72,0,1)}
+  .gmason .gi img{width:100%;display:block;transition:transform 1.4s cubic-bezier(.32,.72,0,1),filter .7s}
+  .gmason .gi:hover{border-color:rgba(217,179,130,.3);box-shadow:0 30px 70px -20px rgba(217,179,130,.12),0 16px 40px -10px rgba(0,0,0,.5)}
+  .gmason .gi:hover::after{opacity:1}
+  .gmason .gi:hover::before{opacity:1}
+  .gmason .gi:hover img{transform:scale(1.06)}
+  .gmason .gi:nth-child(2){border-radius:18px 18px 40px 18px}
+  .gmason .gi:nth-child(4){border-radius:40px 18px 18px 18px}
 
   /* ===== GALLERY CAROUSEL ===== */
   .gcarousel-wrap{position:relative;margin-top:48px}
@@ -342,8 +348,10 @@
     transition:all .7s cubic-bezier(.32,.72,0,1)}
   .gcarousel-track .gc-item img{width:100%;height:100%;object-fit:cover;display:block;
     transition:transform 1.4s cubic-bezier(.32,.72,0,1),filter .7s}
-  .gcarousel-track .gc-item:hover{border-color:rgba(217,179,130,.25);box-shadow:0 24px 60px -20px rgba(0,0,0,.5)}
-  .gcarousel-track .gc-item:hover img{transform:scale(1.08)}
+  .gcarousel-track .gc-item::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,7,8,.55) 0%,transparent 45%);pointer-events:none;opacity:0;transition:opacity .6s cubic-bezier(.32,.72,0,1);z-index:1}
+  .gcarousel-track .gc-item:hover{border-color:rgba(217,179,130,.3);box-shadow:0 28px 70px -20px rgba(217,179,130,.1),0 16px 40px -10px rgba(0,0,0,.5)}
+  .gcarousel-track .gc-item:hover::after{opacity:1}
+  .gcarousel-track .gc-item:hover img{transform:scale(1.06)}
   .gcarousel-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:20px}
   .gcarousel-nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(217,179,130,.3);background:rgba(26,15,18,.6);
     backdrop-filter:blur(8px);color:var(--gold);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
@@ -390,7 +398,12 @@
   .citem figcaption{position:absolute;inset-inline:0;bottom:0;padding:26px;z-index:2;background:linear-gradient(to top,rgba(10,7,8,.95) 6%,transparent 70%)}
   .citem figcaption h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600}
   .citem figcaption p{color:var(--muted);font-size:.85rem;margin-top:4px}
-  .citem.far{filter:brightness(.38) saturate(.7)}
+  .citem:not(.far){cursor:pointer}
+  .citem:not(.far) figcaption::after{content:"לצפייה בתפריט ↓";display:block;font-size:.72rem;color:var(--gold);margin-top:8px;letter-spacing:.06em;opacity:.7;transition:opacity .4s}
+  .citem:not(.far):hover figcaption::after{opacity:1}
+  .citem.far{filter:brightness(.38) saturate(.7);pointer-events:none}
+  .mitem.menu-hl{animation:menuGlow 1.6s cubic-bezier(.32,.72,0,1)}
+  @keyframes menuGlow{0%{background:rgba(217,179,130,.18);box-shadow:0 0 30px rgba(217,179,130,.15)}100%{background:transparent;box-shadow:none}}
   .cnav{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);
     font-size:1.4rem;cursor:pointer;flex:0 0 auto;display:grid;place-items:center;transition:.3s var(--ease);z-index:5}
   .cnav:hover{border-color:var(--gold);color:var(--gold);transform:scale(1.08)}
@@ -639,18 +652,18 @@
 <!-- 3D COVERFLOW CAROUSEL -->
 <section class="blk carousel-sec spot" id="showcase">
   <div class="wrap" style="text-align:center">
-    <span class="eyebrow"><span class="ix">02</span>הבר</span>
-    <h2 class="head" style="margin-top:14px">טעימה <em>מהבר</em></h2>
+    <span class="eyebrow"><span class="ix">02</span>הקוקטיילים</span>
+    <h2 class="head" style="margin-top:14px">טעימה <em>מהתפריט</em></h2>
   </div>
   <div class="cwrap">
     <button class="cnav prev" aria-label="הקודם">‹</button>
     <div class="cstage">
       <div class="cring" id="cring">
-        <figure class="citem"><img src="assets/img/cocktail-cheers.jpeg" alt="אפרול שפריץ" /><figcaption><h3>אפרול שפריץ</h3><p>אפרול · קאווה · תפוז מקורמל</p></figcaption></figure>
-        <figure class="citem"><img src="assets/img/cocktail-passion.jpeg" alt="פאשן סמאש" /><figcaption><h3>פאשן סמאש</h3><p>וודקה · ליקר פסואה · ליצ'י</p></figcaption></figure>
-        <figure class="citem"><img src="assets/img/bar-spread.jpeg" alt="קרייזי תות" /><figcaption><h3>קרייזי תות</h3><p>ערק · תות · לימון טרי</p></figcaption></figure>
-        <figure class="citem"><img src="assets/img/pour-skyline.jpeg" alt="מזיגה חיה" /><figcaption><h3>מזיגה חיה</h3><p>ישר מול האורחים</p></figcaption></figure>
-        <figure class="citem"><img src="assets/img/bar-rooftop.jpeg" alt="הבר על הגג" /><figcaption><h3>הבר על הגג</h3><p>תל אביב · קו הרקיע</p></figcaption></figure>
+        <figure class="citem" data-menu="אפרול שפריץ"><img src="assets/img/cocktail-cheers.jpeg" alt="אפרול שפריץ" /><figcaption><h3>אפרול שפריץ</h3><p>אפרול · קאווה · תפוז מקורמל</p></figcaption></figure>
+        <figure class="citem" data-menu="פאשן סמאש"><img src="assets/img/cocktail-passion.jpeg" alt="פאשן סמאש" /><figcaption><h3>פאשן סמאש</h3><p>וודקה · ליקר פסואה · ליצ'י</p></figcaption></figure>
+        <figure class="citem" data-menu="קרייזי תות"><img src="assets/img/cocktail-cheers.jpeg" alt="קרייזי תות" /><figcaption><h3>קרייזי תות</h3><p>ערק · תות · לימון טרי</p></figcaption></figure>
+        <figure class="citem" data-menu="ג'וני רנג'רס"><img src="assets/img/cocktail-passion.jpeg" alt="ג'וני רנג'רס" /><figcaption><h3>ג'וני רנג'רס</h3><p>טקילה · ליקר מידורי · מנגו</p></figcaption></figure>
+        <figure class="citem" data-menu="קינג פרש"><img src="assets/img/cocktail-cheers.jpeg" alt="קינג פרש" /><figcaption><h3>קינג פרש</h3><p>ג'ין · בזיליקום · מלפפון</p></figcaption></figure>
       </div>
     </div>
     <button class="cnav next" aria-label="הבא">›</button>
@@ -797,7 +810,6 @@
     </div>
     <div class="gmason">
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-pouring-pink.jpeg" alt="מזיגת קוקטייל ורוד מהשייקר באירוע על הגג" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="PLAY"><video src="assets/video/bar.mp4" muted loop playsinline autoplay aria-label="סרטון מהבר באירוע"></video></div>
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-bartender-stage.jpeg" alt="ברמן מוזג קוקטיילים צבעוניים על במה מוארת" loading="lazy" /></div>
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-cocktails-board.jpeg" alt="שלושה קוקטיילים ורודים על משטח עץ זית חרוט" loading="lazy" /></div>
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-rooftop-cocktails.jpeg" alt="קוקטיילים בכוסות קופה על גג עם נוף לעיר" loading="lazy" /></div>
@@ -1418,6 +1430,22 @@
     function reset(){clearInterval(timer);start();}
     stage.addEventListener('mouseenter',function(){clearInterval(timer);});
     stage.addEventListener('mouseleave',start);
+    /* click front item → scroll to matching menu entry */
+    items.forEach(function(it){
+      it.addEventListener('click',function(){
+        if(it.classList.contains('far'))return;
+        var name=it.getAttribute('data-menu');if(!name)return;
+        var targets=document.querySelectorAll('.menu-list .mitem .nm');
+        for(var j=0;j<targets.length;j++){
+          if(targets[j].textContent.trim()===name){
+            var row=targets[j].closest('.mitem');
+            row.scrollIntoView({behavior:'smooth',block:'center'});
+            row.classList.remove('menu-hl');void row.offsetWidth;row.classList.add('menu-hl');
+            break;
+          }
+        }
+      });
+    });
     window.addEventListener('resize',layout);
     layout();start();
   })();
