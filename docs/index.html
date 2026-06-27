@@ -355,18 +355,7 @@
 
   /* ===== BOOK ===== */
   .book{position:relative;overflow:hidden}
-  .bookgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
-  form.bk{display:grid;gap:16px}
-  form.bk .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  form.bk .lab{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
-  form.bk input,form.bk select,form.bk textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:13px 15px;color:var(--ink);font-family:inherit;font-size:.95rem;transition:border-color .3s,background .3s}
-  form.bk input:focus,form.bk select:focus,form.bk textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.06)}
-  form.bk select{appearance:none}form.bk option{background:var(--bg2);color:var(--ink)}
-  .submit{font-family:'Marcellus',serif;letter-spacing:.14em;font-size:.92rem;cursor:pointer;background:var(--gold);color:#1a0f12;border:none;border-radius:100px;padding:16px 28px;transition:all .7s cubic-bezier(.32,.72,0,1);margin-top:6px;position:relative;overflow:hidden}
-  .submit::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25) 50%,transparent 70%);transform:translateX(-100%);transition:transform .7s cubic-bezier(.32,.72,0,1)}
-  .submit:hover{box-shadow:0 20px 50px -16px rgba(217,179,130,.6);transform:translateY(-2px)}
-  .submit:hover::after{transform:translateX(100%)}
-  .submit:active{transform:scale(.97) translateY(0)}
+  .bookgrid{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:640px;margin:0 auto}
   .contactside .c{display:flex;align-items:flex-start;gap:14px;margin-top:24px}
   .contactside .c .ic{color:var(--gold);margin-top:3px}
   .contactside .c b{font-family:'Marcellus',serif;letter-spacing:.06em;font-weight:400}
@@ -506,7 +495,7 @@
   @media(max-width:900px){
     .about{grid-template-columns:1fr}.cgrid{grid-template-columns:1fr 1fr}
     .xgrid{grid-template-columns:1fr}.gmason{columns:2}
-    .bookgrid{grid-template-columns:1fr}form.bk .row{grid-template-columns:1fr}.pour{height:300vh}
+    .bookgrid{max-width:100%}.pour{height:300vh}
   }
   @media(max-width:560px){.cgrid{grid-template-columns:1fr}.gmason{columns:1}}
 
@@ -822,10 +811,6 @@
         <div class="gc-item" data-cur="VIEW"><img src="assets/img/gallery-beach-cocktails.jpeg" alt="קוקטיילים צבעוניים על בר חוף עם דקלים" loading="lazy" /></div>
         <div class="gc-item" data-cur="VIEW"><img src="assets/img/gallery-cocktail-spread.jpeg" alt="מבחר קוקטיילים על משטח עץ זית עם פרחים" loading="lazy" /></div>
         <div class="gc-item" data-cur="VIEW"><img src="assets/img/gallery-evening-bar.jpeg" alt="קוקטיילים ורודים וירוקים על בר בערב" loading="lazy" /></div>
-        <div class="gc-item" data-cur="VIEW"><img src="assets/img/cocktail-cheers.jpeg" alt="קוקטיילים בהרמת כוסית באירוע" loading="lazy" /></div>
-        <div class="gc-item" data-cur="VIEW"><img src="assets/img/bar-rooftop.jpeg" alt="בר קוקטיילים על גג בתל אביב" loading="lazy" /></div>
-        <div class="gc-item" data-cur="VIEW"><img src="assets/img/pour-skyline.jpeg" alt="מזיגת קוקטייל על רקע קו הרקיע" loading="lazy" /></div>
-        <div class="gc-item" data-cur="VIEW"><img src="assets/img/bar-spread.jpeg" alt="הבר המלא עם כל הציוד" loading="lazy" /></div>
       </div>
       <div class="gcarousel-nav">
         <button type="button" id="galPrev" aria-label="הקודם">→</button>
@@ -867,21 +852,6 @@
       <div class="c"><span class="ic">⌖</span><div><b>אזור פעילות</b><span>תל אביב והמרכז · בכל הארץ בתיאום</span></div></div>
       <a class="wa magnetic" href="https://wa.me/972544930095?text=היי!%20אשמח%20לפרטים%20על%20בר%20קוקטיילים%20לאירוע" target="_blank" rel="noopener"><span>הזמינו דרך וואטסאפ</span> <span>↗</span></a>
     </div>
-    <form class="bk reveal" id="bkForm">
-      <label><span class="lab">שם מלא</span><input name="name" type="text" required placeholder="השם שלכם" /></label>
-      <div class="row">
-        <label><span class="lab">טלפון</span><input name="phone" type="tel" required placeholder="050-..." /></label>
-        <label><span class="lab">תאריך האירוע</span><input name="date" type="date" /></label>
-      </div>
-      <div class="row">
-        <label><span class="lab">סוג אירוע</span>
-          <select name="type"><option>חתונה / אירוסין</option><option>אירוע פרטי</option><option>יום הולדת</option><option>אירוע חברה</option><option>אחר</option></select>
-        </label>
-        <label><span class="lab">מספר אורחים</span><input name="guests" type="number" min="1" placeholder="50" /></label>
-      </div>
-      <label><span class="lab">פרטים נוספים</span><textarea name="msg" rows="3" placeholder="ספרו לנו על האירוע..."></textarea></label>
-      <button class="submit magnetic" type="submit">שליחת בקשה ↗</button>
-    </form>
   </div>
 </section>
 
@@ -1575,15 +1545,6 @@
     });
   })();
 
-  /* ---- booking form ---- */
-  var f=document.getElementById('bkForm');
-  f.addEventListener('submit',function(e){
-    e.preventDefault();var d=new FormData(f);
-    var msg='היי, אשמח להזמין אתכם לאירוע.\n\n'+
-      'שם: '+(d.get('name')||'')+'\n'+'טלפון: '+(d.get('phone')||'')+'\n'+'תאריך: '+(d.get('date')||'')+'\n'+
-      'סוג אירוע: '+(d.get('type')||'')+'\n'+'אורחים: '+(d.get('guests')||'')+(d.get('msg')?('\n\n'+d.get('msg')):'');
-    window.open('https://wa.me/972544930095?text='+encodeURIComponent(msg),'_blank');
-  });
 })();
 </script>
 
