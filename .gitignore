@@ -1,6 +1,9 @@
-# Tooling artifacts (not part of the project)
+# Tooling artifacts
 .claude/skills/
 .wix/
 node_modules/
-public/
 .netlify
+
+# Generated build output (per project)
+websites/*/public/
+public/

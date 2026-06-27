@@ -29,12 +29,13 @@ jobs:
           node-version: '20'
       - name: Build
         run: node build.js
+        working-directory: websites/cocktails-and-dreams
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site (public/)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: websites/cocktails-and-dreams/public
       - name: Deploy to Pages
         id: deployment
         uses: actions/deploy-pages@v4

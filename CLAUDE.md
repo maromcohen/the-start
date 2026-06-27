@@ -4,14 +4,18 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Project Overview
 
-Cocktails & Dreams — a professional, cinematic cocktail bar website. Hebrew RTL, dark/gold theme, deployed on Netlify with Decap CMS for visual content editing.
+Multi-project website portfolio. Each website lives under `websites/<project-name>/`.
+
+### Cocktails & Dreams (`websites/cocktails-and-dreams/`)
+Professional, cinematic cocktail bar website. Hebrew RTL, dark/gold theme, deployed on Netlify with Decap CMS for visual content editing.
 
 ## Build System
 
-- `node build.js` — reads `docs/index.html` as template + `content/*.json` → generates `public/index.html`
-- `docs/index.html` is the source template and GitHub Pages backup — **NEVER modify or delete it**
-- Content is edited via JSON files in `content/` or through the CMS at `/admin`
-- Netlify deploys from `public/` directory
+- `cd websites/cocktails-and-dreams && node build.js` — reads `docs/index.html` as template + `content/*.json` → generates `public/index.html`
+- `websites/cocktails-and-dreams/docs/index.html` is the source template and GitHub Pages backup — **NEVER modify or delete it**
+- Content is edited via JSON files in `websites/cocktails-and-dreams/content/` or through the CMS at `/admin`
+- Netlify deploys from `websites/cocktails-and-dreams/public/` directory (configured via `netlify.toml` at repo root with `base = "websites/cocktails-and-dreams"`)
+- GitHub Pages deploys via `.github/workflows/deploy-pages.yml` with `working-directory: websites/cocktails-and-dreams`
 
 ## Israeli Legal Compliance (Required for Every Website Build)
 
@@ -249,6 +253,22 @@ Single-page Hebrew RTL site with these sections (in order):
 - Fixed carousel overflow blocking horizontal scroll
 - Cleaned duplicate gallery images
 - Full Israeli legal compliance audit — all items pass
+
+### Repository Structure
+```
+the-start/
+├── websites/
+│   └── cocktails-and-dreams/    ← first website project
+│       ├── docs/                ← source template + assets
+│       ├── content/             ← CMS JSON content files
+│       ├── admin/               ← Decap CMS admin panel
+│       ├── build.js             ← build script
+│       └── public/              ← generated output (gitignored)
+├── generator/                   ← website generator tools
+├── netlify.toml                 ← Netlify config (repo root)
+├── .github/workflows/           ← CI/CD
+└── CLAUDE.md
+```
 
 ### Pending
 - User will send actual cocktail photos to replace placeholders in 3D carousel (currently uses cocktail-cheers.jpeg and cocktail-passion.jpeg repeated)
