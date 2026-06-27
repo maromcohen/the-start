@@ -333,11 +333,11 @@
   .gmason .gi:hover img,.gmason .gi:hover video{transform:scale(1.08)}
 
   /* ===== GALLERY CAROUSEL ===== */
-  .gcarousel-wrap{position:relative;margin-top:48px;overflow:hidden}
+  .gcarousel-wrap{position:relative;margin-top:48px}
   .gcarousel-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
     scrollbar-width:none;padding:8px 0 20px}
   .gcarousel-track::-webkit-scrollbar{display:none}
-  .gcarousel-track .gc-item{flex:0 0 clamp(260px,28vw,340px);scroll-snap-align:center;border-radius:16px;overflow:hidden;
+  .gcarousel-track .gc-item{flex:0 0 clamp(260px,28vw,340px);min-width:260px;scroll-snap-align:center;border-radius:16px;overflow:hidden;
     position:relative;border:1px solid rgba(255,255,255,.06);aspect-ratio:3/4;
     transition:all .7s cubic-bezier(.32,.72,0,1)}
   .gcarousel-track .gc-item img{width:100%;height:100%;object-fit:cover;display:block;
