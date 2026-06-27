@@ -202,16 +202,4 @@ fs.writeFileSync(path.join(PUBLIC, 'index.html'), html, 'utf8');
 // 3. Copy admin/ to public/admin/
 copyDir(ADMIN, path.join(PUBLIC, 'admin'));
 
-// 4. Add Netlify form detection attribute
-let finalHTML = fs.readFileSync(path.join(PUBLIC, 'index.html'), 'utf8');
-finalHTML = finalHTML.replace(
-  '<form class="bk reveal" id="bkForm">',
-  '<form class="bk reveal" id="bkForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">'
-);
-finalHTML = finalHTML.replace(
-  '<form class="bk reveal" id="bkForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">',
-  '<form class="bk reveal" id="bkForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">\n      <input type="hidden" name="form-name" value="booking" />\n      <p class="hidden" style="display:none"><label>Don\'t fill this out: <input name="bot-field" /></label></p>'
-);
-fs.writeFileSync(path.join(PUBLIC, 'index.html'), finalHTML, 'utf8');
-
 console.log('Build complete! Output in public/');
