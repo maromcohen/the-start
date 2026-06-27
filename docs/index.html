@@ -61,6 +61,7 @@
   .word-reveal{display:inline-block;overflow:hidden;vertical-align:top}
   .word-reveal .wr-inner{display:inline-block;transform:translateY(110%);transition:transform .8s cubic-bezier(.32,.72,0,1);will-change:transform}
   .word-reveal.revealed .wr-inner{transform:translateY(0)}
+  h2.head .word-reveal .wr-inner{background:linear-gradient(135deg,var(--ink) 0%,var(--gold-l) 50%,var(--ink) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
   /* ===== AMBIENT BACKGROUND ===== */
   .bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
@@ -1122,7 +1123,7 @@
       setTimeout(function(){if(!ciDone&&(ciVid.paused||ciVid.readyState<2)){ciDismiss();}},15000);
     }
 
-    gsap.to('h2.head',{backgroundPosition:'200% center',ease:'none',scrollTrigger:{trigger:'main',start:'top top',end:'bottom bottom',scrub:3}});
+    gsap.to('h2.head, h2.head .wr-inner',{backgroundPosition:'200% center',ease:'none',scrollTrigger:{trigger:'main',start:'top top',end:'bottom bottom',scrub:3}});
 
     gsap.utils.toArray('.eyebrow').forEach(function(el){
       gsap.fromTo(el,{opacity:0,x:30},{opacity:1,x:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}});
