@@ -211,6 +211,56 @@ document.querySelectorAll('.modal:not([aria-modal])')
 document.querySelectorAll('input:not([type="hidden"]), select, textarea').filter(el => !el.closest('label') && !el.id)
 ```
 
+## Current Status (Updated 2026-06-27)
+
+### Site Architecture
+Single-page Hebrew RTL site with these sections (in order):
+1. **Cinema Intro** — Higgsfield AI-generated cocktail pour video, plays once then auto-dismisses
+2. **Hero** — Full-viewport with parallax background, animated headline, marquee ticker
+3. **Pouring Section** — Scroll-driven video with fill progress bar
+4. **3D Coverflow Carousel** (#showcase) — 5 cocktails with perspective transforms, autoplay rotation, touch/drag support. Click on front item scrolls to matching menu entry with gold highlight
+5. **About** (#about) — Split layout: image left, text + stats right (250+ events, 40 cocktails, 100% live)
+6. **Menu** (#menu) — 3 flip cards + menu list of 10 cocktails in 2-column grid
+7. **Find Your Drink** (#mixer) — Flavor chip selector → cocktail recommendation
+8. **Events** (#events) — 3 event type cards (weddings, private, corporate) with 3D zoom-in
+9. **Gallery** (#gallery) — Masonry grid (5 photos) + horizontal scroll carousel (5 photos)
+10. **Instagram** (#insta) — 6-tile grid linking to @cocktail.dreams_
+11. **Contact/Book** (#book) — WhatsApp-only booking (no form), contact details
+12. **Footer** — Legal modals (accessibility, privacy, terms), social links
+
+### Visual Effects & Animations
+- GSAP ScrollTrigger for all scroll animations
+- Particle canvas (floating cocktail particles)
+- Word-reveal animation on h2.head elements (staggered entrance)
+- Parallax on hero background
+- 3D perspective on flip cards and event cards
+- Tilt effect on gallery images (mouse-follow)
+- Cinema mask (split reveal) on gallery section
+- Magnetic button hover effects
+- Spotlight cursor-follow on dark sections
+
+### Recent Work (Feature Branch: claude/cocktail-bar-website-7pu9ml)
+- Added 10 real event photos to gallery and Instagram sections
+- Split gallery into masonry grid + horizontal scroll carousel
+- Removed booking form — WhatsApp-only contact
+- Added 3D coverflow carousel with cocktail names and click-to-menu navigation
+- Fixed invisible heading text (word-reveal breaking background-clip:text gradient)
+- Improved gallery visuals (gold glow hover, gradient overlays, varied border-radius)
+- Fixed carousel overflow blocking horizontal scroll
+- Cleaned duplicate gallery images
+- Full Israeli legal compliance audit — all items pass
+
+### Pending
+- User will send actual cocktail photos to replace placeholders in 3D carousel (currently uses cocktail-cheers.jpeg and cocktail-passion.jpeg repeated)
+- Gallery visual improvements can be further refined
+- Consider merging feature branch to main when ready
+
+### Key Technical Notes
+- The word-reveal JS wraps h2.head text in inline-block spans — gradient must be applied to .wr-inner spans too (not just h2.head), otherwise text is invisible
+- Cookie banner and SVG accessibility icon are injected by build.js (not in source template)
+- CSP in netlify.toml includes https://*.cloudfront.net for video hosting
+- Git config: user.email noreply@anthropic.com, user.name Claude
+
 ## Communication
 
 All communication with this user should be in Hebrew.
