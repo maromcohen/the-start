@@ -1094,8 +1094,10 @@
       });
       ciVid.addEventListener('ended',ciDismiss);
       ciVid.addEventListener('error',ciDismiss);
-      ciVid.play().catch(function(){ciDismiss();});
-      setTimeout(function(){if(!ciDone&&ciVid.paused){ciDismiss();}},4000);
+      function ciTryPlay(){ciVid.play().catch(function(){ciDismiss();});}
+      if(ciVid.readyState>=3){ciTryPlay();}
+      else{ciVid.addEventListener('canplay',function(){ciTryPlay();});}
+      setTimeout(function(){if(!ciDone&&(ciVid.paused||ciVid.readyState<2)){ciDismiss();}},15000);
     }
 
     gsap.to('h2.head',{backgroundPosition:'200% center',ease:'none',scrollTrigger:{trigger:'main',start:'top top',end:'bottom bottom',scrub:3}});
