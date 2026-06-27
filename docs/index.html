@@ -496,7 +496,7 @@
   .cinema-intro-inner{position:sticky;top:0;height:100svh;display:grid;place-items:center;overflow:hidden;
     background:#000}
   .ci-video{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .ci-video video{width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity}
+  .ci-video video{width:100%;height:100%;object-fit:cover;will-change:opacity}
   .ci-glow{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);
     width:min(560px,120vw);height:min(560px,120vw);border-radius:50%;pointer-events:none;
     background:radial-gradient(circle,rgba(217,179,130,.12) 0%,rgba(200,77,99,.06) 30%,transparent 60%);
@@ -563,7 +563,7 @@
 <section class="cinema-intro" id="cinemaIntro" aria-label="אינטרו קולנועי — מזיגת קוקטייל">
   <div class="cinema-intro-inner">
     <div class="ci-video">
-      <video id="ciVid" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FiJmqy12NASFK67PFaBPuFwpXv/hf_20260627_103041_7a83dc23-8731-4fd9-a45f-29e7a0d949cc.mp4" muted playsinline preload="auto" aria-label="מזיגת קוקטייל קולנועית"></video>
+      <video id="ciVid" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FiJmqy12NASFK67PFaBPuFwpXv/hf_20260627_103041_7a83dc23-8731-4fd9-a45f-29e7a0d949cc.mp4" muted playsinline preload="auto" autoplay loop aria-label="מזיגת קוקטייל קולנועית"></video>
     </div>
     <div class="ci-glow" id="ciGlow"></div>
     <div class="ci-brand" id="ciBrand">
@@ -1057,7 +1057,7 @@
   if(typeof gsap!=='undefined'&&typeof ScrollTrigger!=='undefined'&&!rm){
     gsap.registerPlugin(ScrollTrigger);
 
-    /* ---- CINEMATIC INTRO — scroll-driven video scrub ---- */
+    /* ---- CINEMATIC INTRO — autoplay video + scroll-driven overlays ---- */
     var ciSec=document.getElementById('cinemaIntro');
     if(ciSec){
       var ciVid=document.getElementById('ciVid'),ciGlow=document.getElementById('ciGlow'),
@@ -1065,20 +1065,11 @@
           ciHdr=document.getElementById('hdr'),ciHint=ciSec.querySelector('.ci-hint');
       ciSec.classList.add('active');
       if(ciHdr){ciHdr.style.opacity='0';ciHdr.style.pointerEvents='none';}
-      var vidReady=false,vidDur=0;
-      function onVidReady(){if(!vidReady&&ciVid.readyState>=1){vidReady=true;vidDur=ciVid.duration||6;ciVid.pause();}}
-      ciVid.addEventListener('loadedmetadata',onVidReady);
-      ciVid.addEventListener('canplay',onVidReady);
-      if(ciVid.readyState>=1)onVidReady();
+      ciVid.play().catch(function(){});
       ScrollTrigger.create({trigger:ciSec,start:'top top',end:'bottom bottom',scrub:.5,
         onUpdate:function(self){
           var p=self.progress;
           var pourP=Math.min(1,p/.85);
-          if(vidReady){
-            var t=pourP*vidDur;
-            if(Math.abs(ciVid.currentTime-t)>.05)ciVid.currentTime=t;
-            ciVid.style.opacity=pourP>.01?'1':'0';
-          }
           ciGlow.style.opacity=Math.min(1,pourP*2);
           ciBrand.style.opacity=pourP>.35?Math.min(1,(pourP-.35)*3):0;
           ciPct.style.opacity=pourP>.01&&p<.88?1:0;
@@ -1086,12 +1077,15 @@
           if(ciHint)ciHint.style.opacity=pourP>.04?'0':'';
           if(p>.84){
             var f=(p-.84)/.16;
-            ciVid.style.transform='scale('+(1+f*.5)+')';
-            ciVid.style.opacity=String(1-f);
+            var inner=ciSec.querySelector('.cinema-intro-inner');
+            if(inner){inner.style.transform='scale('+(1+f*.3)+')';inner.style.opacity=String(1-f);}
             ciBrand.style.opacity=String(Math.max(0,1-f*2.5));
             ciPct.style.opacity='0';
             ciGlow.style.opacity=String(Math.max(0,1-f*2));
-          }else if(vidReady){ciVid.style.transform='';ciVid.style.opacity=pourP>.01?'1':'0';}
+          }else{
+            var inner=ciSec.querySelector('.cinema-intro-inner');
+            if(inner){inner.style.transform='';inner.style.opacity='';}
+          }
           if(ciHdr){
             if(p>.92){ciHdr.style.opacity='';ciHdr.style.pointerEvents='';}
             else{ciHdr.style.opacity='0';ciHdr.style.pointerEvents='none';}
