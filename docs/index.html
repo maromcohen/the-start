@@ -332,6 +332,27 @@
   .gmason .gi:hover{border-color:rgba(217,179,130,.25);box-shadow:0 24px 60px -20px rgba(0,0,0,.5)}
   .gmason .gi:hover img,.gmason .gi:hover video{transform:scale(1.08)}
 
+  /* ===== GALLERY CAROUSEL ===== */
+  .gcarousel-wrap{position:relative;margin-top:48px;overflow:hidden}
+  .gcarousel-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;padding:8px 0 20px}
+  .gcarousel-track::-webkit-scrollbar{display:none}
+  .gcarousel-track .gc-item{flex:0 0 clamp(260px,28vw,340px);scroll-snap-align:center;border-radius:16px;overflow:hidden;
+    position:relative;border:1px solid rgba(255,255,255,.06);aspect-ratio:3/4;
+    transition:all .7s cubic-bezier(.32,.72,0,1)}
+  .gcarousel-track .gc-item img{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform 1.4s cubic-bezier(.32,.72,0,1),filter .7s}
+  .gcarousel-track .gc-item:hover{border-color:rgba(217,179,130,.25);box-shadow:0 24px 60px -20px rgba(0,0,0,.5)}
+  .gcarousel-track .gc-item:hover img{transform:scale(1.08)}
+  .gcarousel-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:20px}
+  .gcarousel-nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(217,179,130,.3);background:rgba(26,15,18,.6);
+    backdrop-filter:blur(8px);color:var(--gold);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:all .4s cubic-bezier(.32,.72,0,1)}
+  .gcarousel-nav button:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+  .gcarousel-dots{display:flex;gap:6px;align-items:center}
+  .gcarousel-dots span{width:6px;height:6px;border-radius:50%;background:rgba(169,155,151,.3);transition:all .4s cubic-bezier(.32,.72,0,1)}
+  .gcarousel-dots span.active{width:24px;border-radius:3px;background:var(--gold)}
+
   /* ===== BOOK ===== */
   .book{position:relative;overflow:hidden}
   .bookgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
@@ -787,20 +808,30 @@
     </div>
     <div class="gmason">
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-pouring-pink.jpeg" alt="מזיגת קוקטייל ורוד מהשייקר באירוע על הגג" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-basil-cocktail.jpeg" alt="קוקטייל בזיליקום עם קצף על משטח עץ זית" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-bartender-stage.jpeg" alt="ברמן מוזג קוקטיילים צבעוניים על במה מוארת" loading="lazy" /></div>
       <div class="gi reveal tilt" data-cur="PLAY"><video src="assets/video/bar.mp4" muted loop playsinline autoplay aria-label="סרטון מהבר באירוע"></video></div>
+      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-bartender-stage.jpeg" alt="ברמן מוזג קוקטיילים צבעוניים על במה מוארת" loading="lazy" /></div>
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-cocktails-board.jpeg" alt="שלושה קוקטיילים ורודים על משטח עץ זית חרוט" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-strainer-pour.jpeg" alt="מזיגה דרך מסננת לכוסות מרטיני" loading="lazy" /></div>
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-rooftop-cocktails.jpeg" alt="קוקטיילים בכוסות קופה על גג עם נוף לעיר" loading="lazy" /></div>
       <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-bartender-action.jpeg" alt="ברמן מוזג קוקטיילים באירוע" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-beach-cocktails.jpeg" alt="קוקטיילים צבעוניים על בר חוף עם דקלים" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-cocktail-spread.jpeg" alt="מבחר קוקטיילים על משטח עץ זית עם פרחים" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/gallery-evening-bar.jpeg" alt="קוקטיילים ורודים וירוקים על בר בערב" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/cocktail-cheers.jpeg" alt="קוקטיילים בהרמת כוסית באירוע" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-rooftop.jpeg" alt="בר קוקטיילים על גג בתל אביב" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/pour-skyline.jpeg" alt="מזיגת קוקטייל על רקע קו הרקיע" loading="lazy" /></div>
-      <div class="gi reveal tilt" data-cur="VIEW"><img src="assets/img/bar-spread.jpeg" alt="הבר המלא עם כל הציוד" loading="lazy" /></div>
+    </div>
+
+    <div class="gcarousel-wrap reveal">
+      <div class="gcarousel-track" id="galCarousel">
+        <div class="gc-item" data-cur="VIEW"><img src="assets/img/gallery-basil-cocktail.jpeg" alt="קוקטייל בזיליקום עם קצף על משטח עץ זית" loading="lazy" /></div>
+        <div class="gc-item" data-cur="VIEW"><img src="assets/img/gallery-strainer-pour.jpeg" alt="מזיגה דרך מסננת לכוסות מרטיני" loading="lazy" /></div>
+        <div class="gc-item" data-cur="VIEW"><img src="assets/img/gallery-beach-cocktails.jpeg" alt="קוקטיילים צבעוניים על בר חוף עם דקלים" loading="lazy" /></div>
+        <div class="gc-item" data-cur="VIEW"><img src="assets/img/gallery-cocktail-spread.jpeg" alt="מבחר קוקטיילים על משטח עץ זית עם פרחים" loading="lazy" /></div>
+        <div class="gc-item" data-cur="VIEW"><img src="assets/img/gallery-evening-bar.jpeg" alt="קוקטיילים ורודים וירוקים על בר בערב" loading="lazy" /></div>
+        <div class="gc-item" data-cur="VIEW"><img src="assets/img/cocktail-cheers.jpeg" alt="קוקטיילים בהרמת כוסית באירוע" loading="lazy" /></div>
+        <div class="gc-item" data-cur="VIEW"><img src="assets/img/bar-rooftop.jpeg" alt="בר קוקטיילים על גג בתל אביב" loading="lazy" /></div>
+        <div class="gc-item" data-cur="VIEW"><img src="assets/img/pour-skyline.jpeg" alt="מזיגת קוקטייל על רקע קו הרקיע" loading="lazy" /></div>
+        <div class="gc-item" data-cur="VIEW"><img src="assets/img/bar-spread.jpeg" alt="הבר המלא עם כל הציוד" loading="lazy" /></div>
+      </div>
+      <div class="gcarousel-nav">
+        <button type="button" id="galPrev" aria-label="הקודם">→</button>
+        <div class="gcarousel-dots" id="galDots"></div>
+        <button type="button" id="galNext" aria-label="הבא">←</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1230,6 +1261,40 @@
     requestAnimationFrame(step);cio.unobserve(el);
   });},{threshold:.6});
   document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+
+  /* ---- GALLERY CAROUSEL ---- */
+  (function(){
+    var track=document.getElementById('galCarousel');
+    if(!track)return;
+    var items=track.querySelectorAll('.gc-item');
+    var prev=document.getElementById('galPrev'),next=document.getElementById('galNext'),dotsC=document.getElementById('galDots');
+    var idx=0,total=items.length;
+    for(var i=0;i<total;i++){var d=document.createElement('span');if(i===0)d.classList.add('active');dotsC.appendChild(d);}
+    var dots=dotsC.querySelectorAll('span');
+    function scrollTo(i){
+      idx=Math.max(0,Math.min(i,total-1));
+      items[idx].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+      dots.forEach(function(d,j){d.classList.toggle('active',j===idx);});
+    }
+    prev.addEventListener('click',function(){scrollTo(idx+1);});
+    next.addEventListener('click',function(){scrollTo(idx-1);});
+    var scrollTimer;
+    track.addEventListener('scroll',function(){
+      clearTimeout(scrollTimer);
+      scrollTimer=setTimeout(function(){
+        var trackRect=track.getBoundingClientRect();
+        var center=trackRect.left+trackRect.width/2;
+        var closest=0,minDist=Infinity;
+        items.forEach(function(item,j){
+          var r=item.getBoundingClientRect();
+          var d=Math.abs(r.left+r.width/2-center);
+          if(d<minDist){minDist=d;closest=j;}
+        });
+        idx=closest;
+        dots.forEach(function(d,j){d.classList.toggle('active',j===idx);});
+      },80);
+    },{passive:true});
+  })();
 
   /* ---- CUSTOM CURSOR ---- */
   if(!touch){
