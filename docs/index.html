@@ -1067,20 +1067,11 @@
       ciSec.style.height='100svh';ciSec.style.overflow='hidden';
       document.body.style.overflow='hidden';
       if(ciHdr){ciHdr.style.opacity='0';ciHdr.style.pointerEvents='none';}
-      ciVid.play().catch(function(){});
       var ciDone=false;
       function ciShowBrand(){
-        if(ciBrand)ciBrand.style.opacity='1';
-        if(ciGlow)ciGlow.style.opacity='1';
+        if(ciBrand){ciBrand.style.transition='opacity 1s cubic-bezier(.32,.72,0,1)';ciBrand.style.opacity='1';}
+        if(ciGlow){ciGlow.style.transition='opacity 1s cubic-bezier(.32,.72,0,1)';ciGlow.style.opacity='1';}
       }
-      ciVid.addEventListener('timeupdate',function(){
-        if(!ciDone&&ciVid.duration){
-          var p=ciVid.currentTime/ciVid.duration;
-          if(ciPct){ciPct.style.opacity=p>.02&&p<.92?'1':'0';ciPct.textContent=Math.round(p*100)+'%';}
-          if(ciHint)ciHint.style.opacity=p>.05?'0':'';
-          if(p>.4)ciShowBrand();
-        }
-      });
       function ciDismiss(){
         if(ciDone)return;ciDone=true;
         if(ciInner){ciInner.style.transition='opacity .8s cubic-bezier(.32,.72,0,1),transform .8s cubic-bezier(.32,.72,0,1)';
@@ -1093,7 +1084,18 @@
           setTimeout(function(){ciSec.remove();ScrollTrigger.refresh();},700);
         },800);
       }
+      ciVid.addEventListener('timeupdate',function(){
+        if(!ciDone&&ciVid.duration){
+          var p=ciVid.currentTime/ciVid.duration;
+          if(ciPct){ciPct.style.opacity=p>.02&&p<.92?'1':'0';ciPct.textContent=Math.round(p*100)+'%';}
+          if(ciHint)ciHint.style.opacity=p>.05?'0':'';
+          if(p>.4)ciShowBrand();
+        }
+      });
       ciVid.addEventListener('ended',ciDismiss);
+      ciVid.addEventListener('error',ciDismiss);
+      ciVid.play().catch(function(){ciDismiss();});
+      setTimeout(function(){if(!ciDone&&ciVid.paused){ciDismiss();}},4000);
     }
 
     gsap.to('h2.head',{backgroundPosition:'200% center',ease:'none',scrollTrigger:{trigger:'main',start:'top top',end:'bottom bottom',scrub:3}});
