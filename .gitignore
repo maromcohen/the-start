@@ -1,5 +1,5 @@
 # Tooling artifacts
-.claude/skills/wix-app/
+.claude/skills/wix-app
 .wix/
 node_modules/
 .netlify
