@@ -30,6 +30,13 @@ jobs:
       - name: Build
         run: node build.js
         working-directory: websites/cocktails-and-dreams
+      - name: Add MAROM studio sketch under /studio/
+        run: |
+          mkdir -p websites/cocktails-and-dreams/public/studio
+          cp -r websites/marom-studio/sequence-sketch/* websites/cocktails-and-dreams/public/studio/
+          # default /studio/ to the real Higgsfield video version
+          mv websites/cocktails-and-dreams/public/studio/index.html websites/cocktails-and-dreams/public/studio/frames.html
+          cp websites/cocktails-and-dreams/public/studio/index-video.html websites/cocktails-and-dreams/public/studio/index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site (public/)
