@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MAROM — Digital Studio</title>
+<meta name="description" content="MAROM Digital Studio — premium web design & development, Tel Aviv.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;700&family=Marcellus&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080608; --ink:#f3ece2; --muted:#8a8178;
+    --gold:#c9a96e; --gold-l:#e6c896;
+    --ease:cubic-bezier(.32,.72,0,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-weight:300;
+    overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--gold);color:#080608}
+  a{color:inherit;text-decoration:none}
+
+  /* ---- film grain ---- */
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.04;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  /* ---- custom cursor (desktop) ---- */
+  .cur{position:fixed;width:34px;height:34px;border:1px solid rgba(201,169,110,.5);border-radius:50%;
+    pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .4s var(--ease),height .4s var(--ease),background .4s var(--ease);left:0;top:0;mix-blend-mode:difference}
+  .cur.big{width:64px;height:64px;background:rgba(201,169,110,.12)}
+  @media(hover:none),(pointer:coarse){.cur{display:none}}
+
+  /* ---- loader ---- */
+  .loader{position:fixed;inset:0;z-index:9000;background:var(--bg);display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:24px;transition:opacity 1s var(--ease)}
+  .loader.gone{opacity:0;pointer-events:none}
+  .loader .lname{font-family:'Marcellus',serif;font-size:clamp(2rem,6vw,3.4rem);letter-spacing:.4em;
+    color:var(--gold);padding-left:.4em}
+  .loader .lbar{width:min(220px,50vw);height:1px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
+  .loader .lbar i{position:absolute;inset:0;width:0;background:var(--gold);transition:width .3s linear}
+  .loader .lpct{font-size:.7rem;letter-spacing:.3em;color:var(--muted)}
+
+  /* ---- nav ---- */
+  .nav{position:fixed;top:0;inset-inline:0;z-index:200;padding:26px clamp(20px,5vw,56px);
+    display:flex;align-items:center;justify-content:space-between;
+    transition:padding .6s var(--ease),background .6s var(--ease),backdrop-filter .6s var(--ease)}
+  .nav.scrolled{padding:16px clamp(20px,5vw,56px);background:rgba(8,6,8,.6);backdrop-filter:blur(20px)}
+  .nav .logo{font-family:'Marcellus',serif;font-size:1.05rem;letter-spacing:.34em;color:var(--ink);padding-left:.34em}
+  .nav .links{display:flex;gap:34px;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+  .nav .links a{transition:color .4s var(--ease)}
+  .nav .links a:hover{color:var(--gold)}
+  @media(max-width:720px){.nav .links{display:none}}
+
+  /* ---- hero ---- */
+  .hero{position:relative;height:100svh;min-height:600px;display:grid;place-items:center;text-align:center;overflow:hidden}
+  .hero .bloom{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);
+    width:min(700px,120vw);height:min(700px,120vw);border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(201,169,110,.10),rgba(160,90,70,.04) 40%,transparent 66%)}
+  .hero .eyebrow{font-size:.7rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:28px;opacity:0;transform:translateY(20px);animation:up 1.2s var(--ease) .3s forwards}
+  .hero h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(3rem,12vw,9rem);line-height:.95;
+    letter-spacing:.04em}
+  .hero h1 .ch{display:inline-block;opacity:0;transform:translateY(40px) rotateX(40deg);
+    animation:chin 1.1s var(--ease) forwards}
+  .hero .sub{margin-top:30px;font-size:clamp(.85rem,2.2vw,1.05rem);color:var(--muted);font-weight:200;
+    letter-spacing:.12em;opacity:0;transform:translateY(20px);animation:up 1.2s var(--ease) 1.1s forwards}
+  .hero .scrollhint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:up 1s var(--ease) 1.6s forwards}
+  .hero .scrollhint .l{width:1px;height:48px;background:linear-gradient(var(--gold),transparent);overflow:hidden;position:relative}
+  .hero .scrollhint .l::after{content:"";position:absolute;top:-50%;left:0;width:100%;height:50%;background:var(--gold-l);animation:drip 2s ease-in-out infinite}
+  .hero .scrollhint span{font-size:.6rem;letter-spacing:.34em;color:var(--muted);text-transform:uppercase}
+  @keyframes up{to{opacity:1;transform:none}}
+  @keyframes chin{to{opacity:1;transform:none}}
+  @keyframes drip{0%{top:-50%}100%{top:100%}}
+
+  /* ======== IMAGE SEQUENCE SECTION (the core) ======== */
+  .seq{position:relative;height:420vh}            /* scroll distance that drives the frames */
+  .seq-sticky{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center}
+  .seq-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .seq-overlay{position:relative;z-index:2;text-align:center;pointer-events:none;mix-blend-mode:screen}
+  .seq-cap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90vw;
+    opacity:0;transition:opacity .6s var(--ease),transform .8s var(--ease)}
+  .seq-cap .k{display:block;font-size:.66rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+  .seq-cap h2{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(2.2rem,7vw,5rem);line-height:1.02;letter-spacing:.02em}
+  .seq-progress{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:3;
+    width:min(180px,40vw);height:1px;background:rgba(255,255,255,.12)}
+  .seq-progress i{display:block;height:100%;width:0;background:var(--gold)}
+
+  /* ---- closing ---- */
+  .outro{min-height:90svh;display:grid;place-items:center;text-align:center;padding:80px 24px;position:relative}
+  .outro .bloom{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(600px,110vw);height:min(600px,110vw);border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(201,169,110,.08),transparent 64%)}
+  .outro h2{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(2rem,6vw,4rem);max-width:14ch;margin-inline:auto;line-height:1.08}
+  .outro .cta{display:inline-flex;align-items:center;gap:14px;margin-top:40px;padding:16px 28px;border:1px solid var(--gold);
+    border-radius:100px;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+    transition:all .6s var(--ease);position:relative;overflow:hidden}
+  .outro .cta span.dot{width:30px;height:30px;border-radius:50%;background:rgba(201,169,110,.14);display:grid;place-items:center;transition:transform .5s var(--ease)}
+  .outro .cta:hover{background:var(--gold);color:#080608}
+  .outro .cta:hover span.dot{background:rgba(8,6,8,.15);transform:translateX(4px) translateY(-2px)}
+  .outro .meta{margin-top:54px;font-size:.7rem;letter-spacing:.2em;color:var(--muted)}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    .seq{height:auto}.seq-sticky{position:relative}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="cur" id="cur"></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="lname">MAROM</div>
+  <div class="lbar"><i id="lbarFill"></i></div>
+  <div class="lpct" id="lpct">0%</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a class="logo" href="#">MAROM</a>
+  <div class="links">
+    <a href="#work">Work</a><a href="#studio">Studio</a><a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="bloom"></div>
+  <div>
+    <div class="eyebrow">Digital Studio · Tel Aviv</div>
+    <h1 id="heroH1">MAROM</h1>
+    <p class="sub">We craft cinematic digital experiences.</p>
+  </div>
+  <div class="scrollhint"><div class="l"></div><span>Scroll</span></div>
+</header>
+
+<!-- ======== IMAGE SEQUENCE ======== -->
+<section class="seq" id="work" aria-label="Cinematic showcase">
+  <div class="seq-sticky">
+    <canvas class="seq-canvas" id="seqCanvas" aria-label="רצף תמונות קולנועי של מונוגרמת MAROM"></canvas>
+    <div class="seq-overlay">
+      <div class="seq-cap" data-from="0" data-to="0.28"><span class="k">01 — Vision</span><h2>From particles<br>to presence</h2></div>
+      <div class="seq-cap" data-from="0.34" data-to="0.62"><span class="k">02 — Craft</span><h2>Every frame,<br>deliberate</h2></div>
+      <div class="seq-cap" data-from="0.7" data-to="1"><span class="k">03 — MAROM</span><h2>Your brand,<br>in motion</h2></div>
+    </div>
+    <div class="seq-progress"><i id="seqProg"></i></div>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro" id="contact">
+  <div class="bloom"></div>
+  <div>
+    <h2>Let's build something unforgettable.</h2>
+    <a class="cta" href="https://wa.me/972532748125" data-cur>
+      Start a project <span class="dot">↗</span>
+    </a>
+    <div class="meta">MAROM Digital Studio · marom7777@icloud.com · 053-274-8125</div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var rm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var touch = window.matchMedia('(hover:none),(pointer:coarse)').matches;
+
+  /* ---- split hero title into chars ---- */
+  (function(){
+    var h1 = document.getElementById('heroH1');
+    var t = h1.textContent; h1.textContent='';
+    t.split('').forEach(function(c,i){
+      var s=document.createElement('span'); s.className='ch'; s.textContent=c;
+      s.style.animationDelay=(0.5 + i*0.08)+'s'; h1.appendChild(s);
+    });
+  })();
+
+  /* ============ IMAGE SEQUENCE ENGINE ============ */
+  var FRAME_COUNT = 72;
+  var framePath = function(i){ return 'sequence/frame_' + String(i).padStart(3,'0') + '.jpg'; };
+  var images = [], loaded = 0;
+  var canvas = document.getElementById('seqCanvas');
+  var ctx = canvas.getContext('2d');
+  var curFrame = 0;
+
+  var loader = document.getElementById('loader'),
+      lbar = document.getElementById('lbarFill'),
+      lpct = document.getElementById('lpct');
+
+  function onLoad(){
+    loaded++;
+    var pct = Math.round(loaded/FRAME_COUNT*100);
+    lbar.style.width = pct+'%'; lpct.textContent = pct+'%';
+    if(loaded === FRAME_COUNT){
+      setTimeout(function(){ loader.classList.add('gone'); }, 350);
+      resize(); drawFrame(0);
+    }
+  }
+  for(var i=1;i<=FRAME_COUNT;i++){
+    var img = new Image();
+    img.onload = onLoad; img.onerror = onLoad;  // never trap the loader
+    img.src = framePath(i);
+    images.push(img);
+  }
+
+  function resize(){
+    var dpr = Math.min(window.devicePixelRatio||1, 2);   // cap DPR — AT performance rule
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth+'px';
+    canvas.style.height = window.innerHeight+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    drawFrame(curFrame);
+  }
+
+  function drawFrame(idx){
+    idx = Math.max(0, Math.min(FRAME_COUNT-1, idx|0));
+    curFrame = idx;
+    var img = images[idx];
+    if(!img || !img.complete || !img.naturalWidth) return;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var ir = img.naturalWidth/img.naturalHeight, vr = vw/vh;
+    var dw, dh, dx, dy;
+    if(vr > ir){ dw = vw; dh = vw/ir; dx = 0; dy = (vh-dh)/2; }   // cover-fit
+    else       { dh = vh; dw = vh*ir; dy = 0; dx = (vw-dw)/2; }
+    ctx.clearRect(0,0,vw,vh);
+    ctx.drawImage(img, dx, dy, dw, dh);
+  }
+
+  /* scroll -> frame index + captions, driven by the .seq section */
+  var seq = document.getElementById('work');
+  var caps = [].slice.call(document.querySelectorAll('.seq-cap'));
+  var seqProg = document.getElementById('seqProg');
+  var targetFrame = 0, raf = false;
+
+  function onScroll(){
+    var rect = seq.getBoundingClientRect();
+    var scrollable = seq.offsetHeight - window.innerHeight;
+    var p = Math.max(0, Math.min(1, (-rect.top) / scrollable));   // 0..1 through section
+    targetFrame = p * (FRAME_COUNT-1);
+    seqProg.style.width = (p*100)+'%';
+    caps.forEach(function(c){
+      var from=+c.dataset.from, to=+c.dataset.to;
+      var on = p>=from && p<=to;
+      c.style.opacity = on ? 1 : 0;
+      c.style.transform = 'translate(-50%,-50%) translateY('+(on?0:24)+'px)';
+    });
+    if(!raf){ raf=true; requestAnimationFrame(tick); }
+  }
+  function tick(){
+    raf=false;
+    // smooth (lerp) toward target frame — gives the buttery AT feel
+    var diff = targetFrame - curFrame;
+    if(Math.abs(diff) > 0.1){
+      drawFrame(curFrame + diff*0.18);
+      raf=true; requestAnimationFrame(tick);
+    } else {
+      drawFrame(targetFrame);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', resize);
+
+  /* ---- nav scrolled state ---- */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+
+  /* ---- custom cursor (desktop) ---- */
+  if(!touch){
+    var cur = document.getElementById('cur');
+    var cx=innerWidth/2, cy=innerHeight/2, tx=cx, ty=cy;
+    window.addEventListener('mousemove', function(e){ tx=e.clientX; ty=e.clientY; }, {passive:true});
+    (function loop(){ cx+=(tx-cx)*0.2; cy+=(ty-cy)*0.2;
+      cur.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';
+      requestAnimationFrame(loop); })();
+    document.querySelectorAll('a,[data-cur]').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ cur.classList.add('big'); });
+      el.addEventListener('mouseleave', function(){ cur.classList.remove('big'); });
+    });
+  }
+})();
+</script>
+</body>
+</html>
