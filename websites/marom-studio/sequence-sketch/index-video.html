@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MAROM — Digital Studio (Higgsfield video scrub)</title>
+<meta name="description" content="MAROM Digital Studio — premium web design & development, Tel Aviv.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;700&family=Marcellus&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#080608;--ink:#f3ece2;--muted:#8a8178;--gold:#c9a96e;--gold-l:#e6c896;--ease:cubic-bezier(.32,.72,0,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--gold);color:#080608}
+  a{color:inherit;text-decoration:none}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.04;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .loader{position:fixed;inset:0;z-index:9000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity 1s var(--ease)}
+  .loader.gone{opacity:0;pointer-events:none}
+  .loader .lname{font-family:'Marcellus',serif;font-size:clamp(2rem,6vw,3.4rem);letter-spacing:.4em;color:var(--gold);padding-left:.4em}
+  .loader .lpct{font-size:.7rem;letter-spacing:.3em;color:var(--muted)}
+  .nav{position:fixed;top:0;inset-inline:0;z-index:200;padding:26px clamp(20px,5vw,56px);display:flex;align-items:center;justify-content:space-between;transition:padding .6s var(--ease),background .6s var(--ease)}
+  .nav.scrolled{padding:16px clamp(20px,5vw,56px);background:rgba(8,6,8,.6);backdrop-filter:blur(20px)}
+  .nav .logo{font-family:'Marcellus',serif;font-size:1.05rem;letter-spacing:.34em;padding-left:.34em}
+  .nav .links{display:flex;gap:34px;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+  .nav .links a:hover{color:var(--gold)}
+  @media(max-width:720px){.nav .links{display:none}}
+  .hero{position:relative;height:100svh;min-height:600px;display:grid;place-items:center;text-align:center;overflow:hidden}
+  .hero .bloom{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:min(700px,120vw);height:min(700px,120vw);border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(201,169,110,.10),rgba(160,90,70,.04) 40%,transparent 66%)}
+  .hero .eyebrow{font-size:.7rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
+  .hero h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(3rem,12vw,9rem);line-height:.95;letter-spacing:.04em}
+  .hero .sub{margin-top:30px;font-size:clamp(.85rem,2.2vw,1.05rem);color:var(--muted);font-weight:200;letter-spacing:.12em}
+  .hero .scrollhint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px}
+  .hero .scrollhint .l{width:1px;height:48px;background:linear-gradient(var(--gold),transparent)}
+  .hero .scrollhint span{font-size:.6rem;letter-spacing:.34em;color:var(--muted);text-transform:uppercase}
+  /* ======= SCROLL-SCRUB VIDEO SECTION ======= */
+  .seq{position:relative;height:420vh}
+  .seq-sticky{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center;background:#000}
+  .seq-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .seq-cap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90vw;text-align:center;pointer-events:none;mix-blend-mode:screen;opacity:0;transition:opacity .6s var(--ease),transform .8s var(--ease);z-index:2}
+  .seq-cap .k{display:block;font-size:.66rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+  .seq-cap h2{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(2.2rem,7vw,5rem);line-height:1.02;letter-spacing:.02em}
+  .seq-progress{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:3;width:min(180px,40vw);height:1px;background:rgba(255,255,255,.12)}
+  .seq-progress i{display:block;height:100%;width:0;background:var(--gold)}
+  .outro{min-height:90svh;display:grid;place-items:center;text-align:center;padding:80px 24px;position:relative}
+  .outro .bloom{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(600px,110vw);height:min(600px,110vw);border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(201,169,110,.08),transparent 64%)}
+  .outro h2{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(2rem,6vw,4rem);max-width:14ch;margin-inline:auto;line-height:1.08}
+  .outro .cta{display:inline-flex;align-items:center;gap:14px;margin-top:40px;padding:16px 28px;border:1px solid var(--gold);border-radius:100px;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);transition:all .6s var(--ease)}
+  .outro .cta span.dot{width:30px;height:30px;border-radius:50%;background:rgba(201,169,110,.14);display:grid;place-items:center;transition:transform .5s var(--ease)}
+  .outro .cta:hover{background:var(--gold);color:#080608}
+  .outro .meta{margin-top:54px;font-size:.7rem;letter-spacing:.2em;color:var(--muted)}
+  @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}.seq{height:auto}.seq-sticky{position:relative}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="loader" id="loader"><div class="lname">MAROM</div><div class="lpct" id="lpct">Loading…</div></div>
+<nav class="nav" id="nav">
+  <a class="logo" href="#">MAROM</a>
+  <div class="links"><a href="#work">Work</a><a href="#studio">Studio</a><a href="#contact">Contact</a></div>
+</nav>
+<header class="hero">
+  <div class="bloom"></div>
+  <div>
+    <div class="eyebrow">Digital Studio · Tel Aviv</div>
+    <h1>MAROM</h1>
+    <p class="sub">We craft cinematic digital experiences.</p>
+  </div>
+  <div class="scrollhint"><div class="l"></div><span>Scroll</span></div>
+</header>
+
+<!-- ======= SCROLL-SCRUB VIDEO (real Higgsfield clip) ======= -->
+<section class="seq" id="work" aria-label="Cinematic showcase">
+  <div class="seq-sticky">
+    <video class="seq-video" id="seqVideo" muted playsinline preload="auto" aria-label="רצף קולנועי — זהב נוזלי יוצר את האות M"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_3FiJmqy12NASFK67PFaBPuFwpXv/hf_20260629_172800_0d55a5e0-92a4-446a-8c5d-bfad0a7b910d.mp4"></video>
+    <div class="seq-cap" data-from="0" data-to="0.28"><span class="k">01 — Vision</span><h2>From particles<br>to presence</h2></div>
+    <div class="seq-cap" data-from="0.34" data-to="0.62"><span class="k">02 — Craft</span><h2>Every frame,<br>deliberate</h2></div>
+    <div class="seq-cap" data-from="0.7" data-to="1"><span class="k">03 — MAROM</span><h2>Your brand,<br>in motion</h2></div>
+    <div class="seq-progress"><i id="seqProg"></i></div>
+  </div>
+</section>
+
+<section class="outro" id="contact">
+  <div class="bloom"></div>
+  <div>
+    <h2>Let's build something unforgettable.</h2>
+    <a class="cta" href="https://wa.me/972532748125">Start a project <span class="dot">↗</span></a>
+    <div class="meta">MAROM Digital Studio · marom7777@icloud.com · 053-274-8125</div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var video = document.getElementById('seqVideo');
+  var seq = document.getElementById('work');
+  var caps = [].slice.call(document.querySelectorAll('.seq-cap'));
+  var seqProg = document.getElementById('seqProg');
+  var loader = document.getElementById('loader'), lpct = document.getElementById('lpct');
+  var nav = document.getElementById('nav');
+  var touch = window.matchMedia('(hover:none),(pointer:coarse)').matches;
+
+  var ready = false, dur = 0, target = 0, current = 0;
+
+  function reveal(){ loader.classList.add('gone'); }
+  video.addEventListener('loadedmetadata', function(){ dur = video.duration || 0; });
+  video.addEventListener('canplay', function(){ ready = true; reveal(); });
+  video.addEventListener('error', function(){ lpct.textContent='וידאו לא נטען — בדוק חיבור/URL'; setTimeout(reveal,1500); });
+  setTimeout(reveal, 8000); // never trap the loader
+
+  function onScroll(){
+    var rect = seq.getBoundingClientRect();
+    var scrollable = seq.offsetHeight - window.innerHeight;
+    var p = Math.max(0, Math.min(1, (-rect.top) / scrollable));
+    target = p;
+    seqProg.style.width = (p*100)+'%';
+    caps.forEach(function(c){
+      var on = p>=+c.dataset.from && p<=+c.dataset.to;
+      c.style.opacity = on?1:0;
+      c.style.transform = 'translate(-50%,-50%) translateY('+(on?0:24)+'px)';
+    });
+    nav.classList.toggle('scrolled', window.scrollY>40);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // lerp the video's currentTime toward the scroll target (buttery scrub)
+  function loop(){
+    current += (target - current) * 0.12;
+    if(ready && dur){
+      var t = current * (dur - 0.05);
+      // seeking every frame is costly on mobile; only seek on meaningful delta
+      if(Math.abs((video.currentTime||0) - t) > 0.02){
+        try{ video.currentTime = t; }catch(e){}
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+  onScroll();
+})();
+</script>
+</body>
+</html>

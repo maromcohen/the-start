@@ -14,23 +14,35 @@
 - pixel-ratio מוגבל ל-2 (כלל ביצועים של Active Theory).
 - כותרות (`.seq-cap`) נדלקות/כבות לפי טווחי התקדמות (`data-from` / `data-to`).
 
-## להחליף את הפריימים ב-Higgsfield (כשה-MCP יחזור)
-1. ב-Higgsfield: `generate_video` עם prompt קולנועי (למשל "slow cinematic gold liquid forming
-   the letter M, dark luxury, particles, 4k") → סרטון של ~3 שניות.
-2. לחלץ פריימים מהסרטון (ffmpeg זמין):
-   ```bash
-   ffmpeg -i higgsfield.mp4 -vf "fps=24,scale=1200:-1" sequence/frame_%03d.jpg
-   ```
-3. לעדכן `FRAME_COUNT` ב-`index.html` למספר הפריימים שיצאו.
-4. (אופציונלי) להתאים את טקסטי הכותרות וטווחי ה-`data-from/to`.
+## שתי גרסאות בתיקייה הזו
 
-> טיפ: 48–96 פריימים זה המתוק. פחות מדי = קפיצתי; יותר מדי = preload כבד. רוחב 1200px
-> ו-JPEG ~0.82 שומר על איכות מול משקל.
+- **`index.html`** — גרסת **image-sequence** (72 פריימי JPG, נסרקים לפי גלילה). חלקה במיוחד
+  במובייל. כרגע עם פריימים זמניים (מ-`frame-gen.js`).
+- **`index-video.html`** — גרסת **scroll-scrub video**: סורקת לפי גלילה את **הסרטון האמיתי
+  שנוצר ב-Higgsfield** (זהב נוזלי יוצר את האות M). מצביעה ישירות ל-URL של ה-CDN — נפתחת
+  ועובדת בכל דפדפן עם אינטרנט. זו הגרסה עם התוכן האמיתי.
+
+### הסרטון האמיתי מ-Higgsfield
+- מודל: `kling3_0_turbo`, 5 שניות, 1280×720
+- URL: `https://d8j0ntlcm91z4.cloudfront.net/user_3FiJmqy12NASFK67PFaBPuFwpXv/hf_20260629_172800_0d55a5e0-92a4-446a-8c5d-bfad0a7b910d.mp4`
+
+### להמיר את הסרטון לפריימי JPG (לגרסת image-sequence — אופציונלי)
+סביבת ה-build כאן חוסמת גישה ל-CDN, אז ההמרה צריכה לרוץ מהמחשב שלך:
+```bash
+curl -L -o higgsfield.mp4 "<ה-URL למעלה>"
+ffmpeg -i higgsfield.mp4 -vf "fps=24,scale=1200:-1" sequence/frame_%03d.jpg
+```
+ואז לעדכן `FRAME_COUNT` ב-`index.html` למספר הפריימים שיצאו.
+
+> טיפ: 48–96 פריימים זה המתוק. רוחב 1200px ו-JPEG ~0.82 שומר על איכות מול משקל.
 
 ## מבנה
 ```
-public/
-├── index.html        ← הדף + מנוע הרצף
-├── sequence/         ← 72 פריימים (להחליף בפלט Higgsfield)
+sequence-sketch/
+├── index.html        ← גרסת image-sequence (פריימי JPG)
+├── index-video.html  ← גרסת scroll-scrub של הסרטון האמיתי מ-Higgsfield
+├── sequence/         ← 72 פריימים זמניים
+├── frame-gen.js      ← מחדש את הפריימים הזמניים
+├── verify.js         ← צילומי אימות בדפדפן
 └── README.md
 ```
